@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>शब्दार्थ र अनलाइन खोज - नेपाली व्याकरण</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Font and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* Custom Variables and Global Styles */
+        :root {
+            --primary-color: #1e3a8a; /* Dark Blue */
+            --secondary-color: #f3f4f6; /* Light Gray */
+            --accent-color: #10b981; /* Emerald Green */
+            --text-color: #1f2937;
+            --shadow-strong: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Mukta', Arial, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 80px; /* Space for fixed footer */
+        }
+        
+        /* Header - Clean and Professional */
+        header {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 20px 15px;
+            text-align: center;
+            box-shadow: var(--shadow-strong);
+            margin-bottom: 25px;
+        }
+
+        /* Search Input Styling */
+        #searchInput {
+            border: 2px solid #d1d5db;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: 'Mukta', Arial, sans-serif;
+        }
+        #searchInput:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+            outline: none;
+        }
+    #buttonText {
+        /* Required: 2px solid black border */
+        border: 2px solid black;
+    
+        /* Original color */
+        color: #0013e6; 
+
+        /* Attractive Enhancements */
+        background-color: #f0f0f0; /* Light background for contrast */
+        border-radius: 8px; /* Smooth rounded corners */
+        padding: 10px 15px; /* Comfortable padding */
+        cursor: pointer; /* Indicates interactivity */
+        font-size: 16px; 
+        font-weight: bold;
+        text-transform: uppercase;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        transition: all 0.2s ease-in-out; /* Smooth transitions for effects */
+        display: inline-block; /* Allows padding and consistent display */
+    }
+
+    /* Hover effect for a more interactive feel */
+    #buttonText:hover {
+        background-color: #e0e0e0; /* Slightly darker on hover */
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Lifted shadow */
+        transform: translateY(-1px); /* Slight lift animation */
+    }
+
+    /* Active/Click effect */
+    #buttonText:active {
+        background-color: #d0d0d0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transform: translateY(1px); /* Push down animation */
+    }
+
+        /* Table Styling for Responsiveness and Clarity */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-strong);
+        }
+
+        table thead tr { 
+            background-color: var(--primary-color);
+            color: #fff;
+            font-weight: 700;
+        }
+        
+        table tbody tr:hover {
+            background-color: #eff6ff; /* Light blue on hover */
+            cursor: default;
+            transition: background-color 0.2s ease;
+        }
+
+        table td, table th {
+            border: 1px solid #e5e7eb;
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 1em;
+            vertical-align: top;
+        }
+
+        /* Zebra striping */
+        table tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        
+        /* Custom spinner for loading state */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-left-color: #fff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- Mobile Optimization (Stackable Table) --- */
+        @media only screen and (max-width: 650px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            
+            table tr {
+                margin-bottom: 15px;
+                border: 1px solid #e5e7eb;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
+            
+            table thead { display: none; } /* Hide header row in stack mode */
+
+            table td {
+                border: none;
+                border-bottom: 1px solid #f3f4f6;
+                position: relative;
+                padding-left: 45%;
+                text-align: right;
+            }
+            
+            table td:last-child { border-bottom: none; }
+
+            table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                width: 40%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: var(--primary-color);
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <h1 class="text-3xl font-bold">नेपाली व्याकरण र शब्दकोष</h1>
+</header>
+
+<div class="content mx-auto px-4 max-w-4xl">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-4 border-accent-color pb-2">शब्दार्थ र अनलाइन खोज</h2>
+    
+    <!-- Search Input and Button -->
+    <div class="flex flex-col sm:flex-row gap-3 mb-6 p-4 bg-white rounded-xl shadow-lg">
+        <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="शब्द वा अर्थ खोजी गर्नुहोस्" 
+            class="flex-grow p-3 rounded-lg text-lg"
+        >
+        <button 
+            id="searchButton"
+            onclick="handleSearch()"
+            class="bg-accent-color text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-emerald-600 transition duration-200 flex items-center justify-center space-x-2"
+        >
+            <span id="buttonText">
+                <i class="fas fa-search mr-2"></i> खोजी गर्नुहोस्
+            </span>
+            <div id="loadingIndicator" class="hidden">
+                <span class="spinner"></span> 
+            </div>
+        </button>
+    </div>
+
+    <!-- Gemini API Search Result Section -->
+    <div id="apiResultSection" class="mt-6 p-6 bg-white rounded-xl shadow-xl border-t-4 border-blue-500 hidden">
+        <h3 class="text-xl font-bold mb-3 text-blue-700 flex items-center">
+            <i class="fas fa-satellite-dish mr-2 text-blue-500"></i> अनलाइन खोज परिणाम
+        </h3>
+        <div id="apiResultContent" class="text-gray-700">
+            <!-- Loading spinner and results will be inserted here -->
+        </div>
+    </div>
+    
+    <!-- Local Dictionary Table -->
+    <h2 class="text-2xl font-bold text-gray-800 mt-10 mb-4 border-b-2 border-gray-400 pb-2">स्थानीय शब्दकोश</h2>
+
+    <table id="localDictionary">
+        <thead>
+            <tr>
+                <th data-label="शब्द" style="width: 30%;">शब्द</th>
+                <th data-label="अर्थ">अर्थ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td data-label="शब्द">पत्तो</td><td data-label="अर्थ">थाहा, जानकारी</td></tr>
+            <tr><td data-label="शब्द">त्रास</td><td data-label="अर्थ">डर, भय</td></tr>
+            <tr><td data-label="शब्द">छोरी</td><td data-label="अर्थ">पुत्री, चेली</td></tr>
+            <tr><td data-label="शब्द">गीत</td><td data-label="अर्थ">गाना, गान</td></tr>
+            <tr><td data-label="शब्द">चीज</td><td data-label="अर्थ">वस्तु, सामान</td></tr>
+            <tr><td data-label="शब्द">संसार</td><td data-label="अर्थ">जगत्, विश्व</td></tr>
+            <tr><td data-label="शब्द">मानव</td><td data-label="अर्थ">मान्छे, मानिस, मनुष्य</td></tr>
+            <tr><td data-label="शब्द">बारम्बार</td><td data-label="अर्थ">लगातार, अनवरत</td></tr>
+            <tr><td data-label="शब्द">रोकिनु</td><td data-label="अर्थ">अडिनु, बिसाउनु</td></tr>
+            <tr><td data-label="शब्द">परिपाटी</td><td data-label="अर्थ">पद्धति, प्रणाली</td></tr>
+            <tr><td data-label="शब्द">आत्मग्लानि</td><td data-label="अर्थ">पछुतो</td></tr>
+            <tr><td data-label="शब्द">आजित</td><td data-label="अर्थ">हैरान, दिक्क</td></tr>
+            <tr><td data-label="शब्द">भुजा</td><td data-label="अर्थ">हात, पाखुरा</td></tr>
+            <tr><td data-label="शब्द">व्ययभार</td><td data-label="अर्थ">खर्चको भार</td></tr>
+            <tr><td data-label="शब्द">भुक्तानी</td><td data-label="अर्थ">मूल्य चुक्ता गर्ने काम, तिराइ</td></tr>
+            <tr><td data-label="शब्द">विलक्षण</td><td data-label="अर्थ">अद्वितीय, अनौठो</td></tr>
+            <tr><td data-label="शब्द">सकल</td><td data-label="अर्थ">सम्पूर्ण, सबै</td></tr>
+            <tr><td data-label="शब्द">अनुयायी</td><td data-label="अर्थ">अनुसरण गर्ने, समर्थक</td></tr>
+            <tr><td data-label="शब्द">वृत्तान्त</td><td data-label="अर्थ">विवरण, कथा</td></tr>
+            <tr><td data-label="शब्द">विचरण गर्नु</td><td data-label="अर्थ">घुम्नु, टहल्नु</td></tr>
+            <tr><td data-label="शब्द">पारखी</td><td data-label="अर्थ">ज्ञाता, विवेकी, गुण बुझ्ने</td></tr>
+            <tr><td data-label="शब्द">अश्लील</td><td data-label="अर्थ">लाज लाग्दो, अभद्र</td></tr>
+            <tr><td data-label="शब्द">जिज्ञासु</td><td data-label="अर्थ">इच्छुक, जान्न चाहने</td></tr>
+            <tr><td data-label="शब्द">यथेष्ट</td><td data-label="अर्थ">प्रशस्त, पर्याप्त</td></tr>
+            <tr><td data-label="शब्द">दुर्व्यवहार</td><td data-label="अर्थ">नराम्रो व्यवहार, दुर्वचन</td></tr>
+            <tr><td data-label="शब्द">धीर</td><td data-label="अर्थ">सहनशील, धैर्यवान्</td></tr>
+            <tr><td data-label="शब्द">विदुषी</td><td data-label="अर्थ">विद्वान स्त्री</td></tr>
+            <tr><td data-label="शब्द">लौकिक</td><td data-label="अर्थ">संसारिक, व्यवहारिक</td></tr>
+            <tr><td data-label="शब्द">सलहेस</td><td data-label="अर्थ">मिथिला क्षेत्रको एक प्रसिद्ध ग्राम देवता</td></tr>
+            <tr><td data-label="शब्द">वैभव</td><td data-label="अर्थ">धन, सम्पत्ति, ऐश्वर्य</td></tr>
+            <tr><td data-label="शब्द">कायापलट</td><td data-label="अर्थ">ठूलो परिवर्तन</td></tr>
+            <tr><td data-label="शब्द">हेतु</td><td data-label="अर्थ">कारण, उद्देश्य</td></tr>
+            <tr><td data-label="शब्द">रश्मि</td><td data-label="अर्थ">किरण, प्रकाश</td></tr>
+            <tr><td data-label="शब्द">ठाट्ट</td><td data-label="अर्थ">अचानक</td></tr>
+            <tr><td data-label="शब्द">सनातन</td><td data-label="अर्थ">पुरानो, चलिआएको, शाश्वत</td></tr>
+            <tr><td data-label="शब्द">निष्ठा</td><td data-label="अर्थ">आस्था, विश्वास, अटल भक्ति</td></tr>
+            <tr><td data-label="शब्द">निवारण गर्नु</td><td data-label="अर्थ">निराकरण गर्नु, हटाउनु, समाधान गर्नु</td></tr>
+            <tr><td data-label="शब्द">खुलासा</td><td data-label="अर्थ">खुलस्त, प्रकट</td></tr>
+            <tr><td data-label="शब्द">अनन्त</td><td data-label="अर्थ">अन्त नहुने, असीम</td></tr>
+            <tr><td data-label="शब्द">श्री गणेश गर्नु</td><td data-label="अर्थ">थाल्नु, सुरु गर्नु</td></tr>
+            <tr><td data-label="शब्द">शिरोधार्य</td><td data-label="अर्थ">स्वीकार, मान्ने</td></tr>
+            <tr><td data-label="शब्द">स्वाधीनता</td><td data-label="अर्थ">स्वतन्त्रता, मुक्ति</td></tr>
+            <tr><td data-label="शब्द">समय</td><td data-label="अर्थ">बेला, मौका</td></tr>
+            <tr><td data-label="शब्द">आँखा</td><td data-label="अर्थ">नेत्र, नयन, चक्षु</td></tr>
+            <tr><td data-label="शब्द">आकाश</td><td data-label="अर्थ">नभ, गगन, अम्बर</td></tr>
+            <tr><td data-label="शब्द">आमा</td><td data-label="अर्थ">माता, जननी</td></tr>
+            <tr><td data-label="शब्द">घर</td><td data-label="अर्थ">गृह, बास</td></tr>
+            <tr><td data-label="शब्द">सूर्य</td><td data-label="अर्थ">घाम, रवि, भास्कर</td></tr>
+            <tr><td data-label="शब्द">विकट</td><td data-label="अर्थ">दुर्गम, कठिन</td></tr>
+            <tr><td data-label="शब्द">चिनारी</td><td data-label="अर्थ">पहिचान, परिचय</td></tr>
+            <tr><td data-label="शब्द">योग्य</td><td data-label="अर्थ">सिपालु, जान्ने, काबिल</td></tr>
+            <tr><td data-label="शब्द">हडप्ने</td><td data-label="अर्थ">जबरजस्ती लिने</td></tr>
+            <tr><td data-label="शब्द">अपहरण</td><td data-label="अर्थ">कुनै वस्तु वा व्यक्तिलाई जबरजस्ती उठाएर लैजाने</td></tr>
+            <tr><td data-label="शब्द">पक्षपाती</td><td data-label="अर्थ">कुनै एक पक्षमा लाग्ने, समर्थन गर्ने</td></tr>
+            <tr><td data-label="शब्द">आदर्श</td><td data-label="अर्थ">रुप, गुण र विचार (नमूनाको रूपमा लिइने)</td></tr>
+            <tr><td data-label="शब्द">प्रतीक्षा</td><td data-label="अर्थ">कुनै कुराको आशामा रहेको पर्खाइ</td></tr>
+            <tr><td data-label="शब्द">तन</td><td data-label="अर्थ">शरीर, काया</td></tr>
+            <tr><td data-label="शब्द">इलमी</td><td data-label="अर्थ">रोजगारमा लागेको, परिश्रमी</td></tr>
+            <tr><td data-label="शब्द">विलास</td><td data-label="अर्थ">सुख, सयल, भोग</td></tr>
+            <tr><td data-label="शब्द">लाञ्छना</td><td data-label="अर्थ">दोष, निन्दा, कलङ्क</td></tr>
+            <tr><td data-label="शब्द">विशिष्ट</td><td data-label="अर्थ">असाधारण, माथिल्लो तहको, खास</td></tr>
+            <tr><td data-label="शब्द">गौरव</td><td data-label="अर्थ">महिमा, महत्व, इज्जत</td></tr>
+            <tr><td data-label="शब्द">भावुक</td><td data-label="अर्थ">सुकुमार हृदय भएको, भावनामा डुब्ने</td></tr>
+            <tr><td data-label="शब्द">दृढ</td><td data-label="अर्थ">अचल, बलियो, अटल</td></tr>
+            <tr><td data-label="शब्द">भयावह</td><td data-label="अर्थ">भय उत्पन्न गराउने, भयानक</td></tr>
+            <tr><td data-label="शब्द">सुगम</td><td data-label="अर्थ">सहज, सजिलैसँग पुग्ने</td></tr>
+            <tr><td data-label="शब्द">पर्यावरण</td><td data-label="अर्थ">वातावरण, परिवेश</td></tr>
+            <tr><td data-label="शब्द">समृद्ध</td><td data-label="अर्थ">उन्नतशील, सम्पन्न</td></tr>
+            <tr><td data-label="शब्द">अनिष्ट</td><td data-label="अर्थ">हानिकारक, खराब, इच्छा गरेभन्दा उल्टो</td></tr>
+            <tr><td data-label="शब्द">नास्तिक</td><td data-label="अर्थ">ईश्वरमा विश्वास नगर्ने</td></tr>
+            <tr><td data-label="शब्द">गरिमा</td><td data-label="अर्थ">गौरव, इज्जत, महत्व</td></tr>
+            <tr><td data-label="शब्द">सद्दे</td><td data-label="अर्थ">जस्ताको तस्तै, सुरक्षित</td></tr>
+            <tr><td data-label="शब्द">पुर्खा</td><td data-label="अर्थ">बाबुबाजे, पूर्वज</td></tr>
+            <tr><td data-label="शब्द">निधन</td><td data-label="अर्थ">मृत्यु, देहान्त</td></tr>
+            <tr><td data-label="शब्द">चक्षु</td><td data-label="अर्थ">आँखा, नयन</td></tr>
+            <tr><td data-label="शब्द">भेल</td><td data-label="अर्थ">बाढी, पानीको ठूलो प्रवाह</td></tr>
+            <tr><td data-label="शब्द">फजिती</td><td data-label="अर्थ">दुःख, फसाद, बेइज्जत</td></tr>
+            <tr><td data-label="शब्द">वरण गर्नु</td><td data-label="अर्थ">खोज्नु, स्वीकार गर्नु</td></tr>
+            <tr><td data-label="शब्द">अभिशाप</td><td data-label="अर्थ">सराप, श्राप</td></tr>
+            <tr><td data-label="शब्द">आँखी हुनु</td><td data-label="अर्थ">कुदृष्टि पर्नु, हेला गर्नु</td></tr>
+            <tr><td data-label="शब्द">हाँसपरिहास</td><td data-label="अर्थ">ठट्टा, रमाइलो कुरा</td></tr>
+            <tr><td data-label="शब्द">शीघ्र</td><td data-label="अर्थ">चाँडै, छिटो</td></tr>
+            <tr><td data-label="शब्द">दुष्कर्म</td><td data-label="अर्थ">नराम्रो काम, पाप</td></tr>
+            <tr><td data-label="शब्द">अनवरत</td><td data-label="अर्थ">लगातार, नरोकिने गरी</td></tr>
+            <tr><td data-label="शब्द">शिष्ट</td><td data-label="अर्थ">असल, सभ्य</td></tr>
+            <tr><td data-label="शब्द">आक्रान्त</td><td data-label="अर्थ">शिथिल, पीडित</td></tr>
+            <tr><td data-label="शब्द">आँच</td><td data-label="अर्थ">समस्या, ताप, क्षति</td></tr>
+            <tr><td data-label="शब्द">उपेक्षा</td><td data-label="अर्थ">हेला, वास्ता नगर्नु</td></tr>
+            <tr><td data-label="शब्द">पराग</td><td data-label="अर्थ">फूलको वासना, फूलको धूलो</td></tr>
+            <tr><td data-label="शब्द">आकृष्ट</td><td data-label="अर्थ">तानिएको, आकर्षित</td></tr>
+            <tr><td data-label="शब्द">जावो</td><td data-label="अर्थ">तुच्छ, सानोतिनो</td></tr>
+            <tr><td data-label="शब्द">दम्भ</td><td data-label="अर्थ">घमण्ड, अहंकार</td></tr>
+            <tr><td data-label="शब्द">अधिक</td><td data-label="अर्थ">धेरै, प्रशस्त</td></tr>
+            <tr><td data-label="शब्द">संयम</td><td data-label="अर्थ">धैर्य, नियन्त्रण</td></tr>
+            <tr><td data-label="शब्द">अतिथि</td><td data-label="अर्थ">नियम नभएको, पाहुना</td></tr>
+            <tr><td data-label="शब्द">हिमांशु</td><td data-label="अर्थ">चन्द्रमा, शीतकिरण</td></tr>
+            <tr><td data-label="शब्द">हिमोट</td><td data-label="अर्थ">हिमनदीले सोहोरेर ल्याएको माटो</td></tr>
+            <tr><td data-label="शब्द">हिरण</td><td data-label="अर्थ">सुन, स्वर्ण</td></tr>
+            <tr><td data-label="शब्द">श्रेय</td><td data-label="अर्थ">कुनै कामको शुभ परिणाम, जस</td></tr>
+            <tr><td data-label="शब्द">अटल</td><td data-label="अर्थ">नहल्लिने, स्थिर</td></tr>
+            <tr><td data-label="शब्द">तृण</td><td data-label="अर्थ">घाँस, दुवो</td></tr>
+            <tr><td data-label="शब्द">द्रुम</td><td data-label="अर्थ">रुख, वृक्ष</td></tr>
+            <tr><td data-label="शब्द">विलम्ब</td><td data-label="अर्थ">ढिलो, ढिलासुस्ती</td></tr>
+            <tr><td data-label="शब्द">सइस</td><td data-label="अर्थ">घोडाको रेखदेख गर्ने व्यक्ति</td></tr>
+            <tr><td data-label="शब्द">करुणा</td><td data-label="अर्थ">दया, कृपा</td></tr>
+            <tr><td data-label="शब्द">प्रणेता</td><td data-label="अर्थ">निर्माता, रचयिता</td></tr>
+            <tr><td data-label="शब्द">अपवाद</td><td data-label="अर्थ">नियम भित्र नपर्ने कुरा, छोड</td></tr>
+            <tr><td data-label="शब्द">उत्पीडन</td><td data-label="अर्थ">पीडा, सतावट</td></tr>
+            <tr><td data-label="शब्द">यातना</td><td data-label="अर्थ">सास्ती, कष्ट</td></tr>
+            <tr><td data-label="शब्द">आवद्ध</td><td data-label="अर्थ">संलग्न, बाँधिएको</td></tr>
+            <tr><td data-label="शब्द">निहत्था</td><td data-label="अर्थ">हतियार नभएको, कमजोर</td></tr>
+            <tr><td data-label="शब्द">सूत्रपात</td><td data-label="अर्थ">प्रारम्भ, सुरुवात</td></tr>
+            <tr><td data-label="शब्द">स्थूल</td><td data-label="अर्थ">ठूलो, मोटो, उलो</td></tr>
+            <tr><td data-label="शब्द">धड्कन</td><td data-label="अर्थ">मुटुको कम्पन</td></tr>
+            <tr><td data-label="शब्द">सङ्कीर्ण</td><td data-label="अर्थ">साँघुरो, खुम्चिएको</td></tr>
+            <tr><td data-label="शब्द">सामयिक</td><td data-label="अर्थ">सुहाउँदो, समय अनुसारको</td></tr>
+            <tr><td data-label="शब्द">सैर</td><td data-label="अर्थ">यात्रा, भ्रमण</td></tr>
+            <tr><td data-label="शब्द">अपेक्षा</td><td data-label="अर्थ">आशा, चाहना</td></tr>
+            <tr><td data-label="शब्द">अकर्मण्य</td><td data-label="अर्थ">नराम्रो, काम नगर्ने, अल्छी</td></tr>
+            <tr><td data-label="शब्द">उत्कृष्ट</td><td data-label="अर्थ">राम्रो, सबैभन्दा उत्तम</td></tr>
+            <tr><td data-label="शब्द">नेपथ्य</td><td data-label="अर्थ">पर्दापछि, लुकेको ठाउँ</td></tr>
+            <tr><td data-label="शब्द">विरलै</td><td data-label="अर्थ">कमै, कहिलेकाहीँ मात्र</td></tr>
+            <tr><td data-label="शब्द">न्यून</td><td data-label="अर्थ">थोरै, कम</td></tr>
+            <tr><td data-label="शब्द">पुरो</td><td data-label="अर्थ">जुठो खाएर छोडेको खानेकुरा</td></tr>
+            <tr><td data-label="शब्द">परामर्श</td><td data-label="अर्थ">सल्लाह, राय</td></tr>
+            <tr><td data-label="शब्द">हिमायती</td><td data-label="अर्थ">पक्षपाती, समर्थन गर्ने</td></tr>
+            <tr><td data-label="शब्द">हिमानी</td><td data-label="अर्थ">हिउँको थुप्रो, हिमनदी</td></tr>
+            <tr><td data-label="शब्द">कपट</td><td data-label="अर्थ">छल तथा धोका दिने काम, बेइमानी</td></tr>
+            <tr><td data-label="शब्द">आलोक</td><td data-label="अर्थ">प्रकाश, उज्यालो</td></tr>
+            <tr><td data-label="शब्द">उत्सर्ग</td><td data-label="अर्थ">मृत्यु, बलिदान</td></tr>
+            <tr><td data-label="शब्द">हृत्तल</td><td data-label="अर्थ">भित्री मन, हृदयको गहिराइ</td></tr>
+            <tr><td data-label="शब्द">दिवास्वप्न</td><td data-label="अर्थ">असम्भव कल्पना (दिउँसै देखिने सपना)</td></tr>
+            <tr><td data-label="शब्द">अनर्गल</td><td data-label="अर्थ">अनावश्यक, जथाभावी, अर्थहीन</td></tr>
+            <tr><td data-label="शब्द">अपकार</td><td data-label="अर्थ">हानी, नोक्सान</td></tr>
+            <tr><td data-label="शब्द">अपामेय</td><td data-label="अर्थ">ज्यादै धेरै, नाप्न नसकिने</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<footer class="bg-blue-900 text-white text-sm fixed bottom-0 w-full z-10 p-3">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+        <span>नेपाली शब्दार्थ सहायक - स्थानीय तथा अनलाइन खोज समावेश</span>
+        <span id="wordCountDisplay" class="font-semibold">शब्द संख्या: 76</span>
+    </div>
+</footer>
+
+<script>
+    // --- Global Variables and Constants ---
+    const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent";
+    
+    // NOTE: Using the API Key provided by the user. If running in the Canvas environment, 
+    // it's safer to leave this as an empty string to use the environment-provided key.
+    const API_KEY = "AIzaSyAsMYxIz5tfVJ1qXG71RnpoxP67OfpXIUc"; 
+    
+    const MAX_RETRIES = 3;
+
+    // --- UI Elements ---
+    const searchInput = document.getElementById("searchInput");
+    const searchButton = document.getElementById("searchButton");
+    const buttonText = document.getElementById("buttonText");
+    const loadingIndicator = document.getElementById("loadingIndicator");
+    const apiResultSection = document.getElementById("apiResultSection");
+    const apiResultContent = document.getElementById("apiResultContent");
+    const localDictionary = document.getElementById("localDictionary");
+    const wordCountDisplay = document.getElementById("wordCountDisplay");
+    
+    const tableRows = localDictionary.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+
+    // --- Utility Functions ---
+
+    /**
+     * Set the loading state on the button and input field.
+     * @param {boolean} isLoading 
+     */
+    function setLoading(isLoading) {
+        searchButton.disabled = isLoading;
+        searchInput.disabled = isLoading;
+        if (isLoading) {
+            buttonText.classList.add('hidden');
+            loadingIndicator.classList.remove('hidden');
+        } else {
+            buttonText.classList.remove('hidden');
+            loadingIndicator.classList.add('hidden');
+        }
+    }
+
+    /**
+     * Shows the loading state in the API result section.
+     */
+    function showLoading(word) {
+        apiResultSection.classList.remove('hidden');
+        apiResultContent.innerHTML = `
+            <div class="flex items-center justify-center p-4 bg-blue-50 text-blue-700 rounded-lg">
+                <span class="spinner !border-l-blue-700 !border-white mr-3"></span> 
+                <span class="font-semibold text-lg">
+                    शब्द '${word}' को लागि अनलाइनमा खोजिँदै...
+                </span>
+            </div>
+        `;
+    }
+
+    /**
+     * Shows a formatted error message in the API result section.
+     * @param {string} message 
+     */
+    function showError(message) {
+        apiResultSection.classList.remove('hidden');
+        apiResultContent.innerHTML = `
+            <div class="p-4 bg-red-100 text-red-700 border border-red-300 rounded-md">
+                <i class="fas fa-exclamation-triangle mr-2"></i> 
+                <span class="font-semibold">त्रुटि:</span> ${message}
+            </div>
+        `;
+        setLoading(false);
+    }
+
+    /**
+     * Converts a list of source objects into an HTML list of citations.
+     */
+    function formatSources(sources) {
+        if (!sources || sources.length === 0) {
+            return '';
+        }
+
+        const sourceList = sources.map((source, index) => `
+            <li class="mt-1 text-sm text-gray-500">
+                <a href="${source.uri}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">
+                    ${source.title || 'अज्ञात स्रोत'}
+                </a>
+                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+            </li>
+        `).join('');
+
+        return `
+            <div class="mt-4 pt-3 border-t border-gray-100">
+                <p class="font-medium text-gray-600 text-sm mb-2">स्रोतहरू (Citations):</p>
+                <ul class="list-disc pl-5">${sourceList}</ul>
+            </div>
+        `;
+    }
+
+    /**
+     * Handles exponential backoff and retries for fetch requests.
+     */
+    async function fetchWithRetry(url, options, attempt = 1) {
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                if (attempt < MAX_RETRIES) {
+                    const delay = Math.pow(2, attempt) * 1000;
+                    // console.warn(`API request failed (Status: ${response.status}). Retrying in ${delay / 1000}s...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithRetry(url, options, attempt + 1);
+                }
+                throw new Error(`API request failed after ${MAX_RETRIES} attempts.`);
+            }
+            return response.json();
+        } catch (error) {
+            if (attempt < MAX_RETRIES) {
+                const delay = Math.pow(2, attempt) * 1000;
+                // console.error(`Network or fetch error. Retrying in ${delay / 1000}s...`, error);
+                await new Promise(resolve => setTimeout(resolve, delay));
+                return fetchWithRetry(url, options, attempt + 1);
+            }
+            throw new Error(`Failed to fetch from API after ${MAX_RETRIES} attempts.`);
+        }
+    }
+
+    /**
+     * Searches for the meaning of a word online using the Gemini API.
+     */
+    async function searchOnlineMeaning(word) {
+        if (!API_KEY) {
+            showError("API Key फेला परेन। कृपया आफ्नो कुञ्जी जाँच गर्नुहोस्।");
+            return;
+        }
+
+        showLoading(word);
+
+        const systemPrompt = "तपाईं नेपाली भाषाको विश्वकोषीय ज्ञान भएको एक विशेषज्ञ हुनुहुन्छ। प्रयोगकर्ताले दिएको शब्दको सही र विस्तृत अर्थ वा परिभाषा नेपाली भाषामै बुँदागत रूपमा प्रदान गर्नुहोस्। यदि शब्द स्थानीय संस्कृति, भूगोल वा इतिहाससँग सम्बन्धित छ भने, त्यसको संक्षिप्त जानकारी पनि थप्नुहोस्। अनावश्यक भूमिका नबनाई सिधै उत्तर दिनुहोस्।";
+        const userQuery = `नेपाली शब्द '${word}' को अर्थ के हो? यसको परिभाषा र प्रयोगको बारेमा बताउनुहोस्।`;
+
+        const payload = {
+            contents: [{ parts: [{ text: userQuery }] }],
+            tools: [{ "google_search": {} }],
+            systemInstruction: {
+                parts: [{ text: systemPrompt }]
+            },
+        };
+
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        };
+        
+        try {
+            const result = await fetchWithRetry(`${API_URL}?key=${API_KEY}`, options);
+            const candidate = result.candidates?.[0];
+
+            if (candidate && candidate.content?.parts?.[0]?.text) {
+                const text = candidate.content.parts[0].text;
+                
+                // 1. Extract grounding sources
+                let sources = [];
+                const groundingMetadata = candidate.groundingMetadata;
+                if (groundingMetadata && groundingMetadata.groundingAttributions) {
+                    sources = groundingMetadata.groundingAttributions
+                        .map(attribution => ({
+                            uri: attribution.web?.uri,
+                            title: attribution.web?.title,
+                        }))
+                        .filter(source => source.uri && source.title);
+                }
+
+                // 2. Display the result
+                const formattedText = text.replace(/\n/g, '<br>'); // Convert newlines to HTML breaks
+                const formattedSources = formatSources(sources);
+                
+                apiResultContent.innerHTML = `
+                    <p class="text-2xl font-bold mb-3 text-blue-800">${word}</p>
+                    <div class="p-4 bg-gray-50 rounded-lg text-gray-800 border border-gray-200">
+                        ${formattedText}
+                    </div>
+                    ${formattedSources}
+                `;
+
+            } else {
+                showError(`शब्दार्थ फेला पार्न सकिएन: '${word}'। कृपया **इन्टरनेट जडान जाँच गर्नुहोस् वा पुन: प्रयास गर्नुहोस्।**`);
+            }
+
+        } catch (error) {
+            console.error("Gemini API Error:", error);
+            showError(`अनलाइन खोजमा त्रुटि भयो। कृपया **इन्टरनेट जडान जाँच गर्नुहोस् वा पुन: प्रयास गर्नुहोस्।**`);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
+    // --- Main Search Logic ---
+
+    /**
+     * Handles the search logic (Local Filter -> Online Search if no local match)
+     */
+    function handleSearch() {
+        const filter = searchInput.value.trim().toUpperCase();
+        
+        if (filter.length === 0) {
+            apiResultSection.classList.add('hidden');
+            // If input is empty, show all rows (local table cleanup)
+            for (let i = 0; i < tableRows.length; i++) {
+                tableRows[i].style.display = "";
+            }
+            return;
+        }
+
+        setLoading(true);
+        apiResultSection.classList.add('hidden'); // Hide previous API results
+
+        let matchFound = false;
+        
+        // 1. Local Search Filter
+        for (let i = 0; i < tableRows.length; i++) {
+            const row = tableRows[i];
+            const wordCell = row.getElementsByTagName("td")[0];
+            const meaningCell = row.getElementsByTagName("td")[1];
+            
+            if (wordCell && meaningCell) {
+                const wordValue = wordCell.textContent || wordCell.innerText;
+                const meaningValue = meaningCell.textContent || meaningCell.innerText;
+                
+                if (wordValue.toUpperCase().indexOf(filter) > -1 || meaningValue.toUpperCase().indexOf(filter) > -1) {
+                    row.style.display = ""; // Show row
+                    matchFound = true;
+                } else {
+                    row.style.display = "none"; // Hide row
+                }
+            }
+        }
+
+        // 2. Trigger Online Search if no local results are found
+        if (!matchFound) {
+            searchOnlineMeaning(searchInput.value.trim());
+        } else {
+            setLoading(false); // If local match found, stop loading state
+        }
+    }
+    
+    // Bind Enter key to the search function
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    });
+
+    // --- Initialization ---
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1. Set data-label attributes for mobile stackable table
+        const headerRow = localDictionary.querySelector("thead tr");
+        if (headerRow) {
+            const headerCells = headerRow.querySelectorAll("th");
+            localDictionary.querySelectorAll("tbody tr").forEach(row => {
+                const cells = row.querySelectorAll("td");
+                cells.forEach((cell, cellIndex) => {
+                    if (headerCells[cellIndex]) {
+                        cell.setAttribute('data-label', headerCells[cellIndex].textContent.trim());
+                    }
+                });
+            });
+        }
+        
+        // 2. Update word count in the footer
+        wordCountDisplay.textContent = `शब्द संख्या: ${tableRows.length}`;
+    });
+
+</script>
+</body>
+</html>

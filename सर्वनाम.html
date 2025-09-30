@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>सर्वनाम - नेपाली व्याकरण</title>
+    <style>
+        /* CSS Variables for a Colorful and Modern Aesthetic */
+        :root {
+            --primary-color: #17a2b8; /* Vibrant Cyan/Teal */
+            --secondary-color: #f8f9fa; /* Light Gray Background */
+            --text-color: #343a40; /* Dark Text for High Contrast */
+            --header-bg: #138496; /* Darker Shade for Headers */
+            --accent-color: #ffc107; /* Yellow/Gold Accent for Highlights */
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        /* Global Styles for Readability and Modern Look */
+        body {
+            font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.65; /* Optimal line height for visibility */
+            font-size: 16px; /* Base font size */
+        }
+
+        /* Header - Modern and Vibrant */
+        header {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content Area */
+        .content {
+            max-width: 1000px;
+            margin: 30px auto 100px auto; /* Increased bottom margin for fixed footer */
+            padding: 0 25px;
+        }
+
+        .content h2 {
+            font-size: 2em;
+            color: var(--header-bg);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        
+        /* Sub-Header - Animated Aesthetic */
+        .content h4 {
+            background-color: var(--header-bg);
+            color: #fff;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            font-size: 1.2em;
+            transition: transform var(--transition-speed) ease; /* Subtle animation */
+            cursor: default;
+        }
+
+        .content h4:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Paragraph and Definition Styles */
+        p {
+            text-align: justify;
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        p b {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        /* Lists */
+        ol, ul {
+            padding-left: 25px;
+            margin-bottom: 25px;
+        }
+
+        ol > li {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        ol ol li {
+            font-weight: 400;
+            color: var(--text-color);
+            list-style-type: lower-alpha;
+        }
+
+        /* Table Styling for Responsiveness and Clarity */
+        .table-container {
+            overflow-x: auto; /* Essential for mobile table responsiveness */
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            min-width: 400px; /* Ensures tables are usable on small screens */
+            border-collapse: collapse;
+            text-align: left;
+            background-color: #fff;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border: 1px solid #e9ecef;
+            vertical-align: top;
+            font-size: 1em;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f1f1f1; /* Zebra striping for better contrast */
+        }
+        
+        table u {
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+        
+        table u:hover {
+            color: var(--accent-color);
+        }
+
+
+        /* Footer - Fixed position for accessibility */
+        footer {
+            background-color: var(--header-bg);
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        /* --- Mobile Optimization (Max Readability) --- */
+        @media only screen and (max-width: 600px) {
+            body {
+                font-size: 17px; /* Increased Base Font Size on Mobile */
+            }
+            
+            .content {
+                padding: 0 15px;
+                margin-bottom: 80px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content h2 {
+                font-size: 1.5em;
+                margin-top: 30px;
+            }
+            
+            p, ol > li, ul > li {
+                font-size: 1em; /* Ensures text is clearly legible */
+            }
+
+            .content h4 {
+                padding: 10px;
+                font-size: 1.1em;
+            }
+
+            table td {
+                padding: 8px 10px;
+                font-size: 0.9em;
+            }
+            
+            /* Ensure the content is not hidden by the fixed footer */
+            .content:last-child {
+                padding-bottom: 80px; 
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>नेपाली व्याकरण</h1>
+</header>
+
+<div class="content">
+    <h2>सर्वनाम (Pronoun)</h2>
+    <p><b>नाम, नाम पदावली तथा वाक्यको सट्टामा प्रयोग हुने शब्दलाई सर्वनाम भनिन्छ।</b></p>
+    <p>म, हामी, तँ, तिमी, तपाईं, ऊ, यो, त्यो, उनी, यिनी, तिनी, उहाँ, जुन, जे, कुन, को, कोही, आफैँ, स्वयम्, आफू आदि सर्वनाम शब्द हुन्।</p>
+    
+    <p>उदाहरणका लागि वाक्यमा हेर्दा:</p>
+    <ul>
+        <li><u>हरि</u> घर गयो। <u>ऊ</u> विद्यार्थी हो।</li>
+        <li><u>सविना</u> बानेश्वर जान्छिन् र <u>उनी</u> कम्प्युटर सिक्छिन्।</li>
+        <li>भाइसँग <u>दुई ओटा मोबाइल</u> छन्। <u>ती</u> महँगा छन्।</li>
+        <li><u>नेपाल दुई ढुङ्गा बिचको तरुल हो।</u> <u>यो</u> भनाइ पृथ्वीनारायण शाहको हो।</li>
+    </ul>
+    <p>माथि दिइएका उदाहरणमा 'ऊ' र 'उनी' नाम शब्द (हरि, सविना) को सट्टामा प्रयोग भएका छन्। यसै गरी 'ती' पदावली (दुई ओटा मोबाइल) का सट्टामा र 'यो' वाक्य ('नेपाल दुई ढुङ्गा बिचको तरुल हो।') को सट्टामा प्रयोग भएको छ। यसरी सर्वनाम नाम, पदावली तथा वाक्यको सट्टामा प्रयोग हुने गर्छ।</p>
+
+    <h4>सर्वनामका प्रकार</h4>
+    <p>सर्वनाम पाँच प्रकारका छन्। ती हुन्:</p>
+    <ol>
+        <li>पुरुषवाचक सर्वनाम</li>
+        <li>दर्शक वा सङ्केतवाचक सर्वनाम</li>
+        <li>प्रश्नवाचक सर्वनाम</li>
+        <li>सम्बन्धवाचक सर्वनाम</li>
+        <li>निजवाचक वा आत्मवाचक सर्वनाम</li>
+    </ol>
+    
+    <ol>
+        <li><b>पुरुषवाचक सर्वनाम</b></li>
+        <p><b>व्यक्ति वा पुरुषको सट्टामा प्रयोग हुने सर्वनामलाई पुरुषवाचक सर्वनाम भनिन्छ। यसलाई व्यक्तिवाचक सर्वनाम पनि भनिन्छ।</b></p>
+        <p>पुरुषवाचक सर्वनाम तीन प्रकारका छन्:</p>
+        <ol>
+            <li>प्रथम पुरुषवाचक सर्वनाम
+                <p><b>बोल्ने वक्ता वा व्यक्तिलाई बुझाउन प्रयोग गरिने सर्वनामलाई प्रथम पुरुषवाचक सर्वनाम भनिन्छ। जस्तै: म, हामी, मलाई, मैले आदि।</b></p>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td><u>म</u> पाठ पढ्छु।</td>
+                            <td><u>हामी</u> पाठ पढ्छौँ।</td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+
+            <li>द्वितीय पुरुषवाचक सर्वनाम
+                <p><b>श्रोता वा सुन्ने व्यक्तिलाई बुझाउने सर्वनामलाई द्वितीय पुरुषवाचक सर्वनाम भनिन्छ। जस्तै: तँ, तिमी, तपाईं आदि।</b></p>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td><u>तँ</u> पाठ पढ्छस्।</td>
+                            <td><u>तिमी</u> पाठ पढ्छौ।</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><u>तपाईं</u> पाठ पढ्नुहुन्छ।</td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+
+            <li>तृतीय पुरुषवाचक सर्वनाम
+                <p><b>वक्ता र श्रोताले जे-जसका बारेमा कुरा गर्छन्, त्यसलाई बुझाउन प्रयोग गरिने सर्वनाम तृतीय पुरुषवाचक सर्वनाम हो।</b> जस्तै: ऊ, यो, उनी, तिनी, उहाँ आदि।</p>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td><u>ऊ</u> गयो।</td>
+                            <td><u>उनी</u> आइन्।</td>
+                        </tr>
+                        <tr>
+                            <td><u>तिनी</u> गइन्।</td>
+                            <td><u>उहाँ</u> जानुहुन्छ।</td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+        </ol>
+        
+        <li><b>दर्शक वा सङ्केतवाचक सर्वनाम</b></li>
+        <p><b>कुनै व्यक्ति वा वस्तुलाई तोकेर देखाउने सर्वनामलाई दर्शक सर्वनाम भनिन्छ। यसलाई सङ्केतवाचक सर्वनाम पनि भनिन्छ। यो समीपवर्ती (निकटवर्ती) र दूरवर्ती गरी दुई प्रकारको हुन्छ।</b></p>
+        <p><b>समीपवर्ती (नजिकको देखाउने):</b> यो, यी, यिनी, यहाँ आदि। <b>दूरवर्ती (टाढाको देखाउने):</b> त्यो, ती, तिनी, उहाँ आदि।</p>
+        <div class="table-container">
+            <table>
+                <tr>
+                    <td><u>समीपवर्ती</u></td>
+                    <td><u>दूरवर्ती</u></td>
+                </tr>
+                <tr>
+                    <td><u>यो</u> केटा हो।</td>
+                    <td><u>त्यो</u> केटी हो।</td>
+                </tr>
+                <tr>
+                    <td><u>यिनी</u> असल छन्।</td>
+                    <td><u>तिनी</u> सोझी छिन्।</td>
+                </tr>
+                <tr>
+                    <td><u>यहाँ</u> (काका) ले खानुभयो।</td>
+                    <td><u>उहाँ</u> (मामा) जानुभयो।</td>
+                </tr>
+            </table>
+        </div>
+
+        <li><b>प्रश्नवाचक सर्वनाम</b></li>
+        <p><b>कुनै व्यक्ति, वस्तु तथा धारणाका बारेमा प्रश्न गर्दा प्रयोग हुने सर्वनाम प्रश्नवाचक सर्वनाम हो।</b> जस्तै: के, को, कुन, को-को, कुनै, कोही आदि। यो निश्चय प्रश्नवाचक र अनिश्चय प्रश्नवाचक गरी दुई प्रकारको हुन्छ।</p>
+        <div class="table-container">
+            <table>
+                <tr>
+                    <td><u>निश्चय प्रश्नवाचक</u></td>
+                    <td><u>अनिश्चय प्रश्नवाचक</u></td>
+                </tr>
+                <tr>
+                    <td>तिमीले <u>के-के</u> ल्यायौ?</td>
+                    <td>घरमा <u>कोही</u> छ?</td>
+                </tr>
+                <tr>
+                    <td>तिमीलाई <u>कुन</u> चाहिं मन पर्छ?</td>
+                    <td>तिमीलाई <u>कुनै</u> चाहिंदैन र?</td>
+                </tr>
+                <tr>
+                    <td><u>को</u> खेल्न गयो?</td>
+                    <td>तिमी <u>केही</u> भन्छौ?</td>
+                </tr>
+            </table>
+        </div>
+
+        <li><b>सम्बन्धवाचक सर्वनाम</b></li>
+        <p><b>नामको सन्दर्भमा आई उपवाक्यका बिच सम्बन्ध जोड्न आउने सर्वनामलाई सम्बन्धवाचक सर्वनाम भनिन्छ।</b></p>
+        <p>सम्बन्धवाचक सर्वनाम दुई प्रकारका छन्: निश्चितवाचक र अनिश्चितवाचक।</p>
+        <ol>
+            <li><u>निश्चित सम्बन्धवाचक:</u>
+                <p>निश्चित किसिमले कुनै व्यक्ति वा वस्तुलाई देखाउने सर्वनाम: जे, जो, जुन, जे-जे, जो-जो आदि।</p>
+                <ul>
+                    <li>तिमीले <u>जे</u> भन्छौ, म त्यही गर्छु।</li>
+                    <li><u>जो</u> बस्छ, उसैले भाइ हेर्नू।</li>
+                    <li>मैले <u>जुन</u> दिएँ, त्यही लेऊ।</li>
+                </ul>
+            </li>
+
+            <li><u>अनिश्चित सम्बन्धवाचक:</u>
+                <p>निश्चित किसिमले कुनै व्यक्ति वा वस्तुलाई नदेखाउने सर्वनाम: जेसुकै, जुनसुकै, जोसुकै आदि।</p>
+                <ul>
+                    <li><u>जोसुकै</u> आओस्, म ऋण दिन्नँ।</li>
+                    <li><u>जुनसुकै</u> भए पनि मलाई मतलब छैन।</li>
+                    <li>तिमी <u>जेसुकै</u> भन, म आफ्नो निर्णय परिवर्तन गर्दिनँ।</li>
+                </ul>
+            </li>
+        </ol>
+
+        <li><b>निजवाचक वा आत्मवाचक सर्वनाम</b></li>
+        <p><b>प्रथम, द्वितीय र तृतीय पुरुषसँग सन्दर्भित भएर आउने 'आफू', 'आफैँ', 'स्वयम्' जस्ता शब्दहरूलाई निजवाचक सर्वनाम भनिन्छ।</b> यो तीनओटै पुरुषको पछाडि प्रयोग हुन्छ। यसलाई आत्मवाचक सर्वनाम पनि भनिन्छ।</p>
+        <ul>
+            <li>म <u>स्वयम्</u> बिरामी परें।</li>
+            <li>तिमी <u>आफैँ</u> घर जाऊ।</li>
+            <li>ऊ <u>आफू</u>लाई जान्ने ठान्छ।</li>
+            <li><u>आफूले</u> रेल देखेकै छैन।</li>
+        </ul>
+    </ol>
+</div>
+</div>
+</body>
+</html>

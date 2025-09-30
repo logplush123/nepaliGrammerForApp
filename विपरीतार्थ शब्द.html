@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली विपरीतार्थ शब्दकोश 🇳🇵</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Modern, Colorful, and Animated Theme */
+        :root {
+            --primary-color: #007bff; /* Vibrant Blue */
+            --secondary-color: #28a745; /* Energetic Green */
+            --accent-color: #ffc107; /* Bright Yellow */
+            --background-light: #f4f7f6; /* Very Light Gray/Off-White */
+            --text-dark: #212529;
+            --text-light: #fff;
+            --shadow-light: 0 6px 15px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
+            --transition-speed: 0.4s;
+            /* Using Mukta as a good, clean Nepali font for visibility */
+            --font-nepali: 'Mukta', 'Poppins', sans-serif; 
+            --font-english: 'Poppins', sans-serif;
+            --antonym-color: #dc3545; /* Vivid Red for results */
+        }
+
+        /* Base Styles */
+        body {
+            font-family: var(--font-nepali);
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            transition: background-color var(--transition-speed);
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #0056b3);
+            color: var(--text-light);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        /* Content Container */
+        .content {
+            padding: 20px;
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--text-light);
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .content h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        /* Search Components */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .search-container input[type="text"] {
+            padding: 14px 20px;
+            border: 3px solid var(--primary-color);
+            border-radius: 10px;
+            font-size: 1.1rem; /* Increased font size for better readability */
+            width: 70%;
+            max-width: 450px;
+            transition: all var(--transition-speed);
+            font-family: var(--font-nepali);
+        }
+
+        .search-container input[type="text"]:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+            outline: none;
+        }
+
+        .search-container button {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            border: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color var(--transition-speed), transform 0.2s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container button:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+        }
+
+        .search-container button:active {
+            transform: translateY(0);
+        }
+
+        /* Results Display */
+        #results-container {
+            min-height: 180px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            animation: fadeIn 1s ease-out;
+        }
+
+        #results-container p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .word-label {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.4rem; /* Maximized readability */
+            display: block;
+            margin: 10px 0;
+            padding: 5px 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+
+        .antonym-result {
+            font-size: 1.8rem; /* Maximized contrast and size */
+            color: var(--antonym-color);
+            font-weight: 700;
+            display: block;
+            margin-top: 15px;
+        }
+
+        .error-message {
+            color: var(--antonym-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--accent-color), rgba(0, 0, 0, 0));
+            margin: 20px 0;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            border: 5px solid rgba(0, 123, 255, 0.2);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            animation: spin 0.8s linear infinite;
+            display: none;
+            margin: 30px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+
+        /* Responsive Design: Mobile Optimization */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+            .content {
+                margin: 20px 10px;
+                padding: 15px;
+                border-radius: 12px;
+            }
+            .content h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+            .search-container {
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 25px;
+            }
+            .search-container input[type="text"],
+            .search-container button {
+                width: 90%; /* Near full width for better tapping/typing */
+                max-width: none;
+                font-size: 1.1rem; /* Consistent, visible font size */
+                padding: 12px 15px;
+            }
+            #results-container {
+                padding: 15px;
+                min-height: 120px;
+            }
+            .word-label {
+                font-size: 1.3rem; /* Slightly smaller but still highly visible */
+            }
+            .antonym-result {
+                font-size: 1.6rem; /* High contrast and size maintained */
+            }
+            /* --- New Styles for the Static Word List Table --- */
+
+.word-list-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.word-list-section h3 {
+    font-family: var(--font-nepali);
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.antonym-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden; /* Ensures border-radius applies to table content */
+}
+
+.antonym-table th, .antonym-table td {
+    padding: 12px 15px;
+    text-align: left;
+    font-family: var(--font-nepali);
+    font-size: 1.1rem; /* Excellent visibility */
+}
+
+.antonym-table th {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.antonym-table tr:nth-child(even) {
+    background-color: #f8f9fa; /* Light alternating row color */
+}
+
+.antonym-table tr:hover {
+    background-color: #e9ecef;
+    transition: background-color 0.3s;
+}
+
+.antonym-table .main-word-cell {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.antonym-table .antonym-word-cell {
+    color: var(--antonym-color);
+    font-weight: 600;
+}
+
+/* Responsive Table Design (Card View for Mobile) */
+@media (max-width: 600px) {
+    .antonym-table, .antonym-table thead, .antonym-table tbody, .antonym-table th, .antonym-table td, .antonym-table tr { 
+        display: block; 
+    }
+    
+    .antonym-table thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    .antonym-table tr { 
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .antonym-table td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%; 
+        text-align: right;
+        font-size: 1.05rem;
+    }
+    
+    /* Create the 'label' effect using a pseudo-element */
+    .antonym-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%; 
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 700;
+        color: var(--text-dark);
+        font-size: 1.05rem;
+    }
+
+    .antonym-table .main-word-cell,
+    .antonym-table .antonym-word-cell {
+        /* Ensure the main word and antonym color/weight stand out in mobile view */
+        font-weight: 600; 
+    }
+
+    .antonym-table .antonym-word-cell {
+        /* Remove bottom border from last item in the mobile 'card' */
+        border-bottom: none;
+    }
+}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>नेपाली व्याकरणको डिजिटल सहायक </h1>
+    </header>
+    
+    <div class="content">
+        <h2>अनलाइन विपरीतार्थ शब्दकोश </h2>
+
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="विपरीत शब्द खोज्न यहाँ टाइप गर्नुहोस्..." onkeydown="if(event.key === 'Enter') searchAntonym()">
+            <button onclick="searchAntonym()">🔍 खोजी गर्नुहोस्</button>
+        </div>
+        
+        <div class="loading-spinner" id="loading-spinner"></div>
+
+        <div id="results-container">
+            <p>सुरु गर्नको लागि, खोजी बक्समा कुनै नेपाली शब्द टाइप गर्नुहोस् र त्यसको **विपरीतार्थ शब्द** पत्ता लगाउनुहोस्।</p>
+        </div>
+
+        <div class="word-list-section">
+    <h3>केही प्रमुख विपरीतार्थ शब्दहरूको सूची</h3>
+
+    <table class="antonym-table">
+        <thead>
+            <tr>
+                <th>मूल शब्द (Word)</th>
+                <th>विपरीतार्थ शब्द (Antonym)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">अर्थ</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">अनर्थ</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">खण्डन</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">मण्डन</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">आय</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">व्यय</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">कटु</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">मधुर</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">खुम्चनु</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">फैलनु</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">उच्च</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">निम्न</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">उदय</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">अस्त</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">उन्नति</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">अवनति</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">देवता</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">दानव</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">माया</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">घृणा</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">सुख</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">दुःख</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">सपना</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">विपना</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">स्वतन्त्र</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">परतन्त्र</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">जीवन</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">मरण</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">खण्ड</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">अखण्ड</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">अनुकूल</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">प्रतिकूल</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">उँभो</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">उँधो</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">जन्म</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">मृत्यु</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">नूतन</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">पूरातन</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">विनम्र</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">घमण्डी/अभिमानी</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">टुप्पो</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">फेद</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">सुलभ</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">दुर्लभ</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">संयोग</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">वियोग</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">विश्लेषण</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">संश्लेषण</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">प्रत्यक्ष</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">अप्रत्यक्ष</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">मूर्ख</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">विद्वान्</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">लाभ</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">हानि</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">आमा</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">बुबा</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">आगत</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">विगत</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">अमृत</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">विष</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">कृत्रिम</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">प्राकृतिक</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">आदि</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">अन्त्य</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">पक्ष</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">विपक्ष</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">शान्ति</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">युद्ध/अशान्ति</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">मलिन</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">स्वच्छ/निर्मल</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">अर्पण</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">ग्रहण</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">नास्तिक</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">आस्तिक</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">आऊ</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">जाऊ</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">पतन</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">उत्थान</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">सङ्कीर्ण</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">उदार</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">अहिंसा</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">हिंसा</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">ठीक</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">बेठीक</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">आदर</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">अनादर</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">सापेक्ष</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">निरपेक्ष</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">आगो</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">पानी</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">राजा</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">प्रजा</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">शिर</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">पैताला</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">घर</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">बन/जङ्गल</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">आकर्षण</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">विकर्षण</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">उपकार</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">अपकार</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">बाँझो</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">आवाद/उब्जाउ</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">बेच</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">किन</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">खराब</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">असल/राम्रो</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">एक</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">अनेक</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">अन्त</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">आदि</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">नक्कली</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">सक्कली</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">जित्नु</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">हार्नु</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">कोमल</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">कठोर/रुखो</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">महान्</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">नीच/सामान्य</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">पूर्वीय</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">पाश्चात्य</td>
+            </tr>
+            <tr>
+                <td class="main-word-cell" data-label="मूल शब्द">सुपुत्र</td>
+                <td class="antonym-word-cell" data-label="विपरीतार्थ शब्द">कुपुत्र</td>
+            </tr>
+            </tbody>
+    </table>
+</div>
+        
+    </div>
+
+    <footer>
+        <p>&copy; AI-Powered Nepali Search.</p>
+    </footer>
+
+    <script>
+        // NOTE: The API key and URL are placeholder/example. In a real-world scenario, 
+        // DO NOT expose your API key directly in frontend code. Use a backend proxy.
+        const API_KEY = "AIzaSyCaGIbpZ-w5damce-FyWWqXWjq5ZKcnAak"; 
+        const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY;
+
+        const input = document.getElementById('search-input');
+        const resultsContainer = document.getElementById('results-container');
+        const spinner = document.getElementById('loading-spinner');
+
+        async function searchAntonym() {
+            const word = input.value.trim();
+            if (word === "") {
+                // Fixed grammatical error: 'शब्द लेख्नुहोस्' is better than 'शब्द लेख्नुहोस्'
+                resultsContainer.innerHTML = '<p class="error-message">कृपया खोजी गर्नको लागि **एउटा शब्द** लेख्नुहोस्।</p>';
+                return;
+            }
+
+            // UI Update: Show loading and clear old results
+            resultsContainer.innerHTML = '';
+            spinner.style.display = 'block';
+
+            // Gemini Prompt - Clear instruction for a single word output
+            const prompt = `नेपाली शब्द "${word}" को विपरीतार्थ शब्द (Antonym) के हो? कृपया जवाफमा केवल विपरीतार्थ शब्द मात्र लेख्नुहोस्, अरू कुनै व्याख्या वा वाक्य नलेख्नुहोस्।`;
+
+            const requestBody = {
+                "contents": [
+                    { "parts": [{ "text": prompt }] }
+                ]
+            };
+
+            try {
+                // API Call
+                const response = await fetch(GEMINI_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: Status ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Extracting Result
+                const antonym = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "विपरीतार्थ शब्द फेला परेन।";
+
+                // Displaying Result
+                resultsContainer.innerHTML = `
+                    <p>तपाईंले खोज्नुभएको शब्द:</p>
+                    <span class="word-label">${word}</span>
+                    <hr>
+                    <p>यसको विपरीतार्थ शब्द (Antonym) हो:</p>
+                    <span class="antonym-result">${antonym}</span>
+                `;
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                // Fixed grammatical error: 'समस्या आयो' is more natural than 'समस्या आयो'
+                resultsContainer.innerHTML = `
+                    <p class="error-message">😔 माफ गर्नुहोस्, खोजीमा **प्राविधिक समस्या** आयो। कृपया फेरि प्रयास गर्नुहोस्।</p>
+                `;
+            } finally {
+                // Hide loading
+                spinner.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

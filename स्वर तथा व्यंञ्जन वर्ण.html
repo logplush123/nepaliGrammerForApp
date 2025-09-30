@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली वर्णविन्यास: स्वर र व्यञ्जन नियम</title>
+    <!-- Load Tailwind CSS for modern styling and responsiveness -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Mukta font for better Devanagari rendering -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #134e4a; /* Deep Teal */
+            --secondary-color: #f59e0b; /* Amber/Orange */
+            --background-color: #0021fb;
+        }
+
+        body {
+            font-family: 'Mukta', sans-serif;
+            background-color: var(--background-color);
+            color: #1f2937; /* Dark Gray text */
+        }
+        
+        /* Custom styles for accordion functionality and visual appeal */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+        
+        .accordion-content.active {
+            max-height: 3000px; /* Sufficient height for large content blocks */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .accordion-header svg {
+            transition: transform 0.3s ease;
+        }
+        
+        .accordion-header.active svg {
+            transform: rotate(180deg);
+        }
+
+        .list-style-none {
+            list-style: none;
+            padding-left: 0;
+        }
+    </style>
+</head>
+
+<!-- min-h-screen and flex-col ensure the body acts as a full-height flex container for sticky footer -->
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-primary-color text-white shadow-2xl">
+        <div class="max-w-6xl mx-auto py-5 px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wider">नेपाली व्याकरण</h1>
+            <p class="mt-1 text-lg text-secondary-color">वर्णविन्याससम्बन्धी महत्त्वपूर्ण नियमहरू</p>
+        </div>
+    </header>
+
+    <!-- Main Content Section - flex-grow pushes the footer down -->
+    <main class="container mx-auto p-4 sm:p-8 flex-grow">
+        
+        <h2 class="text-2xl font-bold text-center mb-8 text-primary-color border-b-4 border-secondary-color pb-3">
+            स्वर तथा व्यञ्जन वर्णका नियम
+        </h2>
+        
+        <!-- Accordion Container -->
+        <div id="grammar-accordion" class="space-y-4 max-w-4xl mx-auto">
+            
+            <!-- 1. 'श' 'ष' 'स' को प्रयोग -->
+            <div class="accordion-item bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                <button class="accordion-header flex justify-between items-center w-full p-5 text-left font-bold text-lg text-primary-color bg-gray-50 hover:bg-gray-100 rounded-xl transition duration-200" aria-expanded="false">
+                    <span>१. 'श', 'ष' र 'स' को प्रयोग</span>
+                    <svg class="w-6 h-6 text-secondary-color transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="accordion-content px-5 transition-all duration-500 border-t border-gray-100">
+                    <h3 class="font-semibold text-base text-teal-700 mb-2">तालव्य 'श' को प्रयोग:</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>**द, क, प** वर्ण अगाडि वा पछाडि भएमा: **पश्चिम, दर्शन, देश, कोश**।</li>
+                        <li>**चवर्ग (च, छ, ज, झ)** र **ल** का साथ: **निश्चित, आश्चर्य, विश्लेषण, निश्छल**।</li>
+                        <li>**विसर्ग**भन्दा अगाडि: **प्रायशः, क्रमशः, अक्षरशः**।</li>
+                        <li>**स** र **घ** भन्दा अगाडि: **विशेष, शोषक, शासन, विशिष्ट**।</li>
+                        <li>अन्य तत्सम शब्दहरू: **शिविर, दिशा, दर्शन, प्रवेश, प्रकाश, शुभ, शुष्क, आशीर्वाद, शाखा, परामर्श, पाश्चात्य, गणेश, स्पर्श, अंश, सशक्त, शैली, शोक** आदि।</li>
+                    </ul>
+
+                    <h3 class="font-semibold text-base text-teal-700 mt-4 mb-2">मूर्धन्य 'ष' को प्रयोग:</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>**क, ट, ठ, ड, ढ, ण** का अघिल्तिर: **कष्ट, विष्णु, कृषक, तृष्णा, पुष्कर**।</li>
+                        <li>**स्वर वर्ण**को पछाडि (केही तत्सम शब्द): **उष्ण, औषधी, ओष्ठ, उषा, आषाढ, रुष्ट**।</li>
+                        <li>**ऋ** पछि: **कृषि** आदि।</li>
+                    </ul>
+
+                    <h3 class="font-semibold text-base text-teal-700 mt-4 mb-2">दन्त्य 'स' को प्रयोग:</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>सबै **आगन्तुक** शब्द: **सिकार, सनाइ, सलाम, बदमास, स्टेसन, सहर, सिन्की**।</li>
+                        <li>सबै **तद्भव** शब्द: **सम, पचास, सुगा, सिङ, मुसा, खास, सायद, साँढे, इसारा, साहु, असार**।</li>
+                        <li>**स, ति, सह, सु, सम्** उपसर्ग लागेका शब्दमा: **सपरिवार, सत्कर्म, सहसचिव, सुकार्य, संवाद**।</li>
+                        <li>केही तत्सम शब्दहरू: **सत्कार, सम्मान, सरस्वती, समिति, सेवक, सेना, स्नान, पुस्तक, स्वभाव, साधु, दाम, स्तुति, कुशुम**।</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. 'ब' र 'व' सम्बन्धी नियम -->
+            <div class="accordion-item bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                <button class="accordion-header flex justify-between items-center w-full p-5 text-left font-bold text-lg text-primary-color bg-gray-50 hover:bg-gray-100 rounded-xl transition duration-200" aria-expanded="false">
+                    <span>२. 'ब' र 'व' को प्रयोग</span>
+                    <svg class="w-6 h-6 text-secondary-color transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="accordion-content px-5 transition-all duration-500 border-t border-gray-100">
+                    <h3 class="font-semibold text-base text-teal-700 mb-2">'ब' को प्रयोग (ओष्ठ्य):</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>'ब' उच्चारण हुने सबै **धातु र क्रियापद**: **बढ्, बन्, बुझ, बल्छ, बाँच्छ**।</li>
+                        <li>**म** पछि: **सम्बन्ध, अम्बर, अम्बा**।</li>
+                        <li>**बे, बद, बि** उपसर्ग लागेका शब्दहरू: **बेवास्ता, बेकाम, बदनियत, बदमास, बिकाम**।</li>
+                        <li>केही **अव्यय** शब्दहरू: **जब, तब, अब, बित्तिकै, बेसरी, बेग्लै**।</li>
+                        <li>केही तत्सम शब्दहरू: **निबन्ध, बाल, बृहत्, बुद्ध, बन्धु, बृहस्पति, प्रबन्ध, कुटुम्ब**।</li>
+                    </ul>
+
+                    <h3 class="font-semibold text-base text-teal-700 mt-4 mb-2">'व' को प्रयोग (दन्त्योष्ठ्य):</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>नेपालीमा 'व' को उच्चारण हुने शब्दमा: **कुवा, क्वारे, बारपार, छेरुवा, कछुवा, नेवार, पावर, क्वाँक्वाँ, वाक्क**।</li>
+                        <li>**बान्, विद्, वती, वत्** मा टुङ्गिने शब्दमा: **विद्वान्, बलवान्, शिक्षाविद्, प्राणीविद्, भगवती, पुत्रवती, पुत्रवत्**।</li>
+                        <li>**सम्** उपसर्ग पछि: **संवाद, संविधान, संवेदना**।</li>
+                        <li>'ब' उच्चारण हुने तर लेख्दा 'व' लेखिने केही **तत्सम** शब्दहरू: **मानव, जीवन, अनुभव, विद्या, कर्तव्य, वर्णन, वायु, वाणिज्य, वेदना, कविता, विश्व, विवेक, पूर्व, वेद, वृक्ष, वर्षा, नवीन, वचन, दानव, विज्ञान, विराट्, वातावरण, वासना, विशेष, विवाह, वर्ग**।</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3. 'ए' र 'य' सम्बन्धी नियम -->
+            <div class="accordion-item bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                <button class="accordion-header flex justify-between items-center w-full p-5 text-left font-bold text-lg text-primary-color bg-gray-50 hover:bg-gray-100 rounded-xl transition duration-200" aria-expanded="false">
+                    <span>३. 'ए' र 'य' को प्रयोग</span>
+                    <svg class="w-6 h-6 text-secondary-color transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="accordion-content px-5 transition-all duration-500 border-t border-gray-100">
+                    <h3 class="font-semibold text-base text-teal-700 mb-2">'ए' को प्रयोग:</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>**भूतकालका क्रियापद**मा: **गएँ, गए, खाएँ, आएन, दिएछ, थिएँ**।</li>
+                        <li>**'एर 'एको'** प्रत्यय लागेका कृदन्त शब्दमा: **गएर, भएको, धोएर, गएको, खाए, दिएको**।</li>
+                        <li>'ए' बाट सुरु हुने **सङ्ख्यावाचक** शब्दमा: **एक, एघार, एकासी, एक्लो, एउटा**।</li>
+                    </ul>
+
+                    <h3 class="font-semibold text-base text-teal-700 mt-4 mb-2">'य' को प्रयोग:</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>**भूतकालका केही क्रियापद**मा: **थियो, गयो, खायौ, भन्यो, भयो, लेख्थ्यो, बस्थ्यौ**।</li>
+                        <li>**'यो' 'त्यो'** सर्वनाम र तिनबाट बनेका शब्दमा: **यस, त्यस, त्यसरी, त्यति, यस्तो, त्यही, त्यहाँ, त्यसको, यसले**।</li>
+                        <li>केही तत्सम शब्दहरू: **दृश्य, मक्ष्य, पद्य, गद्य, भवतोष, अनुपायी, हृदय, रचयिता, वाङ्मय, धैर्य, यश, दैत्य, यन्त्र, निश्चय, कार्य**।</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 4. 'छ' र 'क्ष' तथा 'ऋ' र 'रि' सम्बन्धी नियम -->
+            <div class="accordion-item bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                <button class="accordion-header flex justify-between items-center w-full p-5 text-left font-bold text-lg text-primary-color bg-gray-50 hover:bg-gray-100 rounded-xl transition duration-200" aria-expanded="false">
+                    <span>४. 'छ' र 'क्ष' तथा 'ऋ' र 'रि' को प्रयोग</span>
+                    <svg class="w-6 h-6 text-secondary-color transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="accordion-content px-5 transition-all duration-500 border-t border-gray-100">
+                    <h3 class="font-semibold text-base text-teal-700 mb-2">'छ' को प्रयोग:</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>**आगन्तुक तथा तद्भव** शब्दमा: **छेपारो, छेलो, पछार, छेरुवा, छेउ, अछेता**।</li>
+                        <li>केही तत्सम शब्दहरू: **छात्र, छन्द, तुच्छ, इच्छा**।</li>
+                    </ul>
+
+                    <h3 class="font-semibold text-base text-teal-700 mt-4 mb-2">'क्ष' को प्रयोग:</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>**तत्सम शब्द**मा मात्र 'क्ष' (क् + ष् = क्ष) प्रयोग हुन्छ: **पक्ष, अक्ष, कक्षा, शिक्षा, निक्षेप, भक्षक, लक्ष्य, क्षण, क्षमता, वृक्ष, लक्षण, अक्षांश, शिक्षण, शिक्षक, नक्षत्र, सङ्क्षेप**।</li>
+                    </ul>
+
+                    <h3 class="font-semibold text-base text-teal-700 mt-4 mb-2">'रि' को प्रयोग:</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>**तद्भव तथा आगन्तुक** शब्दमा मात्र: **रिस, रिन, रित्तो, रिबन, रिकापी, रिपोर्ट, रिल, रिक्सा**।</li>
+                    </ul>
+
+                    <h3 class="font-semibold text-base text-teal-700 mt-4 mb-2">'ऋ' को प्रयोग:</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>**तत्सम शब्द**मा मात्र: **ऋतु, ऋण, ऋग्वेद, कृषि, बृहत, ऋचा, सृष्टि, घृणा, तृतीय, शृङ्खला, कृति, भृकुटी**।</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. पञ्चम वर्ण (ङ, ञ, ण, न, म) सम्बन्धी नियम -->
+            <div class="accordion-item bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                <button class="accordion-header flex justify-between items-center w-full p-5 text-left font-bold text-lg text-primary-color bg-gray-50 hover:bg-gray-100 rounded-xl transition duration-200" aria-expanded="false">
+                    <span>५. पञ्चम वर्ण (ङ, ञ, ण, न, म) को प्रयोग</span>
+                    <svg class="w-6 h-6 text-secondary-color transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="accordion-content px-5 transition-all duration-500 border-t border-gray-100">
+                    <p class="text-sm italic text-gray-600 mb-3">पञ्चम वर्णको प्रयोग आफू पछि आउने वर्गका आधारमा हुन्छ।</p>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-2">
+                        <li>**क वर्ग (क, ख, ग, घ)** वर्णसँग **'ङ'** आउँछ।</li>
+                        <li>**च वर्ग (च, छ, ज, झ)** वर्णसँग **'ञ'** आउँछ।</li>
+                        <li>**ट वर्ग (ट, ठ, ड, ढ)** वर्णसँग **'ण'**: **चण्डी, कण्ठ, दण्ड, घण्टा, पिण्ड, पण्डित**।</li>
+                        <li>**त वर्ग (त, थ, द, ध)** वर्णसँग **'न'**: **पन्थ, मन्द, दन्त, गन्ध, मन्दिर, सन्देश, महन्त**।</li>
+                        <li>**प वर्ग (प, फ, ब, भ)** वर्णसँग **'म'**: **सम्बन्ध, सम्भावना, सम्पत्ति, कम्पन, गुम्फन**।</li>
+                        <li>**नेपाली तद्भव र आगन्तुक** शब्दमा उच्चारणअनुसार पञ्चम वर्णको प्रयोग: **अन्डा, मन्जुर, सम्धी, चम्चा, फन्को, दुम्जा, सन्काहा, भन्छन्**।</li>
+                    </ul>
+                    <p class="mt-4 text-sm text-gray-700 p-2 border-l-4 border-secondary-color bg-yellow-50/50">
+                        <strong class="text-secondary-color">टिप्पणी:</strong> तत्सम बाहेकका प्रत्ययहरू लागी बनेका शब्दहरूको तत्सम आधार तत्त्वमा पनि उच्चारणअनुसार **'न'** नै लेखिन्छ, जस्तै: **पन्डित्नी, घन्टे, कन्ठी, मन्डले, भन्डारे** आदि।
+                    </p>
+                </div>
+            </div>
+
+            <!-- 6. स्वर वर्ण र व्यञ्जन वर्णको परिचय -->
+            <div class="accordion-item bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                <button class="accordion-header flex justify-between items-center w-full p-5 text-left font-bold text-lg text-primary-color bg-gray-50 hover:bg-gray-100 rounded-xl transition duration-200" aria-expanded="false">
+                    <span>६. स्वर वर्ण र व्यञ्जन वर्णको परिचय</span>
+                    <svg class="w-6 h-6 text-secondary-color transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="accordion-content px-5 transition-all duration-500 border-t border-gray-100 space-y-4">
+                    <p class="text-sm">वर्णहरू दुई प्रकारका छन्: **(१) स्वर वर्ण** र **(२) व्यञ्जन वर्ण**।</p>
+                    
+                    <div>
+                        <h3 class="font-semibold text-base text-teal-700 mb-2">स्वर वर्ण (Vowel - १३ ओटा)</h3>
+                        <p class="text-sm text-justify mb-2">
+                            स्वर वर्णहरू उच्चारण गर्दा श्वासको प्रवाहमा कुनै बाधा (विना रोकटोक) उत्पन्न नभई बाहिर निस्किन्छन् अथवा स्वर वर्णको उच्चारण अरू वर्णको सहायताविना नै हुन्छ।
+                        </p>
+                        <p class="text-sm font-bold text-red-600">लेख्य स्वर वर्णहरू (१३):</p>
+                        <p class="text-base font-mono bg-red-50 p-2 rounded-lg border border-red-200">
+                            **अ, आ, इ, ई, उ, ऊ, ऋ, ए, ऐ, ओ, औ, अं, अः**
+                        </p>
+                        <p class="text-sm font-bold text-green-600 mt-2">बोल्दा प्रयोग हुने मूल स्वर वर्णहरू (६):</p>
+                        <p class="text-base font-mono bg-green-50 p-2 rounded-lg border border-green-200">
+                            **अ, आ, इ, उ, ए, ओ**
+                        </p>
+                        <p class="text-xs mt-2 italic text-gray-500">
+                            'ई', 'ऊ' दीर्घ रूप हुन्; 'ऋ' संस्कृतको हो (उच्चारण: **रि**); 'ऐ', 'औ' संयुक्त स्वर हुन् (अ+इ = ऐ, अ+उ = औ); 'अं' (अम्), 'अः' (अह्)।
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-semibold text-base text-teal-700 mb-2">व्यञ्जन वर्ण (Consonant - ३६ ओटा)</h3>
+                        <p class="text-sm text-justify mb-2">
+                            व्यञ्जन वर्णहरू उच्चारण गर्दा श्वासको प्रवाहमा बाधा (रोकावट) भई बाहिर निस्किन्छन् अथवा व्यञ्जन वर्णको उच्चारण स्वर वर्णको सहायताले मात्र गर्न सकिन्छ।
+                        </p>
+                        <p class="text-sm font-bold text-red-600">उच्चारणका आधारमा नेपालीमा प्रयोग हुने व्यञ्जन वर्णहरू (२९):</p>
+                        <p class="text-base font-mono bg-red-50 p-2 rounded-lg border border-red-200 overflow-x-auto">
+                            क्, ख, ग, घ, ङ, च्, छ्, ज्, झ्, ट्, ठ्, ड्, ढ्, त्, थ्, द्, ध्, न्, प्, फ्, ब्, भ्, म्, य्, र्, ल्, व्, स्, ह्
+                        </p>
+                        <p class="text-xs mt-2 italic text-gray-500">
+                            नेपालीमा **'ञ'** र **'ण'** को उच्चारण **'न'** हुन्छ, **'श'** र **'ष'** को उच्चारण **'स'** हुन्छ। **'क्ष', 'त्र'** र **'ज्ञ'** संयुक्त वर्ण हुन्।
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer Section - Uses bg-primary-color (Deep Teal) and sticky functionality -->
+    <footer class="bg-primary-color text-white p-4 text-center mt-auto shadow-inner">
+        <p class="text-sm">&copy; 2024 Nepali Grammar Resource. सर्वाधिकार सुरक्षित।</p>
+    </footer>
+
+    <!-- JavaScript for Accordion Interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const headers = document.querySelectorAll('.accordion-header');
+
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    
+                    // Close all other open accordions
+                    document.querySelectorAll('.accordion-header').forEach(h => {
+                        if (h !== header && h.classList.contains('active')) {
+                            h.classList.remove('active');
+                            h.nextElementSibling.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle current accordion
+                    header.classList.toggle('active');
+                    content.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

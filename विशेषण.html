@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली व्याकरण - विशेषण (Adjectives)</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Mukta font (Excellent Devanagari support) -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for Devanagari font and base layout */
+        body {
+            font-family: 'Mukta', sans-serif, Arial; /* Primary Devanagari Font */
+            background-color: #f0f4f8; /* Light background */
+        }
+        .text-devanagari {
+            line-height: 1.8; /* Increased line-height for readability */
+        }
+        /* Subtly animated gradient header */
+        .animated-header {
+            background: linear-gradient(135deg, #0f4c75, #1d976c);
+            animation: gradient-shift 10s ease infinite;
+            background-size: 200% 200%;
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        /* Responsive list and table styles */
+        .content-container ul, .content-container ol {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .content-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            overflow-x: auto; /* Allow horizontal scroll on table for mobile */
+            display: block;
+        }
+        .content-container th, .content-container td {
+            border: 1px solid #cceeff;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.95rem; /* Slightly smaller text in table */
+        }
+        .content-container th {
+            background-color: #e0f7fa;
+            font-weight: 700;
+        }
+        /* Mobile Specific Adjustments */
+        @media (max-width: 640px) {
+            .text-devanagari {
+                font-size: 1.1rem; /* Ensure large font on mobile */
+                line-height: 1.7;
+            }
+            .content-container h2 {
+                font-size: 1.75rem;
+            }
+            .content-container h3 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+    <!-- Header Section -->
+    <header class="animated-header text-white shadow-xl p-6 md:p-8 text-center sticky top-0 z-10">
+        <h1 class="text-3xl md:text-4xl font-bold tracking-wider">नेपाली व्याकरण</h1>
+        <p class="text-sm opacity-80 mt-1">Nepali Grammar</p>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="content-container max-w-4xl mx-auto px-4 py-8 md:py-12 bg-white shadow-lg rounded-xl mt-6 mb-12 text-devanagari">
+
+        <h2 class="text-2xl md:text-3xl font-extrabold text-[#0f4c75] mb-6 border-b-4 border-yellow-500 pb-2 transition duration-500 hover:text-green-700">
+            विशेषण (Adjective)
+        </h2>
+
+        <!-- Definition Section -->
+        <div class="bg-blue-50 border-l-4 border-[#0f4c75] p-4 mb-8 rounded-lg shadow-sm">
+            <p class="text-lg md:text-xl font-semibold text-gray-800">
+                नाम वा सर्वनामको गुण, दोष, सङ्ख्या, मात्रा आदि <strong class="text-[#1d976c] underline">विशेषता बुझाउने शब्दलाई विशेषण भनिन्छ।</strong>
+            </p>
+            <p class="mt-3 text-gray-600 text-base">
+                <span class="font-bold">उदाहरण:</span> नेवारी, भोजपुरी, दुधालु, वैसालु, पहाडे, अग्लो, होचो, पहेंलो, राम्रो, लोभी, गुणी, छुच्चो, मिठो, सज्जन, दुई गुणा, तीन गुणा, हजारौँ, एक, पाँच, अलिकति, थोरै, प्रशस्त, हरियो, प्रत्येक, तेस्रो, सातौँ, निकै, त्यो, यो, जो, कुन, को, चिल्लो, खस्रो, मोटो आदि।
+            </p>
+        </div>
+
+        <!-- Example Sentences -->
+        <div class="mb-8">
+            <p class="text-gray-700">
+                &bullet; ऊ <u class="text-red-500 font-bold">असल</u> केटा हो।
+            </p>
+            <p class="text-gray-700">
+                &bullet; उमेशको अरूलाई ढाट्ने <u class="text-red-500 font-bold">खराब</u> बानी छ ।
+            </p>
+            <p class="text-gray-700">
+                &bullet; विनोदका <u class="text-red-500 font-bold">धेरै</u> साथीहरू छन्।
+            </p>
+            <p class="text-gray-700">
+                &bullet; बहिनीसँग <u class="text-red-500 font-bold">सयौँ</u> रुपैयाँ छ।
+            </p>
+        </div>
+
+        <!-- Types of Adjectives -->
+        <h3 class="text-xl md:text-2xl font-bold text-[#0f4c75] mb-4 mt-8 bg-gray-100 p-3 rounded-md shadow-inner">
+            विशेषणका प्रकार
+        </h3>
+        <p class="text-base text-gray-700 mb-4">विशेषण चार प्रकारका हुन्छन्। ती हुन्:</p>
+        <ol class="list-decimal list-inside space-y-1 mb-8 text-lg font-medium text-gray-700">
+            <li class="hover:text-pink-600 transition duration-300">गुणबोधक विशेषण</li>
+            <li class="hover:text-pink-600 transition duration-300">परिमाणबोधक विशेषण</li>
+            <li class="hover:text-pink-600 transition duration-300">सङ्ख्याबोधक विशेषण</li>
+            <li class="hover:text-pink-600 transition duration-300">सार्वनामिक विशेषण</li>
+        </ol>
+
+        <!-- 1. Guna Bodhak Viseshan -->
+        <div class="type-section p-5 mb-8 rounded-xl border-2 border-green-200 bg-green-50 shadow-md">
+            <h3 class="text-xl font-bold text-green-700 mb-3 border-b border-green-400 pb-2">१. गुणबोधक विशेषण</h3>
+            <p class="mb-3 font-semibold text-gray-800">
+                नामको गुण, दोष, अवस्था, स्वरूप आदि बुझाउने पदलाई गुणबोधक विशेषण भनिन्छ।
+            </p>
+            <p class="text-sm text-gray-600 italic">उदाहरण: गोलो, रातो, गरिब, प्राचीन, गाउँले, मोटो, असल, खराब, आदि।</p>
+            <div class="mt-4">
+                <p class="text-gray-700">&bull; रामको आँखा <u class="text-blue-600 font-semibold">ठूलो</u> छ। राम <u class="text-blue-600 font-semibold">राम्रो</u> विद्यार्थी हो।</p>
+                <p class="text-gray-700">&bull; हरिले <u class="text-blue-600 font-semibold">निलो</u> लुगा मन पराउँछ। ऊ <u class="text-blue-600 font-semibold">नेपाली</u> भाषा बोल्छ।</p>
+            </div>
+            <p class="mt-5 font-bold text-gray-700">गुणबोधक विशेषणले नामको निम्न विशेषता बुझाउँछ:</p>
+            <ul class="list-disc list-outside ml-6 space-y-1 text-gray-600 text-sm md:text-base">
+                <li><strong class="text-gray-800">बानी विशेष:</strong> अल्छी, असल, खराब, परिश्रमी, मिहिनेती...।</li>
+                <li><strong class="text-gray-800">स्वभाव विशेष:</strong> खन्चुवा, सज्जन, धूर्त, गफाडी, दुष्ट...।</li>
+                <li><strong class="text-gray-800">रङ विशेष:</strong> रातो, निलो, कालो, कलेजी, पहेंलो...।</li>
+                <li><strong class="text-gray-800">आकार विशेष:</strong> मोटो, सानो, गोलो, लामो, अग्लो...।</li>
+                <li><strong class="text-gray-800">समय विशेष:</strong> प्राचीन, आधुनिक, वार्षिक, दैनिक, साप्ताहिक...।</li>
+                <li><strong class="text-gray-800">स्थान विशेष:</strong> बागलुङे, विराटनगरे, झापाली, पाल्पाली, पर्वते...।</li>
+                <li><strong class="text-gray-800">अवस्था विशेष:</strong> गरिब, धनी, उच्च, सम्पन्न, नीच...।</li>
+                <li><strong class="text-gray-800">जाति विशेष:</strong> नेपाली, अङ्ग्रेजी, भोजपुरी, मैथिली...।</li>
+            </ul>
+        </div>
+
+        <!-- 2. Pariman Bodhak Viseshan -->
+        <div class="type-section p-5 mb-8 rounded-xl border-2 border-yellow-300 bg-yellow-50 shadow-md">
+            <h3 class="text-xl font-bold text-yellow-700 mb-3 border-b border-yellow-400 pb-2">२. परिमाणबोधक विशेषण</h3>
+            <p class="mb-3 font-semibold text-gray-800">
+                परिमाणबोधक विशेषणले सङ्ख्यालाई नबुझाई कुनै वस्तुको यति उति भन्ने <strong class="text-orange-600">मात्रा वा परिमाणलाई</strong> बुझाउँछ। यसलाई मात्राबोधक विशेषण पनि भनिन्छ।
+            </p>
+            <p class="text-sm text-gray-600 italic">उदाहरण: थोरबहुत, धेरै, थोरै, अलिकति, बहुत, प्रशस्त आदि।</p>
+            <ul class="list-disc list-inside ml-4 mt-4 space-y-1 text-gray-700">
+                <li>करनसँग <u class="text-orange-600 font-semibold">थोरै</u> जग्गा छ।</li>
+                <li>बहिनीसँग <u class="text-orange-600 font-semibold">धेरै</u> खेलौना छन्।</li>
+                <li>रोशनले विदेश गएर <u class="text-orange-600 font-semibold">थोरबहुत</u> पैसा कमाएछ।</li>
+                <li><u class="text-orange-600 font-semibold">थोरै</u> पैसा कमाउनेलाई जीवन धान्न कठिन पर्छ।</li>
+            </ul>
+        </div>
+
+        <!-- 3. Sankhya Bodhak Viseshan -->
+        <div class="type-section p-5 mb-8 rounded-xl border-2 border-red-300 bg-red-50 shadow-md">
+            <h3 class="text-xl font-bold text-red-700 mb-3 border-b border-red-400 pb-2">३. सङ्ख्याबोधक विशेषण</h3>
+            <p class="mb-3 font-semibold text-gray-800">
+                नामको निश्चित सङ्ख्या, क्रम, आवृत्ति आदि जनाउने पदलाई सङ्ख्याबोधक विशेषण भनिन्छ।
+            </p>
+            <p class="text-sm text-gray-600 italic">उदाहरण: पहिलो, दोस्रो, एक, दुई, तीन, दुई गुणा, तेब्बर, सयौँ, हजारौँ, प्रत्येक, हरेक आदि।</p>
+            <p class="mt-4 font-bold text-gray-700">सङ्ख्याबोधकका उप-प्रकार:</p>
+            <ul class="list-disc list-outside ml-6 space-y-1 text-gray-600 text-sm md:text-base">
+                <li><strong class="text-gray-800">गणनाबोधक (सङ्ख्या):</strong> एक, चार, दस, बीस...।</li>
+                <li><strong class="text-gray-800">अनिश्चित सङ्ख्याबोधक:</strong> सयौँ, हजारौँ, करोडौँ...।</li>
+                <li><strong class="text-gray-800">क्रमबोधक:</strong> पहिलो, दोस्रो, पाँचौँ, एघारौँ...।</li>
+                <li><strong class="text-gray-800">प्रत्येकबोधक:</strong> प्रत्येक, एक-एक, हरेक...।</li>
+            </ul>
+            <div class="mt-4">
+                <p class="text-gray-700">&bull; भाइसँग <u class="text-red-600 font-semibold">सय</u> रुपैयाँ छ।</p>
+                <p class="text-gray-700">&bull; नेपालका <u class="text-red-600 font-semibold">हजारौँ</u> जनता अशिक्षित छन्।</p>
+                <p class="text-gray-700">&bull; दीपक <u class="text-red-600 font-semibold">पहिलो</u> दर्जाको विद्यार्थी हो।</p>
+                <p class="text-gray-700">&bull; <u class="text-red-600 font-semibold">हरेक</u> विद्यार्थीले गृहकार्य गर्नुपर्छ।</p>
+            </div>
+        </div>
+
+        <!-- 4. Sarvanamik Viseshan -->
+        <div class="type-section p-5 mb-8 rounded-xl border-2 border-blue-300 bg-blue-50 shadow-md">
+            <h3 class="text-xl font-bold text-blue-700 mb-3 border-b border-blue-400 pb-2">४. सार्वनामिक विशेषण</h3>
+            <p class="mb-3 font-semibold text-gray-800">
+                नामको विशेषता जनाउने सर्वनामलाई <strong class="text-indigo-600">सार्वनामिक विशेषण</strong> भनिन्छ। यसलाई सङ्केतबोधक विशेषण पनि भनिन्छ।
+            </p>
+            <p class="text-sm text-gray-600 italic">उदाहरण: यो, त्यो, ती, जो, को, कुन, केही, के, कोही आदि।</p>
+            <p class="mt-4 font-bold text-gray-700">उही पद सर्वनाम र विशेषणका रूपमा प्रयोग हुँदा तुलना:</p>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-sm md:text-base border border-blue-400 rounded-lg">
+                    <thead>
+                        <tr class="bg-blue-200">
+                            <th class="py-2 px-3">सर्वनाम (Pronoun)</th>
+                            <th class="py-2 px-3">विशेषण (Adjective)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><u class="text-pink-600">त्यो</u> कहाँ गयो ?</td>
+                            <td><u class="text-blue-600">त्यो</u> केटो कहाँ गयो ?</td>
+                        </tr>
+                        <tr>
+                            <td>तिमीले <u class="text-pink-600">के</u> खायौ ?</td>
+                            <td>तिमीले <u class="text-blue-600">के</u> खानेकुरा खायौ ?</td>
+                        </tr>
+                        <tr>
+                            <td><u class="text-pink-600">सबै</u> रुन थाले।</td>
+                            <td><u class="text-blue-600">सबै</u> मान्छे रुन थाले।</td>
+                        </tr>
+                        <tr>
+                            <td><u class="text-pink-600">जुन</u> चाहियो, त्यही लैजाऊ।</td>
+                            <td><u class="text-blue-600">जुन</u> पुस्तक चाहियो, त्यही लैजाऊ।</td>
+                        </tr>
+                        <tr>
+                            <td>आज <u class="text-pink-600">को को</u> आए ?</td>
+                            <td>आज <u class="text-blue-600">को को</u> मान्छे आए ?</td>
+                        </tr>
+                        <tr>
+                            <td><u class="text-pink-600">को</u> गयो ?</td>
+                            <td><u class="text-blue-600">को</u> मान्छे गयो ?</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-4 text-sm md:text-base text-gray-700 italic">
+                <strong class="text-red-500">ध्यान दिनुहोस्:</strong> सर्वनाम पछि विशेष्य (नाम) आएको हुँदैन तर विशेषण पछि विशेष्य आएकै हुनुपर्छ।
+            </p>
+        </div>
+
+        <!-- Navigation Links -->
+        
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="fixed bottom-0 w-full bg-[#0f4c75] text-white text-center p-3 text-sm shadow-inner">
+        <p>&copy;  Nepali Grammar</p>
+    </footer>
+</body>
+</html>

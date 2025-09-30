@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="ne">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>नेपाली व्याकरण — करण र अकरण</title>
+
+  <!-- Prefer Kalimati (if installed). Fallback to Noto Sans Devanagari from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f6fbff;
+      --card:#ffffff;
+      --primary-1: linear-gradient(135deg,#3b82f6 0%, #06b6d4 100%);
+      --accent:#7c3aed;
+      --muted:#6b7280;
+      --success:#0f9d58;
+      --danger:#e11d48;
+      --glass: rgba(255,255,255,0.7);
+      --max-width:960px;
+      --radius:16px;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      background: radial-gradient(circle at 10% 10%, rgba(124,58,237,0.06), transparent 20%),
+                  radial-gradient(circle at 90% 90%, rgba(3,105,161,0.04), transparent 20%),
+                  var(--bg);
+      font-family: "Kalimati", "Noto Sans Devanagari", "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      color:#0f172a;
+    }
+
+    /* Layout */
+    .wrap{
+      max-width: var(--max-width);
+      margin: 28px auto;
+      padding: 20px;
+    }
+
+    header.app-header{
+      background: var(--primary-1);
+      color: white;
+      border-radius: 18px;
+      padding: 26px 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(59,130,246,0.12);
+      display:flex;
+      align-items:center;
+      gap:16px;
+      transform-origin:center;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    header.app-header h1{
+      margin:0;
+      font-size: clamp(20px, 3.2vw, 28px);
+      line-height:1.05;
+      letter-spacing:0.2px;
+      font-weight:700;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    }
+    header.app-header p {
+      margin: 4px 0 0 0;
+      opacity:0.95;
+      font-size: clamp(12px, 1.6vw, 14px);
+      color: rgba(255,255,255,0.95);
+    }
+
+    /* decorative wave */
+    .wave{
+      position:absolute;
+      bottom:-20px;
+      right:-20px;
+      opacity:0.12;
+      transform: rotate(8deg);
+      width:180px;
+      height:180px;
+      filter: blur(1px);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) }
+      50% { transform: translateY(-6px) }
+      100% { transform: translateY(0) }
+    }
+
+    /* Content area */
+    main.content{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:20px;
+      align-items:start;
+    }
+
+    /* Make single column on small screens */
+    @media (max-width: 940px){
+      main.content{ grid-template-columns: 1fr; padding-bottom: 120px;}
+    }
+
+    /* Left column - lesson */
+    .lesson{
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.95));
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(7, 12, 20, 0.06);
+      border:1px solid rgba(15,23,42,0.04);
+    }
+
+    .lesson h2{
+      margin-top:0;
+      font-size:20px;
+      color:#07122a;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .note{
+      font-size:14px;
+      color:var(--muted);
+      margin:8px 0 14px;
+    }
+
+    ol.examples{
+      padding-left: 1.05rem;
+      margin: 10px 0 0 0;
+    }
+    ol.examples li{
+      margin: 8px 0;
+      font-size:15px;
+      line-height:1.5;
+    }
+
+    .exercise-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:18px;
+    }
+    .exercise-title h3{ margin:0; font-size:16px; }
+
+    /* Fill card */
+    .fill-card{
+      margin-top:12px;
+      background:var(--card);
+      border-radius:12px;
+      padding:14px;
+      box-shadow: inset 0 1px 0 rgba(0,0,0,0.02);
+      border:1px solid rgba(15,23,42,0.03);
+    }
+
+    .question{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin:10px 0;
+    }
+
+    /* Big readable inputs */
+    .fill-input{
+      font-size:18px;
+      padding:12px 14px;
+      border-radius:10px;
+      border:1px solid rgba(15,23,42,0.08);
+      outline:none;
+      width:100%;
+      box-sizing:border-box;
+      transition: box-shadow .18s, transform .18s, border-color .18s;
+      background: linear-gradient(180deg, rgba(250,250,252,1), rgba(246,249,255,1));
+    }
+    .fill-input:focus{
+      box-shadow: 0 6px 18px rgba(59,130,246,0.12);
+      border-color: rgba(59,130,246,0.8);
+      transform: translateY(-2px);
+    }
+    .fill-input[aria-invalid="true"]{
+      border-color: var(--danger);
+      box-shadow: 0 6px 18px rgba(225,29,72,0.06);
+    }
+    .feedback{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      margin-top:6px;
+      font-size:14px;
+    }
+    .feedback .ok{
+      color:var(--success);
+      font-weight:600;
+    }
+    .feedback .bad{
+      color:var(--danger);
+      font-weight:600;
+    }
+
+    /* Right column - quick reference */
+    aside.panel{
+      position:sticky;
+      top:24px;
+      align-self:start;
+      border-radius:12px;
+      padding:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.98));
+      box-shadow: 0 10px 30px rgba(11,22,40,0.04);
+      border:1px solid rgba(15,23,42,0.03);
+    }
+    .panel h4{ margin: 0 0 8px 0; font-size:16px;}
+    .panel p{ margin:0; color:var(--muted); font-size:14px; line-height:1.45; }
+
+    /* Buttons / links */
+    .nav-links{
+      display:flex;
+      gap:12px;
+      margin-top:14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:var(--accent);
+      color:white;
+      border:none;
+      padding:10px 14px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+      text-decoration:none;
+      box-shadow: 0 8px 20px rgba(124,58,237,0.12);
+      transition: transform .14s ease, box-shadow .14s ease;
+      font-size:14px;
+    }
+    .btn:active{ transform: translateY(2px); }
+    .btn.ghost{
+      background:transparent;
+      color:var(--accent);
+      box-shadow:none;
+      border:1px solid rgba(124,58,237,0.12);
+    }
+
+    /* footer */
+    footer.site-foot{
+      margin-top:22px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* small-screen visibility improvements */
+    @media (max-width:480px){
+      .wrap{ padding:12px; margin:12px auto;}
+      .fill-input{ font-size:20px; padding:14px; }
+      .panel{ padding:12px; }
+      header.app-header{ padding:18px; border-radius:12px; }
+      header.app-header h1{ font-size:20px; }
+    }
+
+    /* small animated icons */
+    .result-icon{
+      width:18px;height:18px;display:inline-block;
+    }
+
+    /* subtle success pulse */
+    .pulse{
+      animation: pulse .9s ease-out;
+    }
+    @keyframes pulse{
+      0% { transform: scale(0.98); opacity:.6 }
+      60% { transform: scale(1.03); opacity:1 }
+      100% { transform: scale(1); opacity:1 }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <header class="app-header" aria-hidden="false">
+      <div style="flex:1">
+        <h1>नेपाली व्याकरण</h1>
+        <p>करण र अकरण — "हुन्छ" र "हुँदैन" जनाउने क्रियापदहरू</p>
+      </div>
+
+      <!-- decorative SVG wave -->
+      <svg class="wave" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#06b6d4"/>
+            <stop offset="1" stop-color="#3b82f6"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#g1)" d="M43.4,-37.4C59.1,-19.8,72.1,-3.7,68.6,9.8C65.1,23.3,45.0,34.0,27.6,44.9C10.2,55.8,-4.0,67.0,-17.6,66.4C-31.2,65.8,-44.3,53.4,-51.1,37.5C-57.9,21.6,-58.4,2.0,-51.8,-13.6C-45.2,-29.1,-31.6,-39.6,-16.2,-50.8C-0.8,-62,16.2,-73.6,33.7,-72.5C51.1,-71.4,68.3,-57.1,43.4,-37.4Z" transform="translate(100 100)" />
+      </svg>
+    </header>
+
+    <main class="content" aria-live="polite">
+      <!-- LEFT: Lesson + Exercises -->
+      <section class="lesson" aria-labelledby="lesson-title">
+        <h2 id="lesson-title">करण र अकरण क्रिया</h2>
+        <p class="note"><strong>सारांश:</strong> "करण" क्रियाले कुनै कार्य हुन्छ भन्न दर्साउँछ (उदा. पढ्छ, लेख्छ)। "अकरण" क्रियाले कुनै कार्य हुँदैन भन्न जनाउँछ (उदा. पढ्दैन, लेख्दैन)।</p>
+
+        <ol class="examples" aria-label="उदाहरणहरु">
+          <li><strong>करण:</strong> क्रियापदले काम हुन्छ भन्ने जनाउँछ — उदाहरण: <em>पढ्छ, लेख्छ, भन्यो, जान्छ, हाँस्छ</em>.</li>
+          <li><strong>अकरण:</strong> क्रियापदले काम हुँदैन भन्ने जनाउँछ — उदाहरण: <em>पढ्दैन, लेख्दैन, भनेन, जान्न, नहाँस्छ</em>.</li>
+        </ol>
+
+        <div class="exercise-title" aria-hidden="false">
+          <h3>क्रियालाई अकरणमा रुपान्तरण गर्नुहोस् (उदाहरण)</h3>
+          <small style="color:var(--muted)">(उत्तर तल दिइएको छ)</small>
+        </div>
+
+        <div class="fill-card" aria-labelledby="exercise-1">
+          <ol>
+            <li><strong>वाक्य:</strong> सानो बाबु निकै रुन्छ।<br><strong>उत्तर:</strong> सानो बाबु निकै रुदैन।</li>
+            <li><strong>वाक्य:</strong> रीता सधैं मलाई पढाउँछिन्।<br><strong>उत्तर:</strong> रीता कहिल्यै मलाई पढाउँदिनन्।</li>
+            <li><strong>वाक्य:</strong> जुनै मान्छे पनि गफ गर्छन्।<br><strong>उत्तर:</strong> कुनै मान्छे पनि गफ गर्दैन।</li>
+            <li><strong>वाक्य:</strong> सबैले सिनेमा हेर्नु।<br><strong>उत्तर:</strong> कसैले सिनेमा नहेर्नु।</li>
+          </ol>
+        </div>
+
+        <!-- Interactive exercise 1 -->
+        <div style="margin-top:18px">
+          <div class="exercise-title">
+            <h3 id="ex1">Exercise — अकरण बनाउनुहोस्</h3>
+            <small style="color:var(--muted)">तपाईंको जवाफ सही/गलत तुरुन्त देखिन्छ</small>
+          </div>
+
+          <div class="fill-card" aria-describedby="ex1-desc">
+            <div id="ex1-desc" style="display:none">चार वटा वाक्यहरू परिवर्तन गर्नुस्।</div>
+
+            <div class="question">
+              <label for="q1" style="font-weight:600">सबैतिर पानीले ढाकेको छ।</label>
+              <input id="q1" class="fill-input" type="text"
+                     data-answer="सबैतिर पानीले ढाकेको छैन।"
+                     placeholder="यहाँ लेख्नुहोस् — (अकरण)">
+              <div class="feedback" aria-live="polite"><span class="status" id="s1"></span></div>
+            </div>
+
+            <div class="question">
+              <label for="q2" style="font-weight:600">सुगा बोल्यो।</label>
+              <input id="q2" class="fill-input" type="text"
+                     data-answer="सुगा बोलेन।"
+                     placeholder="यहाँ लेख्नुहोस् — (अकरण)">
+              <div class="feedback" aria-live="polite"><span class="status" id="s2"></span></div>
+            </div>
+
+            <div class="question">
+              <label for="q3" style="font-weight:600">उनीहरु खाना खान्छन्।</label>
+              <input id="q3" class="fill-input" type="text"
+                     data-answer="उनीहरु खाना खादैनन्।"
+                     placeholder="यहाँ लेख्नुहोस् — (अकरण)">
+              <div class="feedback" aria-live="polite"><span class="status" id="s3"></span></div>
+            </div>
+
+            <div class="question">
+              <label for="q4" style="font-weight:600">म त प्रथम भएछु।</label>
+              <input id="q4" class="fill-input" type="text"
+                     data-answer="म त प्रथम भएनछु।"
+                     placeholder="यहाँ लेख्नुहोस् — (अकरण)">
+              <div class="feedback" aria-live="polite"><span class="status" id="s4"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second batch -->
+        <div style="margin-top:22px">
+          <div class="exercise-title">
+            <h3>तनाव: करण बनाउनुहोस् (उदाहरण)</h3>
+            <small style="color:var(--muted)">कुनै वाक्यलाई करणमा परिवर्तन गर्नुहोस्</small>
+          </div>
+
+          <div class="fill-card">
+            <ol>
+              <li>रमेश सल्यान नपुग्ला। — उत्तर: रमेश सल्यान पुग्ला।</li>
+              <li>हजुर घर जानुहोस्। — उत्तर: हजुर घर जानुहोस्। (नकारात्मक चाहिँ: हजुर घर नजानुहोस्।)</li>
+              <li>मृग ओरालो झर्दै थियो। — उत्तर: मृग ओरालो झर्दै थियो। (अकरण: मृग ओरालो झर्दै थिएन।)</li>
+            </ol>
+          </div>
+
+          <div class="fill-card" style="margin-top:12px">
+            <div class="question">
+              <label for="q5" style="font-weight:600">सडकमा जुलुस देखिन्छ।</label>
+              <input id="q5" class="fill-input" type="text"
+                     data-answer="सडकमा जुलुस देखिंदैन।"
+                     placeholder="यहाँ लेख्नुहोस् — (अकरण)">
+              <div class="feedback" aria-live="polite"><span class="status" id="s5"></span></div>
+            </div>
+
+            <div class="question">
+              <label for="q6" style="font-weight:600">अन्जु स्कुल आइनछ।</label>
+              <input id="q6" class="fill-input" type="text"
+                     data-answer="अन्जु स्कुल आएको छैन।"
+                     placeholder="यहाँ लेख्नुहोस् — (अकरण)">
+              <div class="feedback" aria-live="polite"><span class="status" id="s6"></span></div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RIGHT: Quick ref and nav -->
+      <aside class="panel" aria-labelledby="panel-title">
+        <h4 id="panel-title">सन्दर्भ</h4>
+        <p><strong>करण:</strong> कार्य हुने संकेत। <strong>अकरण:</strong> कार्य नहुने संकेत।</p>
+        
+        
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    // Small helper: normalize Nepali text for comparison (lowercase, trim, normalize spaces, remove some punctuation)
+    function normalizeNep(text){
+      if (!text) return '';
+      // convert to NFC, trim, collapse spaces
+      text = text.normalize('NFC').trim().replace(/\s+/g,' ');
+      // remove punctuation commonly typed differently
+      text = text.replace(/[।,\.!?]/g,'').trim();
+      // final lowercase using toLocaleLowerCase for 'ne' (but Devanagari has no uppercase/lowercase; still safe)
+      return text.toLocaleLowerCase('ne');
+    }
+
+    // Attach handlers to all inputs with data-answer
+    document.querySelectorAll('.fill-input').forEach((input) => {
+      const statusEl = input.parentElement.querySelector('.status');
+      // set initial aria attributes
+      input.setAttribute('aria-invalid','false');
+
+      input.addEventListener('input', () => {
+        const expected = input.dataset.answer || '';
+        // normalize punctuation-insensitive matching:
+        const normExpected = normalizeNep(expected);
+        const normValue = normalizeNep(input.value);
+
+        // Accept exact match OR match after removing trailing '।' and extra spaces.
+        const ok = (normValue === normExpected) || (normValue === normExpected.replace(/[।,\.!?]/g,''));
+
+        if (ok){
+          input.classList.remove('incorrect');
+          input.classList.add('correct','pulse');
+          input.setAttribute('aria-invalid','false');
+          if(statusEl){
+            statusEl.innerHTML = '<span class="ok">✔ सही</span>';
+          }
+          // subtle green border
+          input.style.borderColor = 'rgba(15,157,88,0.85)';
+          setTimeout(()=> input.classList.remove('pulse'),700);
+        } else {
+          input.classList.remove('correct');
+          input.classList.add('incorrect');
+          input.setAttribute('aria-invalid','true');
+          if(statusEl){
+            statusEl.innerHTML = '<span class="bad">✖ मिलेन</span>';
+          }
+          input.style.borderColor = '';
+        }
+      });
+
+      // On blur, if empty show hint (a11y)
+      input.addEventListener('blur', () => {
+        if (!input.value.trim()){
+          input.setAttribute('aria-invalid','true');
+          if (statusEl) statusEl.innerHTML = '<span class="bad">उत्तर लेख्नुहोस्</span>';
+        }
+      });
+
+      // On focus remove previous hint
+      input.addEventListener('focus', () => {
+        if (statusEl && (statusEl.textContent.includes('उत्तर') || statusEl.textContent.includes('मिलेन'))) {
+          statusEl.innerHTML = '';
+        }
+      });
+    });
+
+    // Enhance keyboard usability: Enter on inputs will move to next input
+    const inputs = Array.from(document.querySelectorAll('.fill-input'));
+    inputs.forEach((el, idx) => {
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const next = inputs[idx+1];
+          if (next) next.focus();
+          else el.blur();
+        }
+      })
+    });
+
+    // Accessibility: announce instructions at start for screen readers
+    (function announce(){
+      const live = document.createElement('div');
+      live.setAttribute('aria-live','polite');
+      live.style.position='absolute';
+      live.style.left='-9999px';
+      live.style.top='auto';
+      live.style.width='1px';
+      live.style.height='1px';
+      live.style.overflow='hidden';
+      live.textContent = 'पृष्ठ लोड भयो — कृपया अभ्यास सुरु गर्नुहोस्। इनपुटमा उत्तर लेख्दा तुरुन्त प्रतिक्रिया देखिन्छ।';
+      document.body.appendChild(live);
+      setTimeout(()=> live.remove(),4000);
+    })();
+  </script>
+</body>
+</html>

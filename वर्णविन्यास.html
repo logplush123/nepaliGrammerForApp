@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>शुद्ध नेपाली वर्णविन्यास</title>
+    <!-- Load Tailwind CSS for modern styling and responsiveness -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Mukta font for better Devanagari rendering -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1e3a8a; /* Deep Blue */
+            --secondary-color: #f59e0b; /* Amber */
+            --background-color: #3c00ff;
+        }
+
+        body {
+            font-family: 'Mukta', sans-serif;
+            background-color: var(--background-color);
+            color: #333;
+        }
+        
+        /* Custom styles for animations and accordion */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+        }
+        
+        .accordion-content.active {
+            max-height: 2000px; /* Large enough for content */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .accordion-header i {
+            transition: transform 0.3s ease;
+        }
+        
+        .accordion-header.active i {
+            transform: rotate(180deg);
+        }
+
+        /* Responsive utility for lists */
+        .list-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .list-grid {
+                grid-template-columns: repeat(2, 1fr); /* Two columns on desktop */
+            }
+        }
+    </style>
+</head>
+
+<!-- min-h-screen and flex-col ensure the body acts as a full-height flex container -->
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Section - Uses bg-primary-color (Deep Blue) -->
+    <header class="bg-primary-color text-white shadow-xl">
+        <div class="max-w-4xl mx-auto py-5 px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">नेपाली व्याकरण</h1>
+            <p class="mt-1 text-lg text-amber-200">वर्णविन्यासका मुख्य नियमहरू</p>
+        </div>
+    </header>
+
+    <!-- Main Content Section - flex-grow ensures it takes up available space, pushing the footer down -->
+    <main class="container mx-auto p-4 sm:p-8 flex-grow">
+        
+        <h2 class="text-2xl font-bold text-center mb-6 text-primary-color border-b-2 border-secondary-color pb-2">
+            वर्णविन्यास: ह्रस्व र दीर्घ, ब/व र श/ष/स
+        </h2>
+
+        <div id="grammar-accordion" class="space-y-4 max-w-3xl mx-auto pb-8">
+            
+            <!-- 1. ह्रस्व र दीर्घ (पदको सुरुमा) -->
+            <div class="accordion-item bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden" data-id="h_d_start">
+                <button class="accordion-header flex justify-between items-center w-full p-4 text-left font-bold text-lg text-primary-color bg-gray-50 hover:bg-gray-100 rounded-t-xl transition duration-200" aria-expanded="false" aria-controls="content_h_d_start">
+                    <span>१. पदको सुरुमा ह्रस्व र दीर्घ हुने शब्दहरू</span>
+                    <svg class="w-5 h-5 text-secondary-color transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="content_h_d_start" class="accordion-content px-4 transition-all duration-500">
+                    <div class="list-grid">
+                        <div class="p-2 border rounded-lg bg-red-50/50">
+                            <h3 class="text-base font-semibold text-red-700">ह्रस्व ('ि', 'ु') हुने:</h3>
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li>नाम शब्द: **कुकुर, सुकुल, पुलिस, जिनो, दिदी, टिकट, चिलिम, किताब, छिमेक, कुसीं** आदि।</li>
+                                <li>सर्वनाम: **तिनी, उनी, यिनी, तिमी, उहाँ** आदि।</li>
+                                <li>विशेषण: **चिसो, दुब्लो** आदि।</li>
+                                <li>सबै व्युत्पन्न शब्द: **नुनिलो, दुधालु, मिचाहा, बढ्याईँ, पुजारी, मितेरी, फुलौरा** आदि।</li>
+                                <li>सबै धातु क्रियापद: **दि, किन, चिर, सुत्, रु, धु, लिन्छ, दिन्छ, हिँड्छ, सुत्यो** आदि।</li>
+                                <li>संख्यावाचक: **दुई, उन्नाईस, उनन्तीस, त्रिपन्न, त्रिसट्ठी** आदि।</li>
+                            </ul>
+                        </div>
+                        <div class="p-2 border rounded-lg bg-green-50/50">
+                            <h3 class="text-base font-semibold text-green-700">दीर्घ ('ी', 'ू') हुने:</h3>
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li>संख्यावाचक: **तीन, बीस, तीस** आदि।</li>
+                                <li>तद्भव शब्द: **ईख, ऊँट, तीतो** आदि।</li>
+                                <li>तत्सम् शब्द (केही): **ईश्वर, जीव, शीत, प्रीत, क्रीडा, दीक्षा, कीर्ति, जीवन, मूर्ति, मूल्य, पूजा, शूर, भूमि** आदि।</li>
+                                <li>विशेषण: **ठूलो, बूढो** आदि।</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. ह्रस्व र दीर्घ (पदको अन्त्यमा) -->
+            <div class="accordion-item bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden" data-id="h_d_end">
+                <button class="accordion-header flex justify-between items-center w-full p-4 text-left font-bold text-lg text-primary-color bg-gray-50 hover:bg-gray-100 rounded-t-xl transition duration-200" aria-expanded="false" aria-controls="content_h_d_end">
+                    <span>२. पदको अन्त्यमा ह्रस्व र दीर्घ हुने शब्दहरू</span>
+                    <svg class="w-5 h-5 text-secondary-color transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="content_h_d_end" class="accordion-content px-4 transition-all duration-500">
+                     <div class="list-grid">
+                        <div class="p-2 border rounded-lg bg-red-50/50">
+                            <h3 class="text-base font-semibold text-red-700">ह्रस्व ('ि', 'ु') हुने:</h3>
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li>पुल्लिंग नाम (केही अपवाद बाहेक): **नाति, पनाति, बाबु, दाजु, गुरु, भाइ, जुवाईं, भिनाजु, बराजु, फुपाजु** आदि।</li>
+                                <li>नपुंसकलिङ्गी उकारान्त नाम: **ठाउँ, गाउँ, घिउ, धनु, पिँडालु, आलु, मासु, स्याउ** आदि।</li>
+                                <li>अव्यय: **अनि, पनि, देखि, निम्ति, लागि, अगाडि, पछाडि, चाहिँ** आदि।</li>
+                                <li>'आई' प्रत्यय लागेका कृदन्त/तद्धितान्त: **पढाइ, लेखाइ, लम्बाइ, चौडाइ, मोटाइ** आदि।</li>
+                                <li>'ति', 'धि', 'नि', 'पि', 'वि' अन्त्यमा हुने तत्सम शब्द: **कृति, बुद्धि, निधि, लिपि, कवि, छवि, कृषि** आदि।</li>
+                                <li>'आलु' प्रत्यय लागेका शब्द: **निम्तालु, दयालु, श्रद्धालु, मायालु, लजालु, विषालु, कृपालु** आदि।</li>
+                            </ul>
+                        </div>
+                        <div class="p-2 border rounded-lg bg-green-50/50">
+                            <h3 class="text-base font-semibold text-green-700">दीर्घ ('ी', 'ू') हुने:</h3>
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li>जाति र थर बुझाउने शब्द: **कामी, दमाईं, घर्ती, ज्यापू, लिम्बु, मैनाली, रेग्मी, ज्ञवाली** आदि।</li>
+                                <li>पेसा बुझाउने शब्द: **व्यापारी, पुजारी, सिकर्मी, डकर्मी, नगर्ची** आदि।</li>
+                                <li>सबै स्त्रीलिङ्गी शब्द: **दिदी, गाई, रानी, छोरी, केटी, जेठी, सासू, फुपू, भाउजू** आदि।</li>
+                                <li>ठाउँ बुझाउने शब्द: **सिन्धुली, बैतडी, गुल्मी, कास्की, सर्लाही, डोटी** आदि।</li>
+                                <li>निर्जीव वस्तु बुझाउने शब्द: **थाली, थैली, धुरी, खरानी, ठेकी, कल्ली, डाली** आदि।</li>
+                                <li>पूर्वक्रियाबोधक र स्त्रीलिङ्गी क्रियापद: **खाई, पढी, लेखी, भनी, हेरी** आदि।</li>
+                                <li>केही सर्वनाम: **आफू, तिमी, हामी, ऊ, तपाईं** आदि।</li>
+                                <li>क्रियाविशेषण (व्युत्पन्न): **राम्ररी, बेसरी, कसरी, सुस्तरी, दनदन्ती** आदि।</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 'ब' र 'व' को प्रयोग -->
+            <div class="accordion-item bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden" data-id="b_w_usage">
+                <button class="accordion-header flex justify-between items-center w-full p-4 text-left font-bold text-lg text-primary-color bg-gray-50 hover:bg-gray-100 rounded-t-xl transition duration-200" aria-expanded="false" aria-controls="content_b_w_usage">
+                    <span>३. 'ब' र 'व' को प्रयोगका नियमहरू</span>
+                    <svg class="w-5 h-5 text-secondary-color transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="content_b_w_usage" class="accordion-content px-4 transition-all duration-500">
+                    <div class="list-grid">
+                        <div class="p-2 border rounded-lg bg-red-50/50">
+                            <h3 class="text-base font-semibold text-red-700">'ब' को प्रयोग (ब)</h3>
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li>नाम शब्द: **बालक, बखान, बगाल, बतास, बोक्रो, बगैँचा, बिजुली, बुहारी, बाहुनी** आदि।</li>
+                                <li>विशेषण: **बलियो, बूढो, बाङ्गो, बहिरो, विखालु, बरबाद** आदि।</li>
+                                <li>अव्यय: **अब, जब, तब, बिस्तारै, बुरुक्क, बेसरी** आदि।</li>
+                                <li>धातु: **बस, बन्, बोल, बाँध, बाँच्** आदि।</li>
+                                <li>'बे', 'बद्', र 'बि' उपसर्ग: **बेईज्जत, बेकार, बदनाम, बदमाश, बिजोर, बिसन्चो** आदि।</li>
+                            </ul>
+                        </div>
+                        <div class="p-2 border rounded-lg bg-green-50/50">
+                            <h3 class="text-base font-semibold text-green-700">'व' को प्रयोग (व)</h3>
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li>तद्भव/आगन्तुक (केही): **कछुवा, जुवा, कुवा, हावा, नेवार, जुवाईं, वारिस, वकिल, वास्ता, पावर** आदि।</li>
+                                <li>तत्सम शब्द (उच्चारण 'ब' भए पनि): **वन, वर्ग, वर्तमान, वर्ष, वृक्ष, विद्या, विज्ञान, विवेक, विवाह, वर्णन, वायु, वातावरण, वासना, वियोग, विश्व, कविता, मानव, वैभव** आदि।</li>
+                                <li>'आवट', 'उवा', 'वाला', 'वार', 'बारी' प्रत्यय: **बोलावट, सजावट, खन्चुवा, हकवाला, उम्मेदवार, महिनावारी, जिम्मेवारी** आदि।</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 'श', 'ष', 'स' को प्रयोग -->
+            <div class="accordion-item bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden" data-id="sh_sh_s_usage">
+                <button class="accordion-header flex justify-between items-center w-full p-4 text-left font-bold text-lg text-primary-color bg-gray-50 hover:bg-gray-100 rounded-t-xl transition duration-200" aria-expanded="false" aria-controls="content_sh_sh_s_usage">
+                    <span>४. 'श', 'ष', 'स' को प्रयोगका नियमहरू</span>
+                    <svg class="w-5 h-5 text-secondary-color transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="content_sh_sh_s_usage" class="accordion-content px-4 transition-all duration-500">
+                     <div class="list-grid">
+                        <div class="p-2 border rounded-lg bg-red-50/50">
+                            <h3 class="text-base font-semibold text-red-700">'श' को प्रयोग (तालव्य श):</h3>
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li>केही तत्सम शब्द: **शिशु, शिविर, शैशव, शासक, शासन, शोषक, शस्त्र, शास्त्र, प्रशासन, देश, दिशा, दर्शन, शान्ति, शोभा, शुभ, विशिष्ट, शेष** आदि।</li>
+                            </ul>
+                        </div>
+                        <div class="p-2 border rounded-lg bg-yellow-50/50">
+                            <h3 class="text-base font-semibold text-yellow-700">'ष' को प्रयोग (मूर्धन्य ष):</h3>
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li>केही तत्सम शब्द: **कृषि, आकर्षण, भाषा, शोषण, पौष, पोषण, ऋषि, शिष्य, शिष्ट, विशेषण, षट्कोण, षड्यन्त्र, कृष्ण, निष्कण्टक, दुष्कर्म, बहिष्कार, परिष्कार** आदि।</li>
+                            </ul>
+                        </div>
+                        <div class="p-2 border rounded-lg bg-green-50/50">
+                            <h3 class="text-base font-semibold text-green-700">'स' को प्रयोग (दन्त्य स):</h3>
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li>सबै नेपाली तद्भव र आगन्तुक शब्दमा 'स' को मात्र प्रयोग हुन्छ। जस्तै: **सय, आँसु, पच्चीस, दस, मुसो, संसार, सिफारिस, स्टेसन, सहर, सिकार, कोसिस, सहिद** आदि।</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. शिरबिन्दु र चन्द्रबिन्दुको प्रयोग -->
+            <div class="accordion-item bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden" data-id="bindu_usage">
+                <button class="accordion-header flex justify-between items-center w-full p-4 text-left font-bold text-lg text-primary-color bg-gray-50 hover:bg-gray-100 rounded-t-xl transition duration-200" aria-expanded="false" aria-controls="content_bindu_usage">
+                    <span>५. शिरबिन्दु (ं) र चन्द्रबिन्दु (ँ) को प्रयोग</span>
+                    <svg class="w-5 h-5 text-secondary-color transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="content_bindu_usage" class="accordion-content px-4 transition-all duration-500">
+                    <div class="list-grid">
+                        <div class="p-2 border rounded-lg bg-red-50/50">
+                            <h3 class="text-base font-semibold text-red-700">शिरबिन्दु ('ं') को प्रयोग:</h3>
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li>य, र, ल, व, श, स, ह का अगाडि आएको तत्सम शब्दको नासिक्य ध्वनिमा: **संविधान, संसार, संवाद, संलग्न, संहार, संसद्** आदि।</li>
+                                <li>(सामान्यतया तत्सम शब्दहरूमा)</li>
+                            </ul>
+                        </div>
+                        <div class="p-2 border rounded-lg bg-green-50/50">
+                            <h3 class="text-base font-semibold text-green-700">चन्द्रबिन्दु ('ँ') को प्रयोग:</h3>
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li>क्रियापदको अन्तिम ध्वनिमा (भूतकाल र भविष्यकालमा): **जाँदै, खाँदै, गाउँछ, आउँछ, गएँ, खाएँ, बसें, पढ़ें** आदि।</li>
+                                <li>तद्भव शब्दहरूमा नासिक्य स्वर आएमा: **आँप, अँध्यारो, इन्जार, घाँस, प्वाँख, साँझ, सँग, काँध, पिँध** आदि।</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section - Uses bg-primary-color (Deep Blue) -->
+    <footer class="bg-primary-color text-white p-4 text-center">
+        <p class="text-sm">&copy; 2024 Nepali Grammar Resource. नियमहरू राष्ट्रिय पाठ्यक्रम विकास केन्द्रको आधारमा लेखिएका छन्।</p>
+    </footer>
+
+    <!-- JavaScript for Accordion Interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Find all accordion header buttons
+            const headers = document.querySelectorAll('.accordion-header');
+
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    
+                    // Toggle the active class on the header and content
+                    
+                    // Close all other open accordions
+                    document.querySelectorAll('.accordion-header').forEach(h => {
+                        if (h !== header && h.classList.contains('active')) {
+                            h.classList.remove('active');
+                            h.nextElementSibling.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle current accordion
+                    header.classList.toggle('active');
+                    content.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

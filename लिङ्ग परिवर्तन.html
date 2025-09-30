@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली व्याकरण: लिङ्ग परिवर्तन</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Mukta (for Nepali Readability) and Inter (for UI) -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Variables for Dark Theme (High Contrast for Mobile Readability) */
+        :root {
+            --primary-bg: #111827; /* Dark Slate */
+            --card-bg: #1f2937; /* Slightly lighter card background */
+            --accent-color: #34d399; /* Vibrant Teal for accents */
+            --secondary-color: #fcd34d; /* Yellow for text highlights */
+            --text-color-light: #f3f4f6;
+            --border-color: #374151;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color-light);
+            min-height: 100vh;
+        }
+
+        /* Use Mukta for all Nepali Text content */
+        .nepali-font {
+            font-family: 'Mukta', Arial, sans-serif;
+            line-height: 1.7;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 5px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Content Card Styling */
+        .content-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Accordion Styles for Gender Types */
+        .accordion-item {
+            background-color: #1a2330;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out; 
+            padding: 0 1rem;
+            color: #ccc;
+        }
+
+        .accordion-item.active .accordion-content {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+            max-height: 5000px; /* High value to prevent clipping */
+        }
+        
+        /* Table Styling for Examples */
+        .grammar-table th, .grammar-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        .grammar-table th {
+            background-color: #14532d; /* Dark Green */
+            color: var(--secondary-color);
+        }
+        .grammar-table tr:nth-child(even) {
+            background-color: #2c3a50;
+        }
+
+        /* Tabs for Categories */
+        .tab-button {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #9ca3af;
+        }
+        .tab-button.active {
+            border-bottom-color: var(--accent-color);
+            color: var(--accent-color);
+            background-color: #1a2330;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeInTab 0.5s ease-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeInTab {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+
+        /* Mobile specific adjustments */
+        @media (max-width: 640px) {
+            .accordion-header {
+                font-size: 1.1rem;
+            }
+            .content-card h2 {
+                font-size: 1.5rem;
+            }
+            .grammar-table th, .grammar-table td {
+                padding: 8px 5px;
+                font-size: 0.85rem;
+                white-space: normal; /* Allow text wrapping */
+            }
+            .tab-button {
+                font-size: 0.8rem;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col">
+
+    <!-- Header -->
+    <header>
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center nepali-font">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white">नेपाली व्याकरण</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex-grow container mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="content-card max-w-5xl mx-auto p-6 sm:p-10 rounded-xl mt-6 mb-20">
+
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-accent-color nepali-font">
+                लिङ्ग (Gender)
+            </h2>
+            <hr class="border-accent-color mb-6">
+            
+            <!-- Definition Section -->
+            <div class="mb-8 nepali-font">
+                <p class="text-lg text-secondary-color font-bold mb-3">
+                    लिङ्गको परिभाषा:
+                </p>
+                <p class="text-base sm:text-lg text-justify">
+                    **भाले (पुलिङ्ग), पोथी (स्त्रीलिङ्ग) वा यी दुवैभन्दा फरक (नपुंसकलिङ्ग) लाई बुझाउने शब्दलाई लिङ्ग (Gender) भनिन्छ।**
+                </p>
+                <p class="mt-4 text-xl font-bold text-accent-color">
+                    लिङ्ग तीन प्रकारका हुन्छन्:
+                </p>
+            </div>
+
+            <!-- Noun Types Section (Accordion) -->
+            <div class="space-y-4" id="accordionContainer">
+                
+                <!-- 1. पुलिङ्ग (Masculine Gender) -->
+                <div class="accordion-item rounded-lg overflow-hidden">
+                    <div class="accordion-header nepali-font" onclick="toggleAccordion(this)">
+                        <span>१. पुलिङ्ग (भाले लिङ्ग)</span>
+                        <svg class="w-6 h-6 transform transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="accordion-content nepali-font">
+                        <p class="font-bold mb-2 text-secondary-color">परिभाषा:</p>
+                        <p class="text-justify">**भाले जाति वा पुरुषलाई बुझाउने शब्दलाई पुलिङ्ग भनिन्छ।**</p>
+                        <p class="font-bold mt-3 text-accent-color">उदाहरण:</p>
+                        <p>केटो, छात्र, युवक, मालिक, साहु, नाति, बाजे, ससुरा, पण्डित, भान्जा, पिता, हात्ती, मत्ता, याक, पाडो, आदि।</p>
+                    </div>
+                </div>
+
+                <!-- 2. स्त्रीलिङ्ग (Feminine Gender) -->
+                <div class="accordion-item rounded-lg overflow-hidden">
+                    <div class="accordion-header nepali-font" onclick="toggleAccordion(this)">
+                        <span>२. स्त्रीलिङ्ग (पोथी लिङ्ग)</span>
+                        <svg class="w-6 h-6 transform transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="accordion-content nepali-font">
+                        <p class="font-bold mb-2 text-secondary-color">परिभाषा:</p>
+                        <p class="text-justify">**पोथी जाति वा महिलालाई बुझाउने शब्दलाई स्त्रीलिङ्ग भनिन्छ।**</p>
+                        <p class="font-bold mt-3 text-accent-color">उदाहरण:</p>
+                        <p>केटी, छात्रा, युवती, मालिक्नी, साहुनी, नातिनी, बज्यै, सासू, पण्डित्नी, भान्जी, माता, ढोई, नाक, पाडी, आदि।</p>
+                    </div>
+                </div>
+
+                <!-- 3. नपुंसकलिङ्ग (Neuter Gender) -->
+                <div class="accordion-item rounded-lg overflow-hidden">
+                    <div class="accordion-header nepali-font" onclick="toggleAccordion(this)">
+                        <span>३. नपुंसकलिङ्ग (Neuter Gender)</span>
+                        <svg class="w-6 h-6 transform transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="accordion-content nepali-font">
+                        <p class="font-bold mb-2 text-secondary-color">परिभाषा:</p>
+                        <p class="text-justify">**भाले वा पोथी कुनै पनि नबुझाई अन्य निर्जीव वस्तु वा पदार्थलाई बुझाउने शब्दलाई नपुंसकलिङ्ग भनिन्छ।**</p>
+                        <p class="font-bold mt-3 text-accent-color">उदाहरण:</p>
+                        <p>किताब, घर, दराज, ढुङ्गो, माटो, कम्प्युटर, कलम, बन्चरो, रुख, टेबुल, मेच, पहाड, धान, मकै, सुन, आदि।</p>
+                        <p class="mt-3 italic text-gray-400">नेपाली भाषामा 'नपुंसकलिङ्ग' लाई प्रायः 'पुलिङ्ग' सरह नै मानिन्छ र व्यवहारमा 'पुलिङ्ग' र 'स्त्रीलिङ्ग' मात्र प्रयोग हुन्छन्।</p>
+                    </div>
+                </div>
+            </div> <!-- End Accordion -->
+
+            <h3 class="text-2xl font-extrabold text-secondary-color border-b-2 border-secondary-color pb-2 mb-6 nepali-font mt-10">
+                पुलिङ्गलाई स्त्रीलिङ्गमा परिवर्तन गर्ने नियम र उदाहरण
+            </h3>
+
+            <!-- Tabs for Gender Examples -->
+            <div class="mt-6 bg-primary-bg p-4 rounded-xl">
+                
+                <div class="flex border-b border-border-color overflow-x-auto whitespace-nowrap">
+                    <div class="tab-button active nepali-font" data-tab="sentences" onclick="openTab(event, 'sentences')">वाक्यमा परिवर्तन</div>
+                    <div class="tab-button nepali-font" data-tab="nouns" onclick="openTab(event, 'nouns')">नामावली परिवर्तन</div>
+                    <div class="tab-button nepali-font" data-tab="rules" onclick="openTab(event, 'rules')">प्रत्ययबाट परिवर्तन</div>
+                </div>
+
+                <!-- Tab Content 1: Sentence Examples -->
+                <div id="sentences" class="tab-content active mt-4 nepali-font">
+                    <p class="text-base text-secondary-color font-bold mb-3">वाक्यमा लिङ्ग परिवर्तन (विशेषण र क्रियापदको प्रयोग)</p>
+                    <div class="overflow-x-auto">
+                        <table class="grammar-table w-full border-collapse">
+                            <thead>
+                                <tr><th>पुलिङ्ग वाक्य</th> <th>स्त्रीलिङ्ग वाक्य</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>**मोटो** केटो **आयो**।</td> <td>**मोटी** केटी **आई**।</td></tr>
+                                <tr><td>**ठूलो** छोरा **रुन्चे** छ।</td> <td>**ठूली** छोरी **रुन्चे** छे।</td></tr>
+                                <tr><td>मेरो दाई ज्ञानी **छ**।</td> <td>मेरी दिदी ज्ञानी **छिन्**।</td></tr>
+                                <tr><td>भाइ स्कुल **जान्छ**।</td> <td>बहिनी स्कुल **जान्छे**।</td></tr>
+                                <tr><td>मामा **गोरो** र **राम्रो** हुनुहुन्छ।</td> <td>माइजु **गोरी** र **राम्री** हुनुहुन्छ।</td></tr>
+                                <tr><td>साहुले पसल **खोले**।</td> <td>साहुनीले पसल **खोलिन्**।</td></tr>
+                                <tr><td>काले सधैँ **रुन्छ**।</td> <td>काली सधैँ **रुन्छे**।</td></tr>
+                                <tr><td>बुबा पाल्पा **जानु भयो**।</td> <td>आमा पाल्पा **जानु भयो**। <span class="text-gray-400 italic text-xs">(आदरार्थीमा क्रियापद उही)</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tab Content 2: Direct Noun/Adjective Change -->
+                <div id="nouns" class="tab-content mt-4 nepali-font">
+                    <p class="text-base text-secondary-color font-bold mb-3">पुलिङ्गलाई स्त्रीलिङ्गमा परिवर्तन गर्ने आधारभूत शब्दहरू</p>
+                    <div class="overflow-x-auto">
+                        <table class="grammar-table w-full border-collapse">
+                            <thead>
+                                <tr><th>पुलिङ्ग (Masculine)</th> <th>स्त्रीलिङ्ग (Feminine)</th> <th>पुलिङ्ग (Masculine)</th> <th>स्त्रीलिङ्ग (Feminine)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>भाले</td> <td>पोथी</td> <td>बाबु</td> <td>आमा</td></tr>
+                                <tr><td>गोरु</td> <td>गाई</td> <td>श्रीमान्</td> <td>श्रीमती</td></tr>
+                                <tr><td>राजा</td> <td>रानी</td> <td>बोका</td> <td>बाख्रा</td></tr>
+                                <tr><td>ठूलो</td> <td>ठूली</td> <td>बाघ</td> <td>बाघिनी</td></tr>
+                                <tr><td>दाजु</td> <td>भाउजु</td> <td>मामा</td> <td>माइजु</td></tr>
+                                <tr><td>केटो</td> <td>केटी</td> <td>बुढो मान्छे</td> <td>बुढी आईमाई</td></tr>
+                                <tr><td>भाई</td> <td>बहिनी</td> <td>कुकुर</td> <td>कुुकुर्नी</td></tr>
+                                <tr><td>काका</td> <td>काकी</td> <td>स्याल</td> <td>स्याल्नी</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tab Content 3: Change using Suffixes (प्रत्यय) -->
+                <div id="rules" class="tab-content mt-4 nepali-font">
+                    <p class="text-base text-secondary-color font-bold mb-3">प्रत्यय ('ई', 'नी', 'आनी', 'इनी') जोडेर लिङ्ग परिवर्तन</p>
+                    <div class="overflow-x-auto">
+                        <table class="grammar-table w-full border-collapse">
+                            <thead>
+                                <tr><th>प्रत्यय</th> <th>पुलिङ्ग शब्द</th> <th>स्त्रीलिङ्ग शब्द</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>**-ई**</td> <td>बाहुन (वा ब्राह्मण)</td> <td>बाहुनी (वा ब्राह्मणी)</td></tr>
+                                <tr><td>**-ई**</td> <td>गोरो</td> <td>गोरी</td></tr>
+                                <tr><td>**-नी**</td> <td>मालिक</td> <td>मालिक्नी</td></tr>
+                                <tr><td>**-नी**</td> <td>साहु</td> <td>साहुनी</td></tr>
+                                <tr><td>**-नी**</td> <td>धोबी</td> <td>धोबिनी</td></tr>
+                                <tr><td>**-आनी**</td> <td>गुरु</td> <td>गुरुआनी</td></tr>
+                                <tr><td>**-आनी**</td> <td>क्षत्री (क्षेवी)</td> <td>क्षत्राणी</td></tr>
+                                <tr><td>**-इनी**</td> <td>पण्डित</td> <td>पण्डितिनी</td></tr>
+                                <tr><td>**-इनी**</td> <td>सभामुख</td> <td>सभामुखिनी</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            
+            <br><br>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-card-bg text-gray-500 p-4 text-center mt-auto shadow-inner border-t border-border-color">
+        <p class="text-xs sm:text-sm nepali-font">&copy; 2024 नेपाली व्याकरण | लिङ्ग</p>
+    </footer>
+
+    <!-- JavaScript for Accordion and Tab Functionality -->
+    <script>
+        // Accordion functionality (Gender Types)
+        function toggleAccordion(header) {
+            const item = header.closest('.accordion-item');
+            const content = item.querySelector('.accordion-content');
+            const icon = header.querySelector('svg');
+
+            const isActive = item.classList.contains('active');
+
+            document.querySelectorAll('.accordion-item.active').forEach(activeItem => {
+                if (activeItem !== item) {
+                    activeItem.classList.remove('active');
+                    activeItem.querySelector('.accordion-content').style.maxHeight = 0;
+                    activeItem.querySelector('svg').style.transform = 'rotate(0deg)';
+                }
+            });
+
+            if (isActive) {
+                item.classList.remove('active');
+                content.style.maxHeight = 0;
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                item.classList.add('active');
+                // Use a large value to prevent clipping
+                content.style.maxHeight = "5000px"; 
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+        
+        // Tab functionality (Examples)
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Deactivate all tab links
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            // Show the current tab, and add an "active" class to the button
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+
+</html>

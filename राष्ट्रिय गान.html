@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>राष्ट्रिय गान र प्रश्नोत्तर - नेपाल</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Mukta (for Nepali Readability) and Inter (for UI) -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Modern Dark Theme Variables */
+        :root {
+            --primary-bg: #0d121c; /* Deep Navy */
+            --card-bg: #1a2330; /* Dark Panel */
+            --accent-color: #ef4444; /* Vibrant Red/Crimson */
+            --secondary-color: #10b981; /* Emerald Green for highlight */
+            --text-color-light: #f3f4f6;
+            --border-color: #374151;
+            --link-color: #60a5fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color-light);
+            transition: background-color 0.4s ease;
+            min-height: 100vh;
+        }
+
+        /* Use Mukta for all Nepali Text content */
+        .nepali-font {
+            font-family: 'Mukta', Arial, sans-serif;
+            line-height: 1.8;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 5px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Content Card Styling */
+        .content-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Anthem Text Styling */
+        .anthem-stanza {
+            font-size: 1.35rem; /* Large font for mobile readability */
+            font-weight: 600;
+            color: var(--text-color-light);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .anthem-translation p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #a0a0a0;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        /* Q&A Accordion Style */
+        .qa-item {
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .qa-item:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .qa-question {
+            background-color: #1f2937;
+            padding: 1rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.1rem;
+        }
+        
+        .qa-answer {
+            padding: 1rem;
+            background-color: #111827;
+            color: #ccc;
+            font-size: 1rem;
+        }
+        
+
+        /* Mobile specific adjustments */
+        @media (max-width: 640px) {
+            .anthem-stanza {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+            .qa-question, .qa-answer {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col">
+
+    
+
+    <!-- Main Content -->
+    <div class="flex-grow container mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="content-card max-w-4xl mx-auto p-6 sm:p-10 rounded-xl mt-6 mb-20">
+
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-6 text-secondary-color nepali-font">
+                राष्ट्रिय गान
+            </h2>
+            <p class="text-center text-sm text-gray-400 mb-8 nepali-font">
+                नेपालको राष्ट्रिय गान
+            </p>
+
+            <!-- Nepali Stanzas (Grammatically Corrected) -->
+            <div class="nepali-font mb-10">
+                <p class="anthem-stanza">
+                    <b>सयौँ थुँगा फूलका हामी, एउटै माला नेपाली ।</b><br>
+                    <b>सार्वभौम भई फैलिएका, मेची-महाकाली ।</b>
+                </p>
+                <p class="anthem-stanza">
+                    <b>प्रकृतिका कोटी-कोटी सम्पदाको आँचल,</b><br>
+                    <b>वीरहरूको रगतले, स्वतन्त्र र अटल ।</b>
+                </p>
+                <p class="anthem-stanza">
+                    <b>ज्ञानभूमि, शान्तिभूमि तराई, पहाड, हिमाल,</b><br>
+                    <b>अखण्ड यो प्यारो हाम्रो मातृभूमि नेपाल ।</b>
+                </p>
+                <p class="anthem-stanza">
+                    <b>बहुल जाति, भाषा, धर्म, संस्कृति छन् विशाल,</b><br>
+                    <b>अग्रगामी राष्ट्र हाम्रो, जय जय नेपाल ।</b>
+                </p>
+            </div>
+
+            <h3 class="text-2xl font-extrabold text-accent-color border-b-2 border-accent-color pb-2 mb-4 nepali-font">
+                English Translation
+            </h3>
+
+            <!-- English Translation (Improved Formatting) -->
+            <div class="anthem-translation mb-10">
+                <p>
+                    Woven from hundreds of flowers, we are one garland that's Nepali,<br>
+                    Spread sovereign from Mechi to Mahakali.
+                </p>
+                <p>
+                    A shawl of nature's wealth unending,<br>
+                    From the blood of the braves, a nation free and non-moving.
+                </p>
+                <p>
+                    A land of knowledge, of peace, the plains, hills, and mountains tall,<br>
+                    Indivisible, this beloved land of ours, our motherland Nepal.
+                </p>
+                <p>
+                    Of many races, languages, religions, and cultures of incredible sprawl,<br>
+                    This progressive nation of ours, all hail Nepal!
+                </p>
+            </div>
+            
+            <br>
+            
+            <!-- Important Q&A Section -->
+            <h3 class="text-2xl font-extrabold text-secondary-color border-b-2 border-secondary-color pb-2 mb-6 nepali-font">
+                महत्वपूर्ण प्रश्नोत्तर (Important Q&A)
+            </h3>
+            
+            <div class="space-y-4 nepali-font">
+                
+                <!-- Q&A Item 1 -->
+                <div class="qa-item rounded-lg overflow-hidden">
+                    <div class="qa-question">
+                        १. राष्ट्रिय गानका रचनाकार को हुन्? (Who is the lyricist?)
+                    </div>
+                    <div class="qa-answer">
+                        यस गानका रचनाकार **प्रदीप कुमार राई** हुन्, जसलाई साहित्यिक नाम **'ब्याकुल माइला'** ले पनि चिनिन्छ।
+                    </div>
+                </div>
+
+                <!-- Q&A Item 2 -->
+                <div class="qa-item rounded-lg overflow-hidden">
+                    <div class="qa-question">
+                        २. राष्ट्रिय गानमा जम्मा कति शब्द र पंक्तिहरू छन्? (How many words and lines are there?)
+                    </div>
+                    <div class="qa-answer">
+                        यस गानमा जम्मा **४६ शब्द** (Words) र **१२ पंक्तिहरू** (Lines) छन्।
+                    </div>
+                </div>
+
+                <!-- Q&A Item 3 -->
+                <div class="qa-item rounded-lg overflow-hidden">
+                    <div class="qa-question">
+                        ३. नेपालको राष्ट्रिय गान कहिले स्वीकृत भयो? (When was it officially adopted?)
+                    </div>
+                    <div class="qa-answer">
+                        यो गान **२०६३ साल मंसिर ८ गते** (November 30, 2006) मा औपचारिक रूपमा नेपालको राष्ट्रिय गानको रूपमा अपनाइएको थियो।
+                    </div>
+                </div>
+
+                <!-- Q&A Item 4 -->
+                <div class="qa-item rounded-lg overflow-hidden">
+                    <div class="qa-question">
+                        ४. राष्ट्रिय गानले नेपालको कुन-कुन विविधतालाई समेटेको छ? (Which diversities does it cover?)
+                    </div>
+                    <div class="qa-answer">
+                        यसले नेपालको **जाति, भाषा, धर्म, संस्कृति**, र **भौगोलिक विविधता** (तराई, पहाड, हिमाल, मेची-महाकाली) लाई सुन्दर ढंगले समेटेको छ।
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-card-bg text-gray-500 p-4 text-center mt-auto shadow-inner border-t border-border-color">
+        <p class="text-xs sm:text-sm nepali-font">&copy; 2024 नेपाली व्याकरण</p>
+    </footer>
+
+</body>
+
+</html>

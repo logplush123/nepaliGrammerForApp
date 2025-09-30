@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली चिठीपत्र लेखन (Letter Writing)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Mukta (Excellent Nepali Readability) and Inter (for UI) -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&family=Inter:wght=400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Variables for Dark Theme (High Contrast for Mobile Readability) */
+        :root {
+            --primary-bg: #111827;
+            /* Dark Slate */
+            --card-bg: #1f2937;
+            /* Slightly lighter card background */
+            --accent-color: #fcd34d;
+            /* Vibrant Yellow for accents */
+            --secondary-color: #34d399;
+            /* Teal for highlights */
+            --text-color-light: #f3f4f6;
+            --border-color: #374151;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color-light);
+            min-height: 100vh;
+        }
+
+        /* Use Mukta for all Nepali Text content */
+        .nepali-font {
+            font-family: 'Mukta', Arial, sans-serif;
+            line-height: 1.7;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 5px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Content Card Styling */
+        .content-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Letter Box Styling (latter -> chithi-box) */
+        .chithi-box {
+            background-color: #e5e7eb;
+            /* Light gray background for the letter content */
+            color: #1f2937;
+            /* Dark text */
+            padding: 16px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+        
+        .chithi-box:hover {
+            transform: translateY(-2px);
+        }
+
+        /* General Font Size Adjustment for Mobile Readability */
+        .nepali-font p, .nepali-font li, .nepali-font td {
+            font-size: 1rem; /* Base size for mobile */
+        }
+        
+        @media (min-width: 640px) {
+            .nepali-font p, .nepali-font li, .nepali-font td {
+                font-size: 1.05rem; /* Slightly larger on desktop */
+            }
+        }
+        
+        /* Table Styling */
+        .grammar-table th,
+        .grammar-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .grammar-table th {
+            background-color: #4a5568;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+        
+        /* Accordion Styles (for letter samples) */
+        .accordion-item {
+            background-color: #1a2330;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .accordion-header:hover {
+            background-color: #2c3a50;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        .accordion-item.active .accordion-content {
+            padding: 1rem;
+            max-height: 5000px;
+        }
+        
+        /* Tabs for Categories */
+        .tab-button {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #9ca3af;
+        }
+        .tab-button.active {
+            border-bottom-color: var(--accent-color);
+            color: var(--accent-color);
+            background-color: #1a2330;
+            border-radius: 6px 6px 0 0;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeInTab 0.5s ease-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeInTab {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer positioning adjusted for content flow */
+        .main-container {
+            padding-bottom: 100px; /* Ensure space for the fixed footer */
+        }
+        footer {
+            background-color: var(--card-bg);
+            color: #9ca3af;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 10;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col">
+
+    <!-- Header -->
+    <header>
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center nepali-font">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white">नेपाली व्याकरण</h1>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="flex-grow container mx-auto p-4 sm:p-6 lg:p-8 main-container">
+        <div class="content-card max-w-6xl mx-auto p-6 sm:p-10 rounded-xl mt-6">
+
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-6 text-accent-color nepali-font">
+                चिठीपत्र लेखन
+            </h2>
+            <hr class="border-secondary-color mb-8">
+
+            <!-- Tabs for Theory and Samples -->
+            <div class="bg-primary-bg rounded-xl">
+                <div class="flex border-b border-border-color overflow-x-auto whitespace-nowrap">
+                    <div class="tab-button active nepali-font" data-tab="theory" onclick="openTab(event, 'theory')">परिचय, प्रकार र ढाँचा</div>
+                    <div class="tab-button nepali-font" data-tab="samples" onclick="openTab(event, 'samples')">चिठीका नमुना</div>
+                    <div class="tab-button nepali-font" data-tab="applications" onclick="openTab(event, 'applications')">निवेदनका नमुना</div>
+                </div>
+
+                <!-- TAB 1: Theory, Types, and Rules -->
+                <div id="theory" class="tab-content active mt-4 p-4">
+                    <div class="space-y-6 nepali-font">
+                        <!-- Introduction -->
+                        <div class="p-4 rounded-lg bg-gray-700/30 border border-border-color">
+                            <h5 class="text-xl font-bold mb-2 text-secondary-color">१. परिचय (Introduction)</h5>
+                            <p class="text-justify text-text-color-light">
+                                **सूचना वा सन्देश आदानप्रदान गर्ने लिखित माध्यमलाई चिठी वा पत्र भनिन्छ।** सञ्चार प्रविधिको विकासले यसको प्रयोग कम हुँदै गए पनि यो अभिव्यक्तिको एक सशक्त रूप हो। चिठीले दुई पक्षबीचको सम्बन्धलाई घनिष्ठ बनाउनुका साथै हार्दिकता र शिष्टताको भाव प्रकट गर्दछ। चिठी सरल, स्पष्ट र प्रभावकारी भाषामा अभिव्यक्ति गरिन्छ र यो हुलाक, विद्युतीय साधन (इमेल) वा व्यक्तिमार्फत आदानप्रदान हुने गर्दछ।
+                            </p>
+                        </div>
+
+                        <!-- Types -->
+                        <div class="p-4 rounded-lg bg-gray-700/30 border border-border-color">
+                            <h5 class="text-xl font-bold mb-2 text-secondary-color">२. चिठी/पत्रका प्रकार (Types of Letters)</h5>
+                            <p class="text-text-color-light mb-4">चिठी मुख्यतया दुई प्रकारका हुन्छन्:</p>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li class="font-bold text-accent-color">घरायसी चिठी (अनौपचारिक) - Gharayasi Chithi (Informal)</li>
+                                <li class="font-bold text-accent-color">कार्यालयीय चिठी (औपचारिक) - Karyalayeeya Chithi (Formal/Official)</li>
+                            </ul>
+                        </div>
+
+                        <!-- Gharelu Chithi Table -->
+                        <div class="p-4 rounded-lg bg-gray-700/30 border border-border-color">
+                            <h5 class="text-xl font-bold mb-3 text-secondary-color">घरायसी चिठीमा नाता सम्बन्धअनुसार प्रयोग हुने शब्दहरू</h5>
+                            <div class="overflow-x-auto">
+                                <table class="grammar-table w-full border-collapse min-w-[600px] text-xs sm:text-sm">
+                                    <thead>
+                                        <tr class="text-accent-color">
+                                            <th>नाता / सम्बन्ध</th>
+                                            <th>सम्बोधन</th>
+                                            <th>अभिवादन</th>
+                                            <th>सम्बन्धज्ञापन</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>हजुरबुबा, बुबा, आमा, दाजु, दिदी, पति</td>
+                                            <td>पूज्य/पूजनीय, आदरणीय</td>
+                                            <td>साष्टाङ्ग दण्डवत्, सादर ढोग</td>
+                                            <td>हजुरको नाति/छोरो, पत्नी</td>
+                                        </tr>
+                                        <tr>
+                                            <td>सासू, ससुरा, काका, काकी, फुपाजु, फुपू</td>
+                                            <td>आदरणीय, श्रद्धेय</td>
+                                            <td>सादर नमस्कार/प्रणाम/अभिवादन</td>
+                                            <td>हजुरकी नातिनी/बुहारी/ज्वाइँ</td>
+                                        </tr>
+                                        <tr>
+                                            <td>मामा/माइजु</td>
+                                            <td>आदरणीय, श्रद्धेय</td>
+                                            <td>सादर नमस्कार, अभिवादन</td>
+                                            <td>हजुरको/की भान्जा/भान्जी</td>
+                                        </tr>
+                                        <tr>
+                                            <td>छोरा, छोरी, भाइ, बहिनी, भान्जा/भान्जी</td>
+                                            <td>प्रिय, स्नेही, प्यारो/प्यारी</td>
+                                            <td>शुभाशीर्वाद, आशीर्वाद, शुभाशीष</td>
+                                            <td>माया गर्ने, तिम्रो बुबा/आमा/दाजु</td>
+                                        </tr>
+                                        <tr>
+                                            <td>साथी</td>
+                                            <td>प्रिय/प्यारो मित्र (नाम), स्नेही</td>
+                                            <td>मीठो सम्झना, नमस्कार, सप्रेम</td>
+                                            <td>हितैषी, शुभेच्छुक, उही साथी</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Gharelu Chithi Rules -->
+                        <div class="p-4 rounded-lg bg-gray-700/30 border border-border-color">
+                            <h5 class="text-xl font-bold mb-3 text-secondary-color">घरायसी चिठी लेख्ने तरिका (Structure)</h5>
+                            <ul class="list-decimal list-inside space-y-3 ml-4 text-text-color-light">
+                                <li>चिठी लेखिने कागजको **दायाँतिर सिरानमा मिति र ठेगाना** लेख्नुपर्छ।</li>
+                                <li>मिति/ठेगाना लेखिएको दुई हार तल **बायाँतिर नाता सम्बन्धअनुसारको सम्बोधन** र त्यसमुनि **अभिवादन/शिष्टाचारको शब्द** लेख्नुपर्छ।</li>
+                                <li>अभिवादनको एक पङ्क्ति तलबाट **सन्चो बिसन्चो र सामान्य भलाकुसारी** सहित चिठी लेखनको प्रारम्भ गर्नुपर्छ।</li>
+                                <li>अर्को अनुच्छेदमा **विषयसँग सम्बन्धित मूल कुरा** (सन्देश/समाचार) लाई स्पष्टसँग व्यक्त गर्नुपर्छ।</li>
+                                <li>समापन अनुच्छेदमा पत्र टुङ्गिएको जानकारी दिने वाक्यका साथ चिठीको अन्त्य गर्नुपर्छ।</li>
+                                <li>चिठीको अन्त्यमा पाउने व्यक्तिसँगको **सम्बन्ध र आफ्नो नाम** (सम्बन्धज्ञापन) उल्लेख गर्नुपर्छ।</li>
+                                <li>(**हुलाकी ढाँचा**): खामको पछाडि पट्टिको देब्रेतिर पठाउने (प्रेषक) र दाहिनेतिर पाउने (प्रापक) को पूरा नाम र ठेगाना लेख्नुपर्छ।</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: Letter Samples (Accordion Structure for better mobile UX) -->
+                <div id="samples" class="tab-content mt-4 p-4">
+                    <p class="text-xl font-bold mb-4 text-accent-color nepali-font">घरायसी चिठीका नमुनाहरू</p>
+                    <div class="space-y-4" id="letterAccordion">
+                        
+                        <!-- Sample 1 -->
+                        <div class="accordion-item rounded-lg overflow-hidden">
+                            <div class="accordion-header nepali-font" onclick="toggleLetter(this)">
+                                <span>१. साथीलाई स्वदेशमै काम गर्न सल्लाह दिँदै लेखिएको चिठी</span>
+                                <svg class="w-5 h-5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content p-4">
+                                <div class="chithi-box nepali-font">
+                                    <p class="font-bold text-lg mb-4">विदेश गई धन कमाउन लालायित साथीलाई आफ्नो ज्ञान, सीप र क्षमता स्वदेशको निम्ति लगाउन सल्लाह दिँदै लेखिएको चिठी।</p>
+                                    <hr class="border-gray-400 mb-4">
+                                    <p class="date font-bold text-right mb-4">
+                                        <u>मिति: २०८१/०४/१७</u><br>
+                                        काठमाडौं, नेपाल।
+                                    </p>
+                                    <p class="mb-4">प्यारो साथी हरिस,<br>सदाबहार नमस्कार!</p>
+                                    <p class="text-justify mb-3">
+                                        यहाँ म सन्चै छु र त्यहाँ तिमी पनि सन्चै छौ भन्ने आशा एवं विश्वास गर्दछु। मित्र, हाम्रो खबर **आदानप्रदान** नभएको पनि लामो समय भइसकेछ। पहिले पहिले त चिठीपत्र आदानप्रदान हुने गर्दथ्यो। अहिले त त्यो पनि टुट्यो कि क्या हो? हुन त मैले पनि यताबाट **चिठी** लेखेको छैन र यो पत्र आज लेख्दै छु। खैर, जेसुकै होस्, हालखबर आदानप्रदान नहुँदैमा मित्रताको **डोरी टुट्ने** पनि त होइन, कि कसो?
+                                    </p>
+                                    <p class="text-justify mb-3">
+                                        अँ साँच्ची, तिमी त विदेश जाने तरखरमा छौ भन्ने कुरा रबिनबाट थाहा पाएँ। के यो कुरा सत्य नै हो? यदि हो भने मलाई त तिम्रो विचार **जायज** लागेन। तिमी जत्तिको पढेलेखेको र हातमा ज्ञान, सीप र क्षमता भएको मान्छेले विदेशको सपना चुन्नु पटक्कै राम्रो होइन। तिमीले आफ्नै देशभित्र बसेर ज्ञान, सीप र पसिना **खन्यायौ** भने एकातिर आर्थिक अवस्था सुदृढ हुन्छ भने अर्कोतिर बेरोजगार दाजुभाइले रोजगारको अवसर प्राप्त गर्ने सम्भावना बढ्छ। यसले तिमी तथा समाजको भलो अवश्य हुन्छ। अनि विदेश भन्दैमा रुखको बोटबाट टपाटप फल टिपेजस्तो पैसा टिप्न पाइने पनि त होइन। विदेशमा गएर काम गर्न कति कठिन छ, यो त तिमीलाई पनि थाहै होला।
+                                    </p>
+                                    <p class="text-justify mb-6">
+                                        अझ स्कूलमा पढ्दा तिमी देशभक्तिका कुरा गर्थ्यौ। आफ्नै देशमा सुन फलाउने तिम्रो विचारलाई केले परिवर्तन गरायो र आज तिमी विदेशको मोहमा **पर्‍यौ** कि? कर्मले तिमीलाई फसाउन खोज्दै छ? यस बारेमा एकचोटी विचार गर भन्ने सल्लाह दिन्छु। हामीजस्ता युवाहरू विदेश **पस्न** थाल्यौँ भने देशको अवस्था कस्तो होला? हामी तन्नेरी जवानहरूले नै यो देशलाई बनाउनुपर्छ। हामीले जानेको, सिकेको ज्ञानले यो देशको **माटोलाई भिजाउनु** पर्छ। त्यसैले मित्र, यहाँ बसेर तत्कालका लागि सानोतिनो उद्योग व्यवसाय गरे पनि हुन्छ अथवा कुनै जागिर खाए पनि हुन्छ। स्वदेशलाई सिर्जनाले भर्ने हाम्रा हातहरू विदेशीको कल्याणका लागि खिइनु हुँदैन। कर्ण, यदि तिमी विदेशको सोचमा छौ भने एकचोटि **मनन्** गर। मेरो विचार त यही नै हो। योभन्दा बढ्ता के भन्न सक्छु। **लत र गन्थन के लेखूँ? अहिलेलाई कलम बन्द गर्छु।**
+                                    </p>
+                                    <p class="text-right mb-6">उही हितैषी मित्र <br>नेत्र **खनाल** (सुधारिएको थर) </p>
+
+                                    <table class="w-full border-collapse border border-gray-500 text-xs sm:text-sm">
+                                        <tr>
+                                            <td class="w-1/2 border border-gray-500 p-2">
+                                                <p class="font-bold text-center">पठाउने (प्रेषक)</p>
+                                                <p class="text-center">नेत्र खनाल<br>काठमाडौं, नेपाल</p>
+                                            </td>
+                                            <td class="w-1/2 border border-gray-500 p-2">
+                                                <p class="font-bold text-center">पाउने (प्रापक)</p>
+                                                <p class="text-center">हरिस प्रसाई<br>विराटनगर १, मोरङ</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sample 2 -->
+                        <div class="accordion-item rounded-lg overflow-hidden">
+                            <div class="accordion-header nepali-font" onclick="toggleLetter(this)">
+                                <span>२. दिदीलाई प्रौढ शिक्षामा सहभागी हुन अनुरोध गर्दै लेखिएको चिठी</span>
+                                <svg class="w-5 h-5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content p-4">
+                                <div class="chithi-box nepali-font">
+                                    <p class="font-bold text-lg mb-4">सानाेमा पढ्न नपाएकी दिदीलाई प्रौढ शिक्षाको महत्त्व दर्शाउँदै कार्यक्रममा सहभागी हुन अनुरोध गर्दै चिठी।</p>
+                                    <hr class="border-gray-400 mb-4">
+                                    <p class="date font-bold text-right mb-4">
+                                        <u>मिति: २०८१/१०/१५</u><br>
+                                        पशुपतिनाथ, काठमाडौं।
+                                    </p>
+                                    <p class="mb-4">प्यारी दिदी राधिका,<br>नमस्कार।</p>
+                                    <p class="text-justify mb-3">
+                                        यहाँ म तपाईंहरूको असीम मायाले सकुशल छु र त्यहाँ तपाईंहरू पनि कुशल हुनुहुन्छ भन्ने कामना गर्दछु। घरबाट चिठी खबर नआएको निकै लामो समय भयो। टाढा बसेपछि के भयो होला? कसो भयो होला भन्ने चिन्ता हुँदोरहेछ। खासगरी आमालाई के कस्तो छ? त्यसका बारेमा पनि आगामी पत्रमा लेखी पठाउनु होला।
+                                    </p>
+                                    <p class="text-justify mb-3">
+                                        दिदी, गाउँमा प्रौढ शिक्षा सञ्चालन भएको कुरा भरतबाट थाहा पाएँ। गाउँका **निरक्षर** जनताले साक्षर हुने अवसर पाउने सुन्दा ज्यादै खुसी लाग्यो। घरमा भाइबहिनी हेर्नुपर्छ भनेर तपाईंलाई आमाले स्कूलमा पढ्न पठाउनुभएन, जसले गर्दा आज तपाईं **निरक्षर** भएर बसिरहनु परेको छ। त्यसैले तपाईं पनि गाउँमा सञ्चालन भएको **प्रौढ शिक्षा कार्यक्रममा** सहभागी भएर फाइदा उठाउनुहोस्। प्रौढ शिक्षा भनेको त्यस्तो शिक्षा हो जसले निरक्षरलाई साक्षर त बनाउँछ नै, त्यसका अतिरिक्त समाजमा गरिने हरेक क्रियाकलाप र जीविकोपार्जनका लागि गरिने हरेक कामहरूका सम्बन्धमा जानकारीसमेत गराउँछ। त्यसकारण तुरुन्तै त्यस कार्यक्रममा सहभागी हुन म तपाईंलाई विनम्र अनुरोध गर्दछु।
+                                    </p>
+                                    <p class="text-justify mb-6">
+                                        यहाँ म राम्ररी पढिरहेको छु। अन्य कुराहरू सबै ठीकै छ। नयाँ नौला कुराहरू भएमा पत्र लेख्दै गरूँला। आजलाई बिदा माग्दछु।
+                                    </p>
+                                    <p class="text-right mb-6">उही तिम्रो भाई <br>दिलिप कार्की </p>
+                                    <table class="w-full border-collapse border border-gray-500 text-xs sm:text-sm">
+                                        <tr>
+                                            <td class="w-1/2 border border-gray-500 p-2">
+                                                <p class="font-bold text-center">पठाउने (प्रेषक)</p>
+                                                <p class="text-center">दिलिप कार्की<br>पशुपतिनाथ, काठमाडौं।</p>
+                                            </td>
+                                            <td class="w-1/2 border border-gray-500 p-2">
+                                                <p class="font-bold text-center">पाउने (प्रापक)</p>
+                                                <p class="text-center">राधिका कार्की<br>गोठगाउँ ७, मोरङ</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sample 3 -->
+                        <div class="accordion-item rounded-lg overflow-hidden">
+                            <div class="accordion-header nepali-font" onclick="toggleLetter(this)">
+                                <span>३. लागू पदार्थको दुर्व्यसनमा फसेको साथीलाई सल्लाह दिँदै लेखिएको चिठी</span>
+                                <svg class="w-5 h-5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content p-4">
+                                <div class="chithi-box nepali-font">
+                                    <p class="font-bold text-lg mb-4">लागू पदार्थको दुर्व्यसनमा फसेको साथीलाई अमूल्य जीवन धुवाँमा नउडाउन सल्लाह दिँदै लेखिएको चिठी।</p>
+                                    <hr class="border-gray-400 mb-4">
+                                    <p class="date font-bold text-right mb-4">
+                                        <u>मिति: २०८१/०५/१५</u><br>
+                                        धरान-१०, सुनसरी।
+                                    </p>
+                                    <p class="mb-4">प्यारो साथी दानवीर,<br>सदाबहार सम्झना।</p>
+                                    <p class="text-justify mb-3">
+                                        आजका दिनसम्म म आराम कुशल नै छु, त्यहाँ तिमी पनि आराम कुशल नै छौ भन्ने पूर्ण विश्वास राखेको छु। विशेष लेख्नुपर्ने कुरा केही नभए पनि मैले यहाँ तिम्रो बारेमा केही नराम्रा कुराहरू **सुनेँ**, त्यसैले तिमीलाई यो पत्र **कोर्दैछु**। दानवीर, मैले यहाँ सुनेअनुसार तिमी कुलतमा **फँसेका** **छौ** रे। तिमी अहिले हरपल अनि हरक्षण विभिन्न किसिमका नशालु पदार्थहरू सेवन गरी लठ्ठ परिरहन्छौ रे। **दानु**, तिमीले यो अवश्य पनि राम्रो गरेनौ। नशालु वस्तुहरू भनेका त्यस्तो चिजहरू हुन्, ती चिजहरू तिमीले सेवन गर्छौ तर ती चिजहरूले तिम्रो अमूल्य जीवनलाई बरबाद बनाइरहेको हुन्छ।
+                                    </p>
+                                    <p class="text-justify mb-3">
+                                        **दानु**, तिमीले आफ्नो वास्तविक जीवन बुझेकै छैनौ। तिमीले जीवन भनेको केवल **दिनको एउटा खेलौना** सरह सोचेका छौ होला। तर त्यो तिम्रो सोचाइ बिल्कुल गलत हो। जीवन धेरै लामो छ अनि जीवनमा धेरै कामहरू गर्न बाँकी नै छ। तिमीले जति बढी **लागू** पदार्थबाट धुवाँ उडाउँछौ, त्यो धुवाँमा अरु केही नभएर तिम्रो आफ्मनो जीवन उडिरहेको छ। बुबाआमाले पसिना बगाएर कमाएको सम्पत्ति पनि उडिरहेको छ। **'म जीवनमा केही गर्छु अनि यो कुलतलाई मेरो जीवनबाट टाढा राख्छु'** भन्ने दृढ विश्वास लेऊ। तिमीले आफ्नो जीवनलाई कुनै खेलौनासँग तुलना नगर। अवश्य पनि ती चिजहरूलाई त्याग्न सक्छौ।
+                                    </p>
+                                    <p class="text-justify mb-6">
+                                        तिमीलाई यो मेरा कुराहरू प्रायः नराम्रा लाग्छन् होला तर पनि एकपटक **चिसो दिमागले** सोच अनि निर्णय गर। **दानु**, अब अरु धेरै कुरा के लेख्नु, मेरो कुरालाई मनन गरेर तिमीले एउटा पत्र मलाई **पठाऊ**। म तिम्रो सकारात्मक प्रत्युत्तरको आशामा हुनेछु। **तिम्रो र मेरो अर्को भेट हुँदासम्म** तिमीले पूर्ण रूपमा कुलतलाई त्यागिसकेको हुनेछौ र जीवनलाई सकारात्मक **बाटोमा** पुर्‍याइसकेको हुनेछौ भन्ने विश्वास राखेको छु। ल त आजलाई यति नै। बाँकी कुरा अर्को पत्रमा वा भेटमा गरौँला। हवस् त।
+                                    </p>
+                                    <p class="text-right mb-6">उही मित्र <br>भीम </p>
+                                    <table class="w-full border-collapse border border-gray-500 text-xs sm:text-sm">
+                                        <tr>
+                                            <td class="w-1/2 border border-gray-500 p-2">
+                                                <p class="font-bold text-center">पठाउने (प्रेषक)</p>
+                                                <p class="text-center">भीम बहादुर तेली<br>धरान-१०, सुनसरी</p>
+                                            </td>
+                                            <td class="w-1/2 border border-gray-500 p-2">
+                                                <p class="font-bold text-center">पाउने (प्रापक)</p>
+                                                <p class="text-center">दानवीर साका<br>विराटनगर -१९, मोरङ</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sample 4 -->
+                        <div class="accordion-item rounded-lg overflow-hidden">
+                            <div class="accordion-header nepali-font" onclick="toggleLetter(this)">
+                                <span>४. प्लाष्टिक प्रदूषण र रोकथामका लागि गाउँको साथीलाई लेखिएको चिठी</span>
+                                <svg class="w-5 h-5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content p-4">
+                                <div class="chithi-box nepali-font">
+                                    <p class="font-bold text-lg mb-4">प्लाष्टिकबाट हुने प्रदूषण र यसको रोकथामका बारेमा गाउँको साथीलाई लेखिएको चिठी।</p>
+                                    <hr class="border-gray-400 mb-4">
+                                    <p class="date font-bold text-right mb-4">
+                                        <u>मिति: २०८१/०७/१०</u><br>
+                                        भरतपुर, चितवन।
+                                    </p>
+                                    <p class="mb-4">प्रिय मित्र राकेश,<br>सप्रेम तथा अभिवादन।</p>
+                                    <p class="text-justify mb-3">
+                                        म यहाँ **सकुशल** छु र त्यहाँ तिमी र तिम्रो परिवार पनि कुशलमङ्गल नै हुनुहुन्छ होला भन्ने आशा राखेकी छु।
+                                    </p>
+                                    <p class="text-justify mb-3">
+                                        तिमीले पठाएको चिठी हिजो मात्रै हात लाग्यो। तिम्रो गाउँ, देवीटारमा पनि विकासका कार्यहरू हुँदैछन् भन्ने थाहा पाउँदा म निकै हर्षित भएकी छु। तिमी गाउँमै रहे पनि **सहर** आउँदा यहाँको अवस्था देखेर विकाससँगै विनाशले पनि पाइला पछ्याइरहन्छ भन्ने थाहा भयो होला। त्यसैले रोगपछिको उपचारभन्दा रोगै लाग्न नदिनु बेस हुन्छ भन्ने कुरा मनन गर्नु जरुरी हुन्छ। त्यो सुन्दर गाउँलाई प्रदूषण र फोहोरको डङ्गुरले पुरिनबाट जोगाउन सर्वप्रथम त प्रदूषणको मूल जरो **प्लाष्टिकजन्य सर-सामानको प्रयोग कम गर्नुपर्छ।** प्लाष्टिकका पोलेथिनका झोला, प्लाष्टिकका सजावट, भाँडाकुँडा आदि एक पटक चलाएपछि पुन: प्रयोग गर्न सकिँदैन। यदि जलाउने हो भने पनि प्रदूषित धुवाँले वातावरणमा असर गर्छ, कुहाएर मल बनाउँदा प्लाष्टिक **कुहिँदैन** पनि। त्यसैले त्यस्तो सर-सामानको प्रयोगमा नै कमी गराउनु बुद्धिमानी हुन्छ।
+                                    </p>
+                                    <p class="text-justify mb-3">
+                                        तिमीलाई थाहा छ, आज यहाँ हाम्रो सहरमा एउटा सानो चकलेटदेखि लिएर तरकारी वा अन्य ठूला सामानको प्याकिङमा पनि प्लाष्टिकको प्रयोग हुन्छ। त्यसैले त्यसको व्यवस्थापन गर्न नसकेर फोहोरमैला बढेको छ। त्यहाँचाहिँ प्लाष्टिकको सट्टामा कपडाका **झोला** वा कागजका झोला प्रयोग गर्ने, सजावट सामग्री बनाउँदा बाँस, पराल, माटोको प्रयोग गर्ने गरेमा यसले वातावरण पनि सफा राख्न मद्दत पुर्‍याउँछ र सजावटका सामानद्वारा **मौलिकता** पनि झल्काउँछ। यसले गर्दा स्वच्छ वातावरण भएको नमुना गाउँ **बन्न** सक्छ र पर्यटकहरूलाई आकर्षण गर्न सक्छ।
+                                    </p>
+                                    <p class="text-justify mb-6">
+                                        राकेश, तिमी शिक्षित परिवारमा **जन्मे-हुर्केका** व्यक्ति हौ, त्यसैले मेरो विचार मनन गरी आफ्नो गाउँको पहिचान जोगाइराख्न र गाउँको विकासमा योगदान पुर्‍याउने छौ भन्ने कुरामा म विश्वस्त छु। अन्त्यमा तिम्रा भाई बहिनीलाई **असीम** मायाका साथै आमाबुबालाई 'नमस्कार' सुनाइदिनु होला।
+                                    </p>
+                                    <p class="text-right mb-6">उही तिम्रो साथी <br>सुनिला देवकोटा </p>
+                                    <table class="w-full border-collapse border border-gray-500 text-xs sm:text-sm">
+                                        <tr>
+                                            <td class="w-1/2 border border-gray-500 p-2">
+                                                <p class="font-bold text-center">पठाउने (प्रेषक)</p>
+                                                <p class="text-center">सुनिला देवकोटा<br>भरतपुर, १३, चितवन, नेपाल</p>
+                                            </td>
+                                            <td class="w-1/2 border border-gray-500 p-2">
+                                                <p class="font-bold text-center">पाउने (प्रापक)</p>
+                                                <p class="text-center">राकेश जी सी<br>देवीटार-९, भोजपुर।</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sample 5 -->
+                        <div class="accordion-item rounded-lg overflow-hidden">
+                            <div class="accordion-header nepali-font" onclick="toggleLetter(this)">
+                                <span>५. दशैँमा घर आउन नसक्ने व्यहोरा पारी आमाबुवालाई लेखिएको चिठी</span>
+                                <svg class="w-5 h-5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content p-4">
+                                <div class="chithi-box nepali-font">
+                                    <p class="font-bold text-lg mb-4">प्रहरी सेवामा जागिरे छोराले यसपालिको दशैँमा घर आउन नसक्ने व्यहोरा पारी आफ्ना आमाबुवालाई लेखेको चिठी।</p>
+                                    <hr class="border-gray-400 mb-4">
+                                    <p class="date font-bold text-right mb-4">
+                                        <u>मिति: २०८१/०७/०१</u><br>
+                                        काठमाडौं।
+                                    </p>
+                                    <p class="mb-4">पूज्य आमाबुवा,<br>साष्टाङ्ग दण्डवत्!</p>
+                                    <p class="text-justify mb-3">
+                                        यहाँ म आरामै छु, त्यहाँ हजुरहरू पनि आरामै हुनुहुन्छ होला भन्ने आशा गर्दछु। खास कुरा त केही पनि छैन तैपनि **तल्लाघरका** माने दाइ घर आउने भएकाले सञ्चो सुविस्ताको खबर लेख्न मन लाग्यो।
+                                    </p>
+                                    <p class="text-justify mb-3">
+                                        यहाँ काठमाडौंमा सबैलाई ठीकै छ। कान्छी फुपू अघिल्लो हप्तामात्र घर फर्किनु भयो। उहाँको उपचार पनि राम्रै भयो, अप्रेशन गर्नुपरेन। माइला काकाका छोराको बल्ल भिसा लाग्यो, अब १ महिना भित्रमा उड्छ। बले कान्छोको विदेशको कुरा पनि मिलेन र प्रहरी सेवामा पनि नाम निकाल्न सकेन। अब घरै फर्किन्छ होला। म र झम्केको एकै ठाउँमा तालिम हुने भएको छ। अब अर्को हप्ताबाट तालिम सुरु हुनेछ। **मुख्य कुरा के भने, यसपालिको दशैँमा घर आउन नपाउने भइयो।** लगातार तालिम भइरहने हुँदा घर आउन नपाइएला जस्तो छ। दशैँमा पाँच दिन मात्र बिदा हुन्छ रे। छोटो समय बिदा हुँदा आउन जान नै समय नपुग्ला। त्यसैले म यसपालि दशैँमा आउँदिन। फेरि हाकिमहरूले यहाँ घर हुनेहरूले दशैँ तिहार यतै मनाउनु भनिसके। दशैँमा घर आउन नपाए पनि मिलेछ भने दुई चार हजार खर्च पठाइदिने विचार गरेको छु। हेरौँ के हुन्छ। यसपालि परदेशमा दशैँ मनाइने भइयो। पहिलो पटक बुबाआमाको हातबाट टीका लगाउन नपाइने हुँदा अहिलेदेखि नै **नराम्रो** लागिरहेको छ।
+                                    </p>
+                                    <p class="text-justify mb-3">
+                                        अब यसपटक जे-जस्तो भए पनि अर्को साल चाहिँ आउँछु। अनि त्यताको खबर के कस्तो छ? आमाको टाउको दुख्ने ठीक भयो कि भएन? ठीक भएको छैन भने धामी झाँक्री मात्र नगर्नु, खर्च जुटाएर जिल्ला अस्पताल जानुहोला। कान्छी बहिनी स्कुल जाँदै छे कि छोडी? पढ्दिन भन्छे होला, त्यसलाई फकाएर पढ्न पठाउनु। कान्छो त राम्ररी नै पढ्दै होला, ऊ पनि आउँदो साल एस.ई.ई. दिने हो, उसलाई पढ्ने समय मिलाइदिनु होला।
+                                    </p>
+                                    <p class="text-justify mb-6">
+                                        अरु कुराहरू माने दाइबाट थाहा पाइहाल्नुहुन्छ। वरिपरिका छरछिमेकहरूलाई नमस्कार **भनिदिनु** होला। मितिनीहरूलाई पनि सम्झेको छ भनिदिनु। अरु नयाँ नौला खबर भएमा खबर गरूँला। त्यताको समाचार के छ, सबै लेखी पठाउनुहोला।
+                                    </p>
+                                    <p class="text-right mb-6">उही छोरा <br>बलराम घर्ती </p>
+                                    <table class="w-full border-collapse border border-gray-500 text-xs sm:text-sm">
+                                        <tr>
+                                            <td class="w-1/2 border border-gray-500 p-2">
+                                                <p class="font-bold text-center">पठाउने (प्रेषक)</p>
+                                                <p class="text-center">बलराम घर्ती<br>महादेवस्थान कोटेश्वर, काठमाडौं</p>
+                                            </td>
+                                            <td class="w-1/2 border border-gray-500 p-2">
+                                                <p class="font-bold text-center">पाउने (प्रापक)</p>
+                                                <p class="text-center">दलमान **घर्ती** (बाबुको थर)<br>जलजले-८, घर्ती गाउँ तेह्रथुम</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- TAB 3: Application Samples -->
+                <div id="applications" class="tab-content mt-4 p-4">
+                    <p class="text-xl font-bold mb-4 text-accent-color nepali-font">निवेदन (कार्यालयीय चिठी) का नमुनाहरू</p>
+
+                    <!-- Application 1 -->
+                    <div class="accordion-item rounded-lg overflow-hidden mb-4">
+                        <div class="accordion-header nepali-font" onclick="toggleLetter(this)">
+                            <span>१. महेन्द्र पुलिस क्लबको सदस्यताका लागि निवेदन</span>
+                            <svg class="w-5 h-5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="accordion-content p-4">
+                            <div class="chithi-box nepali-font">
+                                <p class="font-bold text-lg mb-4">महेन्द्र पुलिस क्लबको सदस्य बन्नका लागि प्रहरी जवानका तर्फबाट लेखिएको निवेदन।</p>
+                                <hr class="border-gray-400 mb-4">
+                                <p class="date font-bold text-right mb-4"><u>मिति: २०८१/१०/०१</u></p>
+                                <p class="mb-4">
+                                    श्रीमान् अध्यक्षज्यू,<br>
+                                    महेन्द्र पुलिस क्लब,<br>
+                                    भृकुटीमण्डप, काठमाडौं।
+                                </p>
+                                <p class="text-center text-secondary-color font-bold text-lg underline my-4">
+                                    विषय: सदस्यताका लागि।
+                                </p>
+                                <p class="text-justify mb-6">
+                                    महोदय,<br>
+                                    उपर्युक्त सम्बन्धमा म २०६७ सालको प्रहरी सेवाको परीक्षामा उत्तीर्ण भई अठार महिने तालिम पूरा गरी प्रहरी कार्यालय कमलपोखरीमा खटिएको छु। मेरो सानैदेखिको रुचि प्रहरी सेवामा लागेर देशको गौरव बढाउने काम गर्न सकूँ भन्ने हो। विशेष गरी यस क्लबले खेलकुदमा राम्रो ख्याति कमाएको छ। मेरो म्याराथुन दौडमा राम्रो **दखल** छ, यही कारण म प्रहरी सेवामा प्रवेश गर्न सकेको हुँ। मैले यस क्लबमा संलग्न भई आफ्नो **दायित्व** पूरा गर्दै राष्ट्रिय गौरवका क्षेत्रमा योगदान पुर्‍याउन सक्दो प्रयास गर्ने छु भन्ने विश्वास दिलाउँदै सदस्य बन्नका लागि यो निवेदन पेश गर्दछु।
+                                </p>
+                                <div class="text-right">
+                                    <p class="font-bold text-xl mb-1">निवेदक</p>
+                                    <p class="text-base">
+                                        प्रहरी जवान दीलबहादुर भुजेल<br>
+                                        इलाका प्रहरी कार्यालय<br>
+                                        कमलपोखरी
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Application 2 -->
+                    <div class="accordion-item rounded-lg overflow-hidden">
+                        <div class="accordion-header nepali-font" onclick="toggleLetter(this)">
+                            <span>२. तीन दिन बिदाका लागि कार्यालय प्रमुखलाई लेखिएको निवेदन</span>
+                            <svg class="w-5 h-5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="accordion-content p-4">
+                            <div class="chithi-box nepali-font">
+                                <p class="font-bold text-lg mb-4">दुई/तीन दिन बिदाका लागि आफू कार्यरत रहेको कार्यालयको प्रमुखलाई लेखिएको निवेदन।</p>
+                                <hr class="border-gray-400 mb-4">
+                                <p class="date font-bold text-right mb-4"><u>मिति: २०८१/०१/०१</u></p>
+                                <p class="mb-4">
+                                    श्रीमान् कार्यालय प्रमुखज्यू,<br>
+                                    सीमा प्रहरी कार्यालय,<br>
+                                    सिन्धुपाल्चोक।
+                                </p>
+                                <p class="text-center text-secondary-color font-bold text-lg underline my-4">
+                                    विषय: बिदा मिलाइदिनेबारे।
+                                </p>
+                                <p class="text-justify mb-6">
+                                    उपर्युक्त सम्बन्धमा मेरो घरमा अत्यन्त जरुरी काम परेकाले मैले घर नगई नहुने भएको हुँदा तीन दिनको बिदा स्वीकृत गरी पाऊँ भनी यो निवेदन गर्दछु। मैले गर्ने रात्रीकालीन ड्यूटी प्रहरी जवान **रोनम राईले** जिम्मा लिएको कुरा पनि अवगत गराउँछु। मेरो बिदा मिति **२०८१/०१/०५** देखि **२०८१/०१/०७** सम्मको लागि हो।
+                                </p>
+                                <div class="text-right">
+                                    <p class="font-bold text-xl mb-1">निवेदक</p>
+                                    <p class="text-base">
+                                        प्रहरी हवल्दार **दीलबहादुर भुजेल**<br>
+                                        परिचय नं. १२३४
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <br><br>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p class="text-sm nepali-font">&copy; 2024 नेपाली व्याकरण | चिठीपत्र लेखन</p>
+    </footer>
+
+    <!-- JavaScript for Tab and Accordion Functionality -->
+    <script>
+        // Tab functionality
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Deactivate all tab links
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            // Show the current tab, and add an "active" class to the button
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            
+            // On mobile, scroll to the top of the content area after tab change
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Accordion functionality for Letter Samples
+        function toggleLetter(header) {
+            const item = header.closest('.accordion-item');
+            const content = item.querySelector('.accordion-content');
+            const icon = header.querySelector('svg');
+
+            const isActive = item.classList.contains('active');
+
+            // Close other open accordions
+            document.querySelectorAll('#letterAccordion .accordion-item.active').forEach(activeItem => {
+                if (activeItem !== item) {
+                    activeItem.classList.remove('active');
+                    activeItem.querySelector('.accordion-content').style.maxHeight = 0;
+                    activeItem.querySelector('svg').style.transform = 'rotate(0deg)';
+                }
+            });
+
+            if (isActive) {
+                item.classList.remove('active');
+                content.style.maxHeight = 0;
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                item.classList.add('active');
+                // Use a large value to prevent clipping
+                content.style.maxHeight = content.scrollHeight + 50 + "px"; 
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली व्याकरण: नाम (Naam)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Mukta (for Nepali Readability) and Inter (for UI) -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Variables for Dark Theme */
+        :root {
+            --primary-bg: #111827; /* Dark Navy/Slate */
+            --card-bg: #1f2937; /* Slightly lighter card background */
+            --accent-color: #f97316; /* Vibrant Orange for accents */
+            --secondary-color: #a7f3d0; /* Pale Green for text highlights */
+            --text-color-light: #f3f4f6;
+            --border-color: #374151;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color-light);
+            min-height: 100vh;
+        }
+
+        /* Use Mukta for all Nepali Text content */
+        .nepali-font {
+            font-family: 'Mukta', Arial, sans-serif;
+            line-height: 1.7;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 5px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Content Card Styling */
+        .content-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Accordion Styles for Noun Types */
+        .accordion-item {
+            background-color: #1a2330;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            border-bottom: 2px solid transparent;
+        }
+        
+        /* Highlight header when active/open */
+        .accordion-item.active .accordion-header {
+            border-bottom-color: var(--accent-color);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            /* Transition speed remains consistent */
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out; 
+            padding: 0 1rem;
+            color: #ccc;
+        }
+        
+        /* CSS rule remains clean, relying on JS for setting max-height */
+        .accordion-item.active .accordion-content {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .qa-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .qa-table th {
+            background-color: #374151;
+            color: var(--secondary-color);
+            padding: 8px;
+        }
+        
+        .qa-table tr:nth-child(even) {
+            background-color: #2c3a50;
+        }
+
+
+        /* Mobile specific adjustments */
+        @media (max-width: 640px) {
+            .accordion-header {
+                font-size: 1.1rem;
+            }
+            .accordion-content {
+                font-size: 0.95rem;
+            }
+            .content-card h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col">
+
+    <!-- Header -->
+    <header>
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center nepali-font">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white">नेपाली व्याकरण</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex-grow container mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="content-card max-w-4xl mx-auto p-6 sm:p-10 rounded-xl mt-6 mb-20">
+
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-accent-color nepali-font">
+                नाम (Noun)
+            </h2>
+            <hr class="border-accent-color mb-6">
+            
+            <!-- Definition Section -->
+            <div class="mb-8">
+                <p class="text-lg text-secondary-color font-bold nepali-font mb-3">
+                    नामको परिभाषा:
+                </p>
+                <p class="text-base sm:text-lg nepali-font text-justify">
+                    कुनै **व्यक्ति, वस्तु, जाति, भाव, पदार्थ वा स्थान** आदिलाई बुझाउने शब्दलाई **नाम (Noun)** भनिन्छ। नामलाई **संज्ञा** पनि भनिन्छ।
+                </p>
+                
+                <div class="bg-primary-bg p-4 rounded-lg mt-4 text-sm sm:text-base border border-border-color">
+                    <p class="font-semibold text-accent-color mb-2 nepali-font">उदाहरणहरू:</p>
+                    <p class="nepali-font">
+                        **व्यक्ति/स्थान:** हरि, मदन, सगरमाथा, बागमती। <br>
+                        **वस्तु/समूह:** पुस्तक, घर, लस्कर, रास, पुञ्ज। <br>
+                        **पदार्थ:** सुन, चाँदी, पानी, घिउ। <br>
+                        **भाव:** दया, माया, वीरता, सुन्दरता।
+                    </p>
+                </div>
+                
+                <p class="mt-4 text-base sm:text-lg nepali-font font-semibold">
+                    नाम शब्दहरू प्रायः **'के'** र **'को'** भन्ने प्रश्नको उत्तरमा आउँछन्।
+                </p>
+                <ul class="list-disc list-inside mt-2 ml-4 nepali-font text-gray-400">
+                    <li>हरि घर गयो। को? &rarr; **हरि**</li>
+                    <li>भाइले स्याउ खायो। के? &rarr; **स्याउ**</li>
+                </ul>
+            </div>
+
+            <!-- Noun Types Section (Accordion) -->
+            <h3 class="text-2xl font-extrabold text-secondary-color border-b-2 border-secondary-color pb-2 mb-6 nepali-font mt-8">
+                नामका पाँच प्रकार
+            </h3>
+
+            <div class="space-y-4" id="accordionContainer">
+                
+                <!-- 1. व्यक्तिवाचक नाम (Proper Noun) -->
+                <div class="accordion-item rounded-lg overflow-hidden">
+                    <div class="accordion-header nepali-font" onclick="toggleAccordion(this)">
+                        <span>१. व्यक्तिवाचक नाम (Proper Noun)</span>
+                        <svg class="w-6 h-6 transform transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="accordion-content nepali-font">
+                        <p class="font-bold mb-2 text-secondary-color">परिभाषा:</p>
+                        <p>कुनै व्यक्ति, वस्तु, स्थान, पदार्थ आदिलाई **तोकेर** वा **विशेष नामले** चिनाउने पदलाई **व्यक्तिवाचक नाम** भनिन्छ। यसलाई **विशेष नाम** पनि भनिन्छ।</p>
+                        <p class="font-bold mt-3 text-accent-color">उदाहरण:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>**व्यक्ति:** श्याम, गणेश, भानुभक्त, रामवरण।</li>
+                            <li>**स्थान:** बागलुङ, भक्तपुर, अमेरिका, दमक।</li>
+                            <li>**वस्तु:** पृथ्वी, सूर्य, चन्द्रमा।</li>
+                            <li>**विशेष नाम:** सगरमाथा (हिमाल), कालीगण्डकी (नदी), दशैं (चाड)।</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 2. जातिवाचक नाम (Common Noun) -->
+                <div class="accordion-item rounded-lg overflow-hidden">
+                    <div class="accordion-header nepali-font" onclick="toggleAccordion(this)">
+                        <span>२. जातिवाचक नाम (Common Noun)</span>
+                        <svg class="w-6 h-6 transform transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="accordion-content nepali-font">
+                        <p class="font-bold mb-2 text-secondary-color">परिभाषा:</p>
+                        <p>कुनै व्यक्ति, वस्तु वा स्थानको **साझा गुण** वा **सम्पूर्ण जाति** बुझाउने नामलाई **जातिवाचक नाम** भनिन्छ। यसलाई **साझा नाम** पनि भनिन्छ।</p>
+                        
+                        <p class="font-bold mt-3 text-accent-color">उदाहरण:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>**सजीवलाई बुझाउने:** मान्छे, लेखक, चरा, रुख, पशु, फूल, व्यापारी।</li>
+                            <li>**निर्जीवलाई बुझाउने:** लुगा, कलम, देश, घर, पुस्तक, पहाड, नदी, ताल।</li>
+                        </ul>
+                        
+                        <p class="font-bold mt-4 text-accent-color">जातिवाचक र व्यक्तिवाचक नामको तुलना:</p>
+                        <div class="overflow-x-auto mt-2">
+                             <table class="qa-table w-full border border-border-color">
+                                <thead>
+                                    <tr><th class="w-1/3">जातिवाचक</th> <th>व्यक्तिवाचक</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>मानिस</td> <td>राम, श्याम, लक्ष्मीप्रसाद</td></tr>
+                                    <tr><td>हिमाल</td> <td>सगरमाथा, अन्नपूर्ण, कन्चनजङ्घा</td></tr>
+                                    <tr><td>नदी</td> <td>गण्डकी, राप्ती, मेची</td></tr>
+                                    <tr><td>चाडपर्व</td> <td>दसैँ, लोसार, इद</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. समूहवाचक नाम (Collective Noun) -->
+                <div class="accordion-item rounded-lg overflow-hidden">
+                    <div class="accordion-header nepali-font" onclick="toggleAccordion(this)">
+                        <span>३. समूहवाचक नाम (Collective Noun)</span>
+                        <svg class="w-6 h-6 transform transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="accordion-content nepali-font">
+                        <p class="font-bold mb-2 text-secondary-color">परिभाषा:</p>
+                        <p>मानिस, प्राणी वा वस्तुहरूको **समूह** वा **गुलजार** बुझाउने शब्दलाई **समूहवाचक नाम** भनिन्छ।</p>
+                        <p class="font-bold mt-3 text-accent-color">उदाहरण:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>**सजीवको समूह:** सङ्घ, दल, हुल, बथान, ताँती, समाज, जन्ती, फौज, परिवार।</li>
+                            <li>**निर्जीवको समूह:** चाङ, थुप्रो, झुप्पो, पुञ्ज (ताराको), डङ्गुर, बिटो (घाँसको), मुठो, रास।</li>
+                        </ul>
+                        <p class="mt-3 italic text-gray-400">जस्तै: विद्यार्थीहरूको **ताँती**, चराहरूको **बगाल**, फूलको **गुच्छा**, मानिसहरूको **भिड**।</p>
+                    </div>
+                </div>
+
+                <!-- 4. द्रव्यवाचक नाम (Material Noun) -->
+                <div class="accordion-item rounded-lg overflow-hidden">
+                    <div class="accordion-header nepali-font" onclick="toggleAccordion(this)">
+                        <span>४. द्रव्यवाचक नाम (Material Noun)</span>
+                        <svg class="w-6 h-6 transform transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="accordion-content nepali-font">
+                        <p class="font-bold mb-2 text-secondary-color">परिभाषा:</p>
+                        <p>ठोस, तरल वा ग्यास पदार्थहरूलाई बुझाउने, **गन्न नसकिने** तर **नापतौल** द्वारा छुट्याइने नामलाई **द्रव्यवाचक नाम** भनिन्छ।</p>
+                        <p class="font-bold mt-3 text-accent-color">उदाहरण:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>**ठोस पदार्थ:** सुन, चाँदी, फलाम, माटो, काठ, चामल, नुन, हिउँ।</li>
+                            <li>**तरल पदार्थ:** दूध, घिउ, पानी, तेल, मसी, रगत, पेट्रोल, चिया।</li>
+                            <li>**ग्यास पदार्थ:** बादल, कुहिरो, अक्सिजन, हाइड्रोजन, नाइट्रोजन, हावा, धुवाँ।</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 5. भाववाचक नाम (Abstract Noun) -->
+                <div class="accordion-item rounded-lg overflow-hidden">
+                    <div class="accordion-header nepali-font" onclick="toggleAccordion(this)">
+                        <span>५. भाववाचक नाम (Abstract Noun)</span>
+                        <svg class="w-6 h-6 transform transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="accordion-content nepali-font">
+                        <p class="font-bold mb-2 text-secondary-color">परिभाषा:</p>
+                        <p>**गन्न, देख्न र छुन नसकिने** तर **अनुभव मात्र** गर्न सकिने कुनै वस्तु वा पदार्थमा रहेको **भाव** वा **गुण** बुझाउने नामलाई **भाववाचक नाम** भनिन्छ।</p>
+                        <p class="font-bold mt-3 text-accent-color">उदाहरण:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>**गुण बुझाउने:** रिस, दया, माया, प्रेम, वीरता, सुन्दरता, दुःख, सुख, धैर्य।</li>
+                            <li>**अवस्था बुझाउने:** बुढ्याइँ, केटाकेटीपन, गरिबी, जवानी, विद्वता।</li>
+                            <li>**धातु/क्रियाबाट:** बसाइ, रमाइ, बोलाइ, सुताइ, पढाइ, हिँडाइ।</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <br><br>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-card-bg text-gray-500 p-4 text-center mt-auto shadow-inner border-t border-border-color">
+        <p class="text-xs sm:text-sm nepali-font">&copy; 2024 नेपाली व्याकरण | नाम</p>
+    </footer>
+
+    <!-- JavaScript for Accordion Functionality -->
+    <script>
+        function toggleAccordion(header) {
+            const item = header.closest('.accordion-item');
+            const content = item.querySelector('.accordion-content');
+            const icon = header.querySelector('svg');
+
+            const isActive = item.classList.contains('active');
+
+            // Close all other accordions (Optional, but good for mobile UX)
+            document.querySelectorAll('.accordion-item.active').forEach(activeItem => {
+                if (activeItem !== item) {
+                    activeItem.classList.remove('active');
+                    activeItem.querySelector('.accordion-content').style.maxHeight = 0;
+                    activeItem.querySelector('svg').style.transform = 'rotate(0deg)';
+                }
+            });
+
+            if (isActive) {
+                // Close current item
+                item.classList.remove('active');
+                content.style.maxHeight = 0;
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Open current item
+                item.classList.add('active');
+                // FIX: Setting max-height to a very large value (5000px) 
+                // ensures all content is visible, regardless of screen size 
+                // or variable text length, resolving the clipping issue.
+                content.style.maxHeight = "5000px"; 
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ne">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली शुद्ध-अशुद्ध शब्दकोष</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use a suitable Nepali font -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1d4ed8; /* Deep Blue, for the required blue text color */
+            --secondary-color: #ef4444; /* Red for Wrong */
+            --tertiary-color: #10b981; /* Green for Right */
+        }
+
+        body {
+            font-family: 'Mukta', Arial, sans-serif;
+            background-color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Custom Styles for better visual separation */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto; /* Enable horizontal scroll on mobile */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Styling for the table cells */
+        .w-cell {
+            background-color: rgba(239, 68, 68, 0.1); /* Light Red */
+            color: #b91c1c; /* Dark Red text */
+        }
+
+        .r-cell {
+            background-color: rgba(16, 185, 129, 0.1); /* Light Green */
+            color: #059669; /* Dark Green text */
+        }
+
+        /* Hover effect on rows for better interaction */
+        .table-row-group tr:hover td {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.01);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .table-row-group tr:nth-child(even) {
+            background-color: #f1f5f9; /* Subtle striping */
+        }
+
+        /* Main heading color set to blue */
+        .main-heading {
+            color: var(--primary-color);
+        }
+
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- Main Content Section -->
+    <div class="content p-4 sm:p-6 flex-grow max-w-4xl mx-auto w-full">
+        <!-- Main title, now blue and bold -->
+        <h2 class="main-heading text-2xl sm:text-3xl font-extrabold text-center mb-6 underline underline-offset-4 decoration-primary-color">
+            नेपाली शुद्ध-अशुद्ध शब्दकोश
+        </h2>
+        <p class="text-center text-gray-600 mb-6">तलको तालिकामा अशुद्ध शब्द (गलत) र तिनका शुद्ध (सही) रूपहरू दिइएका छन्।</p>
+
+        <!-- Table Container for Responsive Scroll -->
+        <div class="table-container bg-white rounded-xl shadow-2xl p-2 sm:p-4 border-t-4 border-primary-color mb-10">
+            <table class="min-w-full text-sm sm:text-base border-separate border-spacing-0">
+                <!-- Table Header -->
+                <thead>
+                    <!-- TEXT COLOR CHANGED TO BLACK -->
+                    <tr class="text-black font-bold text-center shadow-md">
+                        <th class="px-3 py-3 w-1/4 rounded-tl-lg bg-secondary-color">अशुद्ध (गलत)</th>
+                        <th class="px-3 py-3 w-1/4 bg-tertiary-color">शुद्ध (सही)</th>
+                        <th class="px-3 py-3 w-1/4 bg-secondary-color">अशुद्ध (गलत)</th>
+                        <th class="px-3 py-3 w-1/4 rounded-tr-lg bg-tertiary-color">शुद्ध (सही)</th>
+                    </tr>
+                </thead>
+                <!-- Table Body -->
+                <tbody class="table-row-group divide-y divide-gray-200">
+                    <tr>
+                        <td class="px-3 py-2 w-cell rounded-bl-xl sm:rounded-none">आवस्येक</td>
+                        <td class="px-3 py-2 r-cell sm:rounded-none">आवश्यक</td>
+                        <td class="px-3 py-2 w-cell">मन्त्रिपरिसद</td>
+                        <td class="px-3 py-2 r-cell rounded-tr-xl sm:rounded-none">मन्त्रिपरिषद्</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">अबिबादन</td>
+                        <td class="px-3 py-2 r-cell">अभिवादन</td>
+                        <td class="px-3 py-2 w-cell">एन्त्र</td>
+                        <td class="px-3 py-2 r-cell">यन्त्र</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">अधीराज्जे</td>
+                        <td class="px-3 py-2 r-cell">अधिराज्य</td>
+                        <td class="px-3 py-2 w-cell">अत्याधिक</td>
+                        <td class="px-3 py-2 r-cell">अत्यधिक</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">ईस्शोर</td>
+                        <td class="px-3 py-2 r-cell">ईश्वर</td>
+                        <td class="px-3 py-2 w-cell">भाग्ये</td>
+                        <td class="px-3 py-2 r-cell">भाग्य</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">मुर्ती</td>
+                        <td class="px-3 py-2 r-cell">मूर्ति</td>
+                        <td class="px-3 py-2 w-cell">मृतु</td>
+                        <td class="px-3 py-2 r-cell">मृत्यु</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">यकनास</td>
+                        <td class="px-3 py-2 r-cell">एकनाश</td>
+                        <td class="px-3 py-2 w-cell">राजधनी</td>
+                        <td class="px-3 py-2 r-cell">राजधानी</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">शुबिदा</td>
+                        <td class="px-3 py-2 r-cell">सुविधा</td>
+                        <td class="px-3 py-2 w-cell">सुंदर</td>
+                        <td class="px-3 py-2 r-cell">सुन्दर</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">अविरुची</td>
+                        <td class="px-3 py-2 r-cell">अभिरुचि</td>
+                        <td class="px-3 py-2 w-cell">अग्यान</td>
+                        <td class="px-3 py-2 r-cell">अज्ञान</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">जनसन्ख्या</td>
+                        <td class="px-3 py-2 r-cell">जनसंख्या</td>
+                        <td class="px-3 py-2 w-cell">बिधालय</td>
+                        <td class="px-3 py-2 r-cell">विद्यालय</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">कार्यलय</td>
+                        <td class="px-3 py-2 r-cell">कार्यालय</td>
+                        <td class="px-3 py-2 w-cell">कबिता</td>
+                        <td class="px-3 py-2 r-cell">कविता</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">सम्यम</td>
+                        <td class="px-3 py-2 r-cell">संयम</td>
+                        <td class="px-3 py-2 w-cell">हिर्दय</td>
+                        <td class="px-3 py-2 r-cell">हृदय</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">संभावना</td>
+                        <td class="px-3 py-2 r-cell">सम्भावना</td>
+                        <td class="px-3 py-2 w-cell">माहापुरुष</td>
+                        <td class="px-3 py-2 r-cell">महापुरुष</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">प्रतीबिम्ब</td>
+                        <td class="px-3 py-2 r-cell">प्रतिबिम्ब</td>
+                        <td class="px-3 py-2 w-cell">देस</td>
+                        <td class="px-3 py-2 r-cell">देश</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">कंकाल</td>
+                        <td class="px-3 py-2 r-cell">कङ्काल</td>
+                        <td class="px-3 py-2 w-cell">भासा</td>
+                        <td class="px-3 py-2 r-cell">भाषा</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">पन्चाम्रित</td>
+                        <td class="px-3 py-2 r-cell">पञ्चामृत</td>
+                        <td class="px-3 py-2 w-cell">परिक्छ्या</td>
+                        <td class="px-3 py-2 r-cell">परीक्षा</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">स्वाध्यायन</td>
+                        <td class="px-3 py-2 r-cell">स्वाध्ययन</td>
+                        <td class="px-3 py-2 w-cell">अनुशस्थान</td>
+                        <td class="px-3 py-2 r-cell">अनुसन्धान</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">अत्यान्त</td>
+                        <td class="px-3 py-2 r-cell">अत्यन्त</td>
+                        <td class="px-3 py-2 w-cell">शुरछ्या</td>
+                        <td class="px-3 py-2 r-cell">सुरक्षा</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">नामाकरण</td>
+                        <td class="px-3 py-2 r-cell">नामकरण</td>
+                        <td class="px-3 py-2 w-cell">अनिवार्ये</td>
+                        <td class="px-3 py-2 r-cell">अनिवार्य</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">साहेता</td>
+                        <td class="px-3 py-2 r-cell">सहायता</td>
+                        <td class="px-3 py-2 w-cell">भउगोलीक</td>
+                        <td class="px-3 py-2 r-cell">भौगोलिक</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">अभिव्याक्ति</td>
+                        <td class="px-3 py-2 r-cell">अभिव्यक्ति</td>
+                        <td class="px-3 py-2 w-cell">राष्ट्रिए</td>
+                        <td class="px-3 py-2 r-cell">राष्ट्रिय</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">आकर्शन</td>
+                        <td class="px-3 py-2 r-cell">आकर्षण</td>
+                        <td class="px-3 py-2 w-cell">बाउमण्डल</td>
+                        <td class="px-3 py-2 r-cell">वायुमण्डल</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">बाहादुर</td>
+                        <td class="px-3 py-2 r-cell">बहादुर</td>
+                        <td class="px-3 py-2 w-cell">भउतिक</td>
+                        <td class="px-3 py-2 r-cell">भौतिक</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">भिमसेन</td>
+                        <td class="px-3 py-2 r-cell">भीमसेन</td>
+                        <td class="px-3 py-2 w-cell">असामायिक</td>
+                        <td class="px-3 py-2 r-cell">असामयिक</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">कटाक्छे</td>
+                        <td class="px-3 py-2 r-cell">कटाक्ष</td>
+                        <td class="px-3 py-2 w-cell">घुँइचो</td>
+                        <td class="px-3 py-2 r-cell">घुईंचो</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">सन्तोश</td>
+                        <td class="px-3 py-2 r-cell">सन्तोष</td>
+                        <td class="px-3 py-2 w-cell">पुरुषजाती</td>
+                        <td class="px-3 py-2 r-cell">पुरुषजाति</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">सुर्योदय</td>
+                        <td class="px-3 py-2 r-cell">सूर्योदय</td>
+                        <td class="px-3 py-2 w-cell">सर्वागिण</td>
+                        <td class="px-3 py-2 r-cell">सर्वाङ्गीण</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">इस्थल</td>
+                        <td class="px-3 py-2 r-cell">स्थल</td>
+                        <td class="px-3 py-2 w-cell">इश्कूल</td>
+                        <td class="px-3 py-2 r-cell">स्कूल</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">बिषय</td>
+                        <td class="px-3 py-2 r-cell">विषय</td>
+                        <td class="px-3 py-2 w-cell">ग्यानी</td>
+                        <td class="px-3 py-2 r-cell">ज्ञानी</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">अनुसाशन</td>
+                        <td class="px-3 py-2 r-cell">अनुशासन</td>
+                        <td class="px-3 py-2 w-cell">श्रिमान्</td>
+                        <td class="px-3 py-2 r-cell">श्रीमान्</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">व्यावसाय</td>
+                        <td class="px-3 py-2 r-cell">व्यवसाय</td>
+                        <td class="px-3 py-2 w-cell">एलानो</td>
+                        <td class="px-3 py-2 r-cell">ऐलानी</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">दिनहू</td>
+                        <td class="px-3 py-2 r-cell">दिनहुँ</td>
+                        <td class="px-3 py-2 w-cell">बाताबरण</td>
+                        <td class="px-3 py-2 r-cell">वातावरण</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">लोकतान्तक</td>
+                        <td class="px-3 py-2 r-cell">लोकतान्त्रिक</td>
+                        <td class="px-3 py-2 w-cell">अवश्था</td>
+                        <td class="px-3 py-2 r-cell">अवस्था</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">आएव्यय</td>
+                        <td class="px-3 py-2 r-cell">आयव्यय</td>
+                        <td class="px-3 py-2 w-cell">भबिस्य</td>
+                        <td class="px-3 py-2 r-cell">भविष्य</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">परिक्षम</td>
+                        <td class="px-3 py-2 r-cell">परिश्रम</td>
+                        <td class="px-3 py-2 w-cell">सम्पुर्ण</td>
+                        <td class="px-3 py-2 r-cell">सम्पूर्ण</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">गतिसिल</td>
+                        <td class="px-3 py-2 r-cell">गतिशील</td>
+                        <td class="px-3 py-2 w-cell">शारिरिक</td>
+                        <td class="px-3 py-2 r-cell">शारीरिक</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">प्रतिभासाली</td>
+                        <td class="px-3 py-2 r-cell">प्रतिभाशाली</td>
+                        <td class="px-3 py-2 w-cell">पन्चवर्षिय</td>
+                        <td class="px-3 py-2 r-cell">पञ्चवर्षीय</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">राजनिति</td>
+                        <td class="px-3 py-2 r-cell">राजनीति</td>
+                        <td class="px-3 py-2 w-cell">अध्यात्मिक</td>
+                        <td class="px-3 py-2 r-cell">आध्यात्मिक</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">शान्तिबिर</td>
+                        <td class="px-3 py-2 r-cell">शान्तिवीर</td>
+                        <td class="px-3 py-2 w-cell">चाहाना</td>
+                        <td class="px-3 py-2 r-cell">चाहना</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">सामाग्री</td>
+                        <td class="px-3 py-2 r-cell">सामग्री</td>
+                        <td class="px-3 py-2 w-cell">आशिरबाद</td>
+                        <td class="px-3 py-2 r-cell">आशीर्वाद</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">बातबिवाद</td>
+                        <td class="px-3 py-2 r-cell">वादविवाद</td>
+                        <td class="px-3 py-2 w-cell">भएता पनि</td>
+                        <td class="px-3 py-2 r-cell">भए तापनि</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">सम्रक्षण</td>
+                        <td class="px-3 py-2 r-cell">संरक्षण</td>
+                        <td class="px-3 py-2 w-cell">बन्मेजन्तु</td>
+                        <td class="px-3 py-2 r-cell">वन्यजन्तु</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">जाहाँतही</td>
+                        <td class="px-3 py-2 r-cell">जहाँतहाँ</td>
+                        <td class="px-3 py-2 w-cell">अध्यन</td>
+                        <td class="px-3 py-2 r-cell">अध्ययन</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">मनोरन्जन</td>
+                        <td class="px-3 py-2 r-cell">मनोरञ्जन</td>
+                        <td class="px-3 py-2 w-cell">जथाभाभी</td>
+                        <td class="px-3 py-2 r-cell">जथाभावी</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">प्रदुशित</td>
+                        <td class="px-3 py-2 r-cell">प्रदूषित</td>
+                        <td class="px-3 py-2 w-cell">अवलम्वन</td>
+                        <td class="px-3 py-2 r-cell">अवलम्बन</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">भर्मण</td>
+                        <td class="px-3 py-2 r-cell">भ्रमण</td>
+                        <td class="px-3 py-2 w-cell">शुक्ष्म</td>
+                        <td class="px-3 py-2 r-cell">सूक्ष्म</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">दिर्घकालिन</td>
+                        <td class="px-3 py-2 r-cell">दीर्घकालीन</td>
+                        <td class="px-3 py-2 w-cell">पौश्टिक</td>
+                        <td class="px-3 py-2 r-cell">पौष्टिक</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">सिधान्त</td>
+                        <td class="px-3 py-2 r-cell">सिद्धान्त</td>
+                        <td class="px-3 py-2 w-cell">अतिथी</td>
+                        <td class="px-3 py-2 r-cell">अतिथि</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">बिचार</td>
+                        <td class="px-3 py-2 r-cell">विचार</td>
+                        <td class="px-3 py-2 w-cell">सुचना</td>
+                        <td class="px-3 py-2 r-cell">सूचना</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">ग्रामिण</td>
+                        <td class="px-3 py-2 r-cell">ग्रामीण</td>
+                        <td class="px-3 py-2 w-cell">पुर्नजागरण</td>
+                        <td class="px-3 py-2 r-cell">पुनर्जागरण</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">सताब्दी</td>
+                        <td class="px-3 py-2 r-cell">शताब्दी</td>
+                        <td class="px-3 py-2 w-cell">मिहेनत</td>
+                        <td class="px-3 py-2 r-cell">मिहिनेत</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">अगिकार</td>
+                        <td class="px-3 py-2 r-cell">अङ्गीकार</td>
+                        <td class="px-3 py-2 w-cell">माध्यामिक</td>
+                        <td class="px-3 py-2 r-cell">माध्यमिक</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">पाठसाला</td>
+                        <td class="px-3 py-2 r-cell">पाठशाला</td>
+                        <td class="px-3 py-2 w-cell">दाइत्व</td>
+                        <td class="px-3 py-2 r-cell">दायित्व</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">रितिरिवाज</td>
+                        <td class="px-3 py-2 r-cell">रीतिरिवाज</td>
+                        <td class="px-3 py-2 w-cell">नीजिकरण</td>
+                        <td class="px-3 py-2 r-cell">निजीकरण</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">पयर्टक</td>
+                        <td class="px-3 py-2 r-cell">पर्यटक</td>
+                        <td class="px-3 py-2 w-cell">छमायाचना</td>
+                        <td class="px-3 py-2 r-cell">क्षमायाचना</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">शिरषक</td>
+                        <td class="px-3 py-2 r-cell">शीर्षक</td>
+                        <td class="px-3 py-2 w-cell">प्रस्तुती</td>
+                        <td class="px-3 py-2 r-cell">प्रस्तुति</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">अन्तेस्टी</td>
+                        <td class="px-3 py-2 r-cell">अन्त्यष्टि</td>
+                        <td class="px-3 py-2 w-cell">साहेता</td>
+                        <td class="px-3 py-2 r-cell">सहायता</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">परिक्षन</td>
+                        <td class="px-3 py-2 r-cell">परीक्षण</td>
+                        <td class="px-3 py-2 w-cell">उपनिबेस</td>
+                        <td class="px-3 py-2 r-cell">उपनिवेश</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">अभिषाप</td>
+                        <td class="px-3 py-2 r-cell">अभिशाप</td>
+                        <td class="px-3 py-2 w-cell">रोगब्याधी</td>
+                        <td class="px-3 py-2 r-cell">रोगव्याधि</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">चरदान</td>
+                        <td class="px-3 py-2 r-cell">वरदान</td>
+                        <td class="px-3 py-2 w-cell">परजिवो</td>
+                        <td class="px-3 py-2 r-cell">परजीवी</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">मुक्तकन्ट</td>
+                        <td class="px-3 py-2 r-cell">मुक्तकण्ठ</td>
+                        <td class="px-3 py-2 w-cell">मष्तिस्क</td>
+                        <td class="px-3 py-2 r-cell">मस्तिष्क</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">अनुकुल</td>
+                        <td class="px-3 py-2 r-cell">अनुकूल</td>
+                        <td class="px-3 py-2 w-cell">निर्धारत</td>
+                        <td class="px-3 py-2 r-cell">निर्धारण</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">उधार</td>
+                        <td class="px-3 py-2 r-cell">उदार</td>
+                        <td class="px-3 py-2 w-cell">सुरछित</td>
+                        <td class="px-3 py-2 r-cell">सुरक्षित</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">इमान्दार</td>
+                        <td class="px-3 py-2 r-cell">इमानदार</td>
+                        <td class="px-3 py-2 w-cell">निएन्त्रण</td>
+                        <td class="px-3 py-2 r-cell">नियन्त्रण</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">बायुमन्डल</td>
+                        <td class="px-3 py-2 r-cell">वायुमण्डल</td>
+                        <td class="px-3 py-2 w-cell">व्यावस्थापन</td>
+                        <td class="px-3 py-2 r-cell">व्यवस्थापन</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">प्रिक्षारोपण</td>
+                        <td class="px-3 py-2 r-cell">वृक्षरोपण</td>
+                        <td class="px-3 py-2 w-cell">व्याक्ति</td>
+                        <td class="px-3 py-2 r-cell">व्यक्ति</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">मांशपेसी</td>
+                        <td class="px-3 py-2 r-cell">मांसपेशी</td>
+                        <td class="px-3 py-2 w-cell">अन्तरीम</td>
+                        <td class="px-3 py-2 r-cell">अन्तरिम</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">जीबाणु</td>
+                        <td class="px-3 py-2 r-cell">जीवाणु</td>
+                        <td class="px-3 py-2 w-cell">एतिहासिक</td>
+                        <td class="px-3 py-2 r-cell">ऐतिहासिक</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">सौन्दर्यता</td>
+                        <td class="px-3 py-2 r-cell">सौन्दर्य</td>
+                        <td class="px-3 py-2 w-cell">कौतुहलता</td>
+                        <td class="px-3 py-2 r-cell">कुतूहल</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">व्यायम</td>
+                        <td class="px-3 py-2 r-cell">व्यायाम</td>
+                        <td class="px-3 py-2 w-cell">बैग्यानिक</td>
+                        <td class="px-3 py-2 r-cell">वैज्ञानिक</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">सङ्ग्राहलय</td>
+                        <td class="px-3 py-2 r-cell">सङ्ग्रहालय</td>
+                        <td class="px-3 py-2 w-cell">सञ्कोच</td>
+                        <td class="px-3 py-2 r-cell">सङ्कोच</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">संपत्ति</td>
+                        <td class="px-3 py-2 r-cell">सम्पत्ति</td>
+                        <td class="px-3 py-2 w-cell">प्रतक्छे</td>
+                        <td class="px-3 py-2 r-cell">प्रत्यक्ष</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 w-cell">अदक्ष्य</td>
+                        <td class="px-3 py-2 r-cell">अध्यक्ष</td>
+                        <td class="px-3 py-2 w-cell">यकता</td>
+                        <td class="px-3 py-2 r-cell">एकता</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
