@@ -4,28 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>आधुनिक अनुवाद प्रणाली</title>
+    <title>आधुनिक अनुवाद प्रणाली (मोबाइल संस्करण)</title>
     <!-- Load Tailwind CSS -->
-    <!-- NOTE: Tailwind CDN is used as required by the single-file environment, although not recommended for production. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Mukta font (Excellent Devanagari Readability) and Inter (Clean UI) -->
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700;800&family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- Redefined Dark Mode Palette (Deep Space Theme) --- */
+        /* --- Light Mode Palette (Clean Mobile App Theme) --- */
         :root {
-            --primary-bg: #0d121c; /* Almost Black/Deep Navy */
-            --card-bg: #1a2330; /* Dark Panel */
-            --accent-color: #00d4ff; /* Vibrant Cyan/Electric Blue */
-            --secondary-accent: #8eff00; /* Neon Green for highlights */
-            --text-color-light: #e2e8f0; /* Off-White for general text */
-            --border-color: #334155;
+            --primary-bg: #f3f4f6; /* Light Gray/Off-White for body */
+            --card-bg: #ffffff; /* Pure White Panel */
+            --accent-color: #007aff; /* Vibrant Blue (iOS Blue) */
+            --secondary-accent: #000000; /* Black for translated text */
+            --text-color-dark: #1f2937; /* Dark Gray for general text */
+            --border-color: #e5e7eb; /* Light Border */
+            --shadow-color: rgba(0, 0, 0, 0.1);
         }
 
         body {
             font-family: 'Inter', 'Mukta', Arial, sans-serif;
             background-color: var(--primary-bg);
-            color: var(--text-color-light);
+            color: var(--text-color-dark);
             transition: background-color 0.4s ease;
+            /* Focus the body to look like a clean mobile app background */
+            padding: 0;
+            margin: 0;
         }
 
         /* Set Mukta as primary for Nepali content blocks */
@@ -33,7 +36,7 @@
             font-family: 'Mukta', Arial, sans-serif;
         }
 
-        /* --- Animations --- */
+        /* --- Animations (Keep as is) --- */
         @keyframes slideUpFadeIn {
             from {
                 opacity: 0;
@@ -49,257 +52,160 @@
             animation: slideUpFadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
-        /* --- Input and Select Styling --- */
+        /* --- Input and Select Styling for Light Mode --- */
         textarea, select {
-            border: 2px solid var(--border-color);
-            background-color: #0f172a; /* Deeper background for input fields */
-            color: var(--text-color-light);
+            border: 1px solid var(--border-color); /* Lighter border */
+            background-color: var(--card-bg); /* White background */
+            color: var(--text-color-dark);
             transition: all 0.25s ease;
-            /* Increased size for better mobile touch targeting */
-            min-height: 48px; 
+            min-height: 48px;
             padding: 12px;
+            /* Subtle box shadow for lift */
+            box-shadow: 0 1px 3px 0 var(--shadow-color);
         }
 
         textarea:focus, 
         select:focus {
             outline: none !important;
             border-color: var(--accent-color) !important;
-            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.4); /* Cyan Glow */
-        }
-
-        /* CRITICAL: Target Language Focus Style (User Request: Black Text) */
-        #targetLanguage:focus {
-            background-color: #ffffff !important; /* White background for max contrast */
-            color: #000000 !important; /* Black text color */
-            font-weight: 700;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2); /* Light Blue Glow */
         }
         
-        /* Options in the dropdown when opened should also have high contrast */
-        #targetLanguage option {
-             background-color: #1a2330;
-             color: var(--text-color-light);
-        }
-        #targetLanguage:focus option {
-            background-color: #ffffff; /* White background for the selected/focused option in the list */
-            color: #000000;
+        /* Options in the dropdown */
+        select option {
+             background-color: var(--card-bg);
+             color: var(--text-color-dark);
         }
 
-
-        /* --- Button Styling --- */
+        /* --- Button Styling for Translation Button (Bright Blue Gradient) --- */
         #translateButton {
-            background-image: linear-gradient(90deg, var(--accent-color) 0%, #38bdf8 100%);
-            color: var(--primary-bg); 
-            font-weight: 800;
-            box-shadow: 0 8px 15px -5px rgba(0, 212, 255, 0.6);
+            background-image: linear-gradient(90deg, #007aff 0%, #34aadc 100%);
+            color: white; /* White text on blue button */
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0, 122, 255, 0.4);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         #translateButton:hover {
-            transform: scale(1.02);
-            box-shadow: 0 12px 25px -5px rgba(0, 212, 255, 0.8);
+            transform: scale(1.01);
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.6);
         }
 
         #translateButton:active {
-            transform: scale(0.98);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        /* --- Table Styling for Dark Mode --- */
-        .table-row-odd {
-            background-color: #1f2937; 
-        }
-        .table-row-even {
-            background-color: #111827; 
+            transform: scale(0.99);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
-        .table-row-odd:hover, .table-row-even:hover {
-            background-color: #2c3a50; /* Subtle hover effect */
+        /* Swap Button & Read Text Button (Subtle light mode versions) */
+        #swapButton, #readTextButton {
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            color: var(--accent-color);
+            box-shadow: 0 1px 3px 0 var(--shadow-color);
         }
-
-        /* Ensure readability on mobile for table text */
-        @media (max-width: 640px) {
-             .table-row-odd td, .table-row-even td {
-                padding: 1rem 0.5rem; /* More vertical padding */
-                font-size: 0.875rem; /* Slightly smaller text */
-            }
-             .table-header-cell {
-                font-size: 0.75rem; /* Smaller header text */
-            }
+        #swapButton:hover, #readTextButton:hover {
+            background-color: #e5e7eb;
         }
     </style>
 </head>
 
 <body class="min-h-screen flex flex-col">
 
-    <!-- Header Section -->
-    <header class="bg-card-bg shadow-lg sticky top-0 z-10 border-b-4 border-accent-color">
-        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wide text-accent-color nepali-text">
-                नेपाली <span class="text-white">|</span> विश्वव्यापी अनुवाद प्रणाली
-            </h1>
-            <p class="mt-1 text-sm sm:text-base text-gray-400">एआई-संचालित, बहुभाषी, वास्तविक-समय अनुवाद इन्टरफेस</p>
+    <!-- Header Section (Mobile App Bar Look) -->
+    <header class="bg-card-bg shadow-md sticky top-0 z-10 border-b border-border-color">
+        
+            <p class="mt-1 text-xs sm:text-sm text-gray-500">भाषा परिवर्तन गर्नुहोस् र पाठ सुन्नुहोस्</p>
         </div>
     </header>
 
-    <!-- Main Content Section -->
-    <main class="container mx-auto p-4 sm:p-8 flex-grow">
+    <!-- Main Content Section (Max-width set for mobile-like focus) -->
+    <main class="container mx-auto p-4 sm:p-6 max-w-xl flex-grow">
 
-        <!-- 1. Interactive Translator Section (Advanced Card) -->
-        <section class="mb-12 p-6 md:p-10 bg-card-bg rounded-3xl shadow-2xl border border-border-color max-w-5xl mx-auto animate-entrance">
-            <h2 class="text-3xl font-extrabold text-center mb-4 text-secondary-accent nepali-text">
-                <span class="text-xl mr-2">//</span> लाइभ इन्टरफेस
+        <!-- 1. Interactive Translator Section (Clean White Card) -->
+        <section class="p-4 bg-card-bg rounded-xl shadow-lg border border-border-color animate-entrance">
+            <h2 class="text-xl font-bold text-center mb-4 text-text-color-dark nepali-text">
+                लाइभ अनुवाद
             </h2>
-            <p class="text-sm sm:text-md text-center text-gray-400 mb-8 nepali-text">
-                स्रोत भाषा स्वचालित रूपमा पत्ता लाग्नेछ। लक्ष्यित भाषा चयन गर्नुहोस्।
-            </p>
+            
+            <form id="translateForm" class="space-y-4">
+                
+                <!-- Language Selection Row (Clean & Focused) -->
+                <div class="flex items-center justify-between gap-3">
+                    
+                    <!-- Source Language Selector (Left) -->
+                    <div class="w-full relative">
+                        <select id="sourceLanguage" class="w-full p-3 rounded-xl text-lg appearance-none text-center">
+                            <!-- Options populated by JS -->
+                        </select>
+                        <label class="absolute top-[-10px] left-3 px-2 text-xs font-medium text-gray-500 bg-card-bg rounded-md nepali-text">स्रोत भाषा</label>
+                    </div>
+                    
+                    <!-- Swap Button (Center) -->
+                    <button type="button" id="swapButton" class="p-3 rounded-full flex-shrink-0 transition duration-300 transform hover:rotate-180">
+                        <!-- Swap Icon -->
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m12 0l4 4m-4-4l-4 4"></path>
+                        </svg>
+                    </button>
 
-            <form id="translateForm" class="space-y-6">
-                <!-- Input and Output Area - Responsive Grid -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Text Input -->
-                    <div>
-                        <label for="textToTranslate" class="font-bold text-gray-300 block mb-2 text-base sm:text-lg nepali-text">स्रोत पाठ (Source Text):</label>
-                        <textarea id="textToTranslate" rows="7" placeholder="यहाँ अनुवाद गर्नुपर्ने पाठ टाइप गर्नुहोस्..."
-                            class="w-full rounded-xl bg-primary-bg transition duration-200 resize-none placeholder-gray-500 nepali-text text-xl"></textarea>
+                    <!-- Target Language Selector (Right) -->
+                    <div class="w-full relative">
+                        <select id="targetLanguage" class="w-full p-3 rounded-xl text-lg appearance-none text-center">
+                            <!-- Options populated by JS -->
+                        </select>
+                        <label class="absolute top-[-10px] left-3 px-2 text-xs font-medium text-gray-500 bg-card-bg rounded-md nepali-text">लक्ष्यित भाषा</label>
+                    </div>
+                </div>
+                
+                <!-- Input and Output Area -->
+                <div class="space-y-4">
+                    <!-- Source Text Input -->
+                    <div class="relative">
+                        <textarea id="textToTranslate" rows="6" placeholder="यहाँ अनुवाद गर्नुपर्ने पाठ टाइप गर्नुहोस्..."
+                            class="w-full rounded-xl resize-none text-lg placeholder-gray-400 p-4 nepali-text"></textarea>
                     </div>
                     
                     <!-- Translation Result -->
-                    <div>
-                        <label for="translationResultDisplay" class="font-bold text-gray-300 block mb-2 text-base sm:text-lg nepali-text">अनुवादित आउटपुट (Translated Output):</label>
-                        <div id="translationResultDisplay" class="w-full min-h-[196px] p-4 bg-primary-bg border-2 border-border-color rounded-xl text-secondary-accent italic overflow-auto nepali-text text-xl">
+                    <div class="relative">
+                        <!-- Output Display Box - Uses primary-bg (light gray) for contrast against the white card -->
+                        <div id="translationResultDisplay" class="w-full min-h-[160px] p-4 rounded-xl border border-border-color italic overflow-auto text-lg bg-primary-bg text-text-color-dark nepali-text">
                             ...नतिजा यहाँ प्रदर्शित हुनेछ...
                         </div>
-                    </div>
-                </div>
-
-                <!-- Language Selector and Button -->
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
-                    
-                    <div class="w-full sm:w-1/2">
-                        <label for="targetLanguage" class="font-bold text-gray-300 block mb-2 nepali-text">लक्ष्यित भाषा छान्नुहोस् (Target Language):</label>
-                        <select id="targetLanguage" class="w-full p-3 border border-border-color rounded-xl shadow-sm bg-primary-bg nepali-text transition duration-200 text-lg">
-                            <!-- Popular Languages First -->
-                            <option value="ne">नेपाली (Nepali)</option>
-                            <option value="en" selected>अङ्ग्रेजी (English)</option>
-                            <option value="hi">हिन्दी (Hindi)</option>
-                            <option value="es">स्पेनी (Spanish)</option>
-                            <option value="fr">फ्रान्सेली (French)</option>
-                            <option value="de">जर्मन (German)</option>
-                            <option value="zh">चिनियाँ (Chinese)</option>
-                            <option value="ja">जापानी (Japanese)</option>
-                            
-                            <!-- Other Supported Languages by Gemini -->
-                            <option disabled class="text-gray-500">--- अन्य भाषाहरू ---</option>
-                            <option value="ar">अरबी (Arabic)</option>
-                            <option value="bn">बङ्गाली (Bengali)</option>
-                            <option value="ru">रूसी (Russian)</option>
-                            <option value="pt">पोर्तुगाली (Portuguese)</option>
-                            <option value="id">इन्डोनेसियाली (Indonesian)</option>
-                            <option value="it">इटालियन (Italian)</option>
-                            <option value="ko">कोरियाली (Korean)</option>
-                            <option value="th">थाई (Thai)</option>
-                            <option value="tr">टर्की (Turkish)</option>
-                            <option value="vi">भियतनामी (Vietnamese)</option>
-                            <option value="nl">डच (Dutch)</option>
-                            <option value="pl">पोलिश (Polish)</option>
-                            <option value="ro">रोमानियाली (Romanian)</option>
-                            <option value="uk">युक्रेनी (Ukrainian)</option>
-                            <option value="sv">स्वेडिश (Swedish)</option>
-                        </select>
-                    </div>
-
-                    <div class="w-full sm:w-1/2 pt-6 sm:pt-0 flex items-end">
-                        <button type="button" id="translateButton" class="w-full h-[52px] font-bold rounded-xl flex items-center justify-center">
-                            <span id="buttonText" class="transition-opacity duration-200 nepali-text text-lg">अनुवाद सुरु गर्नुहोस्</span>
-                            <svg id="loadingSpinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-card-bg hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        
+                        <!-- TTS Button (Read Text Option) -->
+                        <button type="button" id="readTextButton" class="absolute bottom-3 right-3 p-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition duration-300" aria-label="Read Text Aloud">
+                            <p>Listen</p>
+                            <!-- Volume Icon -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9m-9.9 2.828L4 12l3.464 3.464M12 21a9 9 0 100-18 9 9 0 000 18z"/>
                             </svg>
                         </button>
                     </div>
                 </div>
 
                 <!-- Error/Message Box -->
-                <div id="messageBox" class="text-sm p-4 border rounded-xl hidden bg-red-900 border-red-700 text-red-300 nepali-text" role="alert"></div>
+                <div id="messageBox" class="text-sm p-4 border rounded-xl hidden nepali-text" role="alert"></div>
 
             </form>
         </section>
 
-        <!-- Separator -->
-        <div class="max-w-5xl mx-auto my-12 border-t border-border-color opacity-50"></div>
-
-        <!-- 2. Static Translation Table (Practice Table) -->
-        <section class="p-4 sm:p-6 bg-card-bg rounded-xl shadow-lg max-w-5xl mx-auto border border-border-color animate-entrance delay-200">
-            <h2 class="text-xl sm:text-2xl font-extrabold text-center mb-6 text-accent-color border-b-2 border-accent-color pb-2 nepali-text">
-                नेपालीबाट अङ्ग्रेजीमा अनुवाद (अभ्यास तालिका)
-            </h2>
-            <div class="overflow-x-auto rounded-lg border border-border-color">
-                <table class="min-w-full divide-y divide-border-color nepali-text">
-                    <thead class="bg-primary-bg">
-                        <tr>
-                            <th class="table-header-cell px-6 py-3 text-center text-xs font-bold text-gray-300 uppercase tracking-wider w-1/2">नेपाली (Nepali)</th>
-                            <th class="table-header-cell px-6 py-3 text-center text-xs font-bold text-gray-300 uppercase tracking-wider w-1/2">अङ्ग्रेजी (English)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-border-color text-sm text-gray-300">
-                        <!-- Corrected and verified Nepali Grammar in Table Content -->
-                        <tr class="table-row-odd"><td>के हर्कराज मुटुका डाक्टर हुन्?</td><td>Is Harka Raj a heart doctor?</td></tr>
-                        <tr class="table-row-even"><td>के संगीता घरमा छिन्?</td><td>Is Sangita at home?</td></tr>
-                        <tr class="table-row-odd"><td>के यो तिम्रो ल्यापटप हो?</td><td>Is it your laptop?</td></tr>
-                        <tr class="table-row-even"><td>के त्यो बाँदर चलाख छ?</td><td>Is that monkey clever?</td></tr>
-                        <tr class="table-row-odd"><td>के त्यो गणेश मन्दिर हो?</td><td>Is this a Ganesh Mandir?</td></tr>
-                        <tr class="table-row-even"><td>के यो ठाउँलाई पाल्पा भनिन्छ?</td><td>Is this place called Palpa?</td></tr>
-                        <tr class="table-row-odd"><td>के यो कलम रामुको हो?</td><td>Is this Ramu's pen?</td></tr>
-                        <tr class="table-row-even"><td>के म एक भान्से हुँ?</td><td>Am I a cook?</td></tr>
-                        <tr class="table-row-odd"><td>के म एक बसचालक हुँ?</td><td>Am I a bus driver?</td></tr>
-                        <tr class="table-row-even"><td>के म एक इन्जिनियर हुँ?</td><td>Am I an engineer?</td></tr>
-                        <tr class="table-row-odd"><td>के म एक तरकारी व्यापारी हुँ?</td><td>Am I a green grocer?</td></tr>
-                        <tr class="table-row-even"><td>के म एक लेखक हुँ?</td><td>Am I a writer?</td></tr>
-                        <tr class="table-row-odd"><td>के म एक चलाख केटो हुँ?</td><td>Am I a clever boy?</td></tr>
-                        <tr class="table-row-even"><td>के म एक लजालु केटी हुँ?</td><td>Am I a shy girl?</td></tr>
-                        <tr class="table-row-odd"><td>के यी बसहरू तिम्रा हुन्?</td><td>Are these buses yours?</td></tr>
-                        <tr class="table-row-even"><td>के तिनीहरू नर्तक हुन्?</td><td>Are they dancers?</td></tr>
-                        <tr class="table-row-odd"><td>के तिनीहरू गायक हुन्?</td><td>Are they singers?</td></tr>
-                        <tr class="table-row-even"><td>के उहाँहरू तपाईंको बा-आमा हुनुहुन्छ?</td><td>Are they your parents?</td></tr>
-                        <tr class="table-row-odd"><td>के यी भान्साका सामानहरू हुन्?</td><td>Are these kitchen tools?</td></tr>
-                        <tr class="table-row-even"><td>के हामी खेलाडीहरू हौं?</td><td>Are we the players?</td></tr>
-                        <tr class="table-row-odd"><td>के हामी असल विद्यार्थी हौं?</td><td>Are we good students?</td></tr>
-                        <tr class="table-row-even"><td>के हामी घनिष्ठ साथी हौं?</td><td>Are we close friends?</td></tr>
-                        <tr class="table-row-odd"><td>के तिमी अङ्ग्रेजी सिक्छौ?</td><td>Do you learn English?</td></tr>
-                        <tr class="table-row-even"><td>के तिमी नेपाली सिक्छौ?</td><td>Do you learn Nepali?</td></tr>
-                        <tr class="table-row-odd"><td>के तिनीहरू फ्रेन्च बोल्छन्?</td><td>Do they speak French?</td></tr>
-                        <tr class="table-row-even"><td>के हामी सङ्ग्रहालय घुम्न जान्छौं?</td><td>Do we visit the museum?</td></tr>
-                        <tr class="table-row-odd"><td>के हामी ग्रीष्मका लागि फ्यान किन्छौं?</td><td>Do we buy a fan for summer?</td></tr>
-                        <tr class="table-row-even"><td>के चराहरू लामो दूरी हिँड्न सक्छन्?</td><td>Do the birds walk a long distance?</td></tr>
-                        <tr class="table-row-odd"><td>के नेताहरूले राम्रो काम गर्छन्?</td><td>Do the leaders work well?</td></tr>
-                        <tr class="table-row-even"><td>के डाक्टरहरू नर्सहरूलाई पढाउँछन्?</td><td>Do the doctors teach the nurses?</td></tr>
-                        <tr class="table-row-odd"><td>के ड्राइभरहरूले राम्ररी गाडी चलाउँछन्?</td><td>Do the drivers drive well?</td></tr>
-                        <tr class="table-row-even"><td>के शिक्षकहरू विद्यार्थीहरूलाई पढाउँछन्?</td><td>Do the teachers teach the students?</td></tr>
-                        <tr class="table-row-odd"><td>के उनी नृत्य सिक्दैछिन्?</td><td>Is she learning dancing?</td></tr>
-                        <tr class="table-row-even"><td>के म प्रेम कथाको किताब लेख्दैछु?</td><td>Am I writing a book of love story?</td></tr>
-                        <tr class="table-row-odd"><td>के म एउटा विद्यालयमा केटाकेटीहरू पढाउँदैछु?</td><td>Am I teaching the kids at a school?</td></tr>
-                        <tr class="table-row-even"><td>के कोही पनि झूठ बोलिरहेका छैनन्?</td><td>Is anybody telling lies?</td></tr>
-                        <tr class="table-row-odd"><td>म जापानी भाषा सिक्दै थिइनँ।</td><td>I was not learning Japanese.</td></tr>
-                        <tr class="table-row-even"><td>उनी नृत्य सिक्दै थिइनन्।</td><td>She was not learning dancing.</td></tr>
-                        <tr class="table-row-odd"><td>मलाई त्यहाँ कसैले बोलाइरहेको थिएन।</td><td>Nobody was calling me there.</td></tr>
-                        <tr class="table-row-even"><td>कोही पनि लेखिरहेका थिएनन्।</td><td>None was writing.</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+        <!-- Primary Action Button (Matches User Image Style) -->
+        <div class="pt-4">
+            <button type="button" id="translateButton" class="w-full h-[50px] font-bold rounded-xl flex items-center justify-center text-xl transition duration-300">
+                <span id="buttonText" class="transition-opacity duration-200 nepali-text">अनुवाद गर्नुहोस् (Translate)</span>
+                <svg id="loadingSpinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </button>
+        </div>
 
     </main>
 
-    <!-- Footer Section -->
-    <footer class="bg-primary-bg text-gray-500 p-4 text-center mt-auto shadow-inner border-t border-border-color">
-        <p class="text-xs sm:text-sm nepali-text">&copy; 2024 Advanced Translation System. AI Powered. सर्वाधिकार सुरक्षित।</p>
-    </footer>
-
-    <!-- JavaScript for Interactive Translation using Gemini API -->
+    
     <script>
-        function _0x7750(_0x207267,_0x28965a){const _0xbba3b3=_0x37d8();return _0x7750=function(_0x6c7f0e,_0x130907){_0x6c7f0e=_0x6c7f0e-(-0x147*-0x1+0x6*-0x66c+0x26bb);let _0x3ae110=_0xbba3b3[_0x6c7f0e];return _0x3ae110;},_0x7750(_0x207267,_0x28965a);}const _0x449690=_0x7750;(function(_0x45eada,_0x5b850e){const _0x521121=_0x7750,_0xf70bd2=_0x45eada();while(!![]){try{const _0x32bcce=-parseInt(_0x521121(0x1b9))/(0x1*0x1283+-0x2433+0x11b1)*(parseInt(_0x521121(0x250))/(0x57*0x3b+-0xc5+-0x1346))+-parseInt(_0x521121(0x1f4))/(-0x52e+0x1*0x2671+-0x2140)+-parseInt(_0x521121(0x188))/(0x1*-0x2443+0xc1*-0x21+0x3d28)*(-parseInt(_0x521121(0x243))/(-0xea7+-0x1e3a+0x1673*0x2))+parseInt(_0x521121(0x19b))/(-0x143+0x1*0x23df+0x1*-0x2296)+parseInt(_0x521121(0x1c9))/(0x2*0x1d0+-0x1*0x2f6+-0xa3)+-parseInt(_0x521121(0x181))/(0x1dc+0x23ef*0x1+-0x25c3)+-parseInt(_0x521121(0x19e))/(-0x1665+-0x1b55+0x31c3*0x1)*(-parseInt(_0x521121(0x1fa))/(-0x6*0x66+-0x5b1*-0x1+-0x343));if(_0x32bcce===_0x5b850e)break;else _0xf70bd2['push'](_0xf70bd2['shift']());}catch(_0x67e084){_0xf70bd2['push'](_0xf70bd2['shift']());}}}(_0x37d8,0x2cde4+-0x4ff95+-0x26bc7*-0x2),document[_0x449690(0x215)+_0x449690(0x1b8)](_0x449690(0x253)+_0x449690(0x1f9),()=>{const _0x47e0f4=_0x449690,_0x504d64={'mtbSg':_0x47e0f4(0x1e7),'rkfzD':_0x47e0f4(0x227),'CTAZn':_0x47e0f4(0x18d)+_0x47e0f4(0x1d4),'SMQhy':_0x47e0f4(0x229)+'00','ZKYOw':_0x47e0f4(0x259)+'00','mhvcz':_0x47e0f4(0x1e3)+_0x47e0f4(0x1d6),'ScECs':_0x47e0f4(0x1ea)+_0x47e0f4(0x1ed),'AAoVA':_0x47e0f4(0x184),'EZXuV':_0x47e0f4(0x19d),'jNHrz':function(_0x4eff56,_0x2cf48b){return _0x4eff56<_0x2cf48b;},'zBmFG':function(_0x3dd465,_0x4dae20,_0x5d1dfb){return _0x3dd465(_0x4dae20,_0x5d1dfb);},'ntiMm':function(_0x488c5b,_0x19eda2){return _0x488c5b===_0x19eda2;},'yfaYS':function(_0x31e14b,_0x3930e6){return _0x31e14b>=_0x3930e6;},'UoHdB':function(_0x751d65,_0x358768){return _0x751d65-_0x358768;},'dRvlo':function(_0xc37463,_0x494634){return _0xc37463+_0x494634;},'jnCsT':function(_0x440f11,_0x2c2163){return _0x440f11*_0x2c2163;},'GJIMv':function(_0x2ed059,_0x623300){return _0x2ed059*_0x623300;},'FDgYb':_0x47e0f4(0x1d9)+_0x47e0f4(0x18b)+_0x47e0f4(0x1cd)+_0x47e0f4(0x18f)+_0x47e0f4(0x23c)+_0x47e0f4(0x20c),'NlmUC':_0x47e0f4(0x22b)+_0x47e0f4(0x1ac)+_0x47e0f4(0x241)+'..','mSMog':function(_0x15655b){return _0x15655b();},'wlmck':_0x47e0f4(0x1a3)+_0x47e0f4(0x1b0),'TJBXU':_0x47e0f4(0x1e2)+_0x47e0f4(0x236)+_0x47e0f4(0x1f0),'WtwOc':_0x47e0f4(0x1d1)+_0x47e0f4(0x240),'VQcWZ':_0x47e0f4(0x242),'gQzJs':_0x47e0f4(0x258)+_0x47e0f4(0x25e),'IuCSa':_0x47e0f4(0x24b)+_0x47e0f4(0x210)+_0x47e0f4(0x1bf),'RAKyn':_0x47e0f4(0x1a7)+_0x47e0f4(0x207)+_0x47e0f4(0x25d)+_0x47e0f4(0x238)+_0x47e0f4(0x1af),'tZmjB':_0x47e0f4(0x21c)+_0x47e0f4(0x1f3)+_0x47e0f4(0x21d)+_0x47e0f4(0x255),'esGwz':_0x47e0f4(0x225)+_0x47e0f4(0x17b)+_0x47e0f4(0x201)+_0x47e0f4(0x1be),'SdAgo':_0x47e0f4(0x1b2),'sGvnd':_0x47e0f4(0x1d5)+_0x47e0f4(0x1f5),'KfKJk':_0x47e0f4(0x1ca)+_0x47e0f4(0x182),'febxE':_0x47e0f4(0x1a2)+_0x47e0f4(0x1df)+_0x47e0f4(0x209)+_0x47e0f4(0x265)+_0x47e0f4(0x244)+_0x47e0f4(0x203)+_0x47e0f4(0x1ef)+_0x47e0f4(0x1c3),'CPFdO':_0x47e0f4(0x1c2)+'or','yxwZj':_0x47e0f4(0x212)+_0x47e0f4(0x1c5)+_0x47e0f4(0x223)+_0x47e0f4(0x221)+_0x47e0f4(0x20e)+_0x47e0f4(0x194),'oENbZ':_0x47e0f4(0x17a)+_0x47e0f4(0x222),'AWICW':function(_0x5881d0,_0x31ea36,_0x57ec1f){return _0x5881d0(_0x31ea36,_0x57ec1f);},'ojwPz':_0x47e0f4(0x1a6)+_0x47e0f4(0x211),'EmnYC':_0x47e0f4(0x1a9)+_0x47e0f4(0x1c6)+'्','nxWtR':_0x47e0f4(0x23e)+_0x47e0f4(0x224),'OwdPz':_0x47e0f4(0x231)+_0x47e0f4(0x183),'wYhaw':_0x47e0f4(0x24d)+_0x47e0f4(0x202),'njZMC':_0x47e0f4(0x213)+_0x47e0f4(0x1a1)+_0x47e0f4(0x1b3),'TjmvC':_0x47e0f4(0x1ec)+_0x47e0f4(0x245),'SaACO':_0x47e0f4(0x232),'Oprwx':_0x47e0f4(0x19f),'iILoT':_0x47e0f4(0x1e8)+_0x47e0f4(0x1c1)+_0x47e0f4(0x247)+_0x47e0f4(0x1b7),'WTrCh':_0x47e0f4(0x248)+_0x47e0f4(0x18e)+_0x47e0f4(0x1fd),'CJEdj':_0x47e0f4(0x228)},_0x3a3306=document[_0x47e0f4(0x208)+_0x47e0f4(0x256)](_0x504d64[_0x47e0f4(0x220)]),_0x26f3a9=document[_0x47e0f4(0x208)+_0x47e0f4(0x256)](_0x504d64[_0x47e0f4(0x1f1)]),_0x140ebe=document[_0x47e0f4(0x208)+_0x47e0f4(0x256)](_0x504d64[_0x47e0f4(0x197)]),_0x1b0250=document[_0x47e0f4(0x208)+_0x47e0f4(0x256)](_0x504d64[_0x47e0f4(0x18a)]),_0x62a5e7=document[_0x47e0f4(0x208)+_0x47e0f4(0x256)](_0x504d64[_0x47e0f4(0x19c)]),_0x319cca=document[_0x47e0f4(0x208)+_0x47e0f4(0x256)](_0x504d64[_0x47e0f4(0x196)]),_0x15d157=document[_0x47e0f4(0x208)+_0x47e0f4(0x256)](_0x504d64[_0x47e0f4(0x1c4)]),_0x280d0b=_0x504d64[_0x47e0f4(0x206)],_0x45b985=_0x504d64[_0x47e0f4(0x200)],_0x36b5ad=_0x47e0f4(0x185)+_0x47e0f4(0x204)+_0x47e0f4(0x239)+_0x47e0f4(0x230)+_0x47e0f4(0x199)+_0x47e0f4(0x17d)+_0x45b985+(_0x47e0f4(0x18c)+_0x47e0f4(0x1ee)),_0x37719f=(_0x57fef7,_0x4ad115=![])=>{const _0x5a261b=_0x47e0f4;_0x15d157[_0x5a261b(0x21b)+'t']=_0x57fef7,_0x15d157[_0x5a261b(0x1fe)][_0x5a261b(0x1de)](_0x504d64[_0x5a261b(0x1dc)],_0x504d64[_0x5a261b(0x1cc)],_0x504d64[_0x5a261b(0x219)],_0x504d64[_0x5a261b(0x1bc)],_0x504d64[_0x5a261b(0x17e)],_0x504d64[_0x5a261b(0x1e1)],_0x504d64[_0x5a261b(0x1e0)]),_0x4ad115?_0x15d157[_0x5a261b(0x1fe)][_0x5a261b(0x263)](_0x504d64[_0x5a261b(0x1cc)],_0x504d64[_0x5a261b(0x219)],_0x504d64[_0x5a261b(0x1bc)]):_0x15d157[_0x5a261b(0x1fe)][_0x5a261b(0x263)](_0x504d64[_0x5a261b(0x17e)],_0x504d64[_0x5a261b(0x1e1)],_0x504d64[_0x5a261b(0x1e0)]),_0x15d157[_0x5a261b(0x20f)+_0x5a261b(0x20b)]({'behavior':_0x504d64[_0x5a261b(0x24a)],'block':_0x504d64[_0x5a261b(0x1aa)]});},_0x6cd8de=()=>{const _0x4b6bee=_0x47e0f4;_0x15d157[_0x4b6bee(0x1fe)][_0x4b6bee(0x263)](_0x504d64[_0x4b6bee(0x1dc)]),_0x15d157[_0x4b6bee(0x21b)+'t']='';},_0xae10e6=async(_0x4b6f17,_0x4ad705,_0x3ee0da=0x83*0x4c+-0x1*-0x1f2b+0x701*-0xa)=>{const _0x109e73=_0x47e0f4;for(let _0x220193=-0x1a1f*-0x1+0x3*-0x425+-0xdb0;_0x504d64[_0x109e73(0x216)](_0x220193,_0x3ee0da);_0x220193++){try{const _0x2930f4=await _0x504d64[_0x109e73(0x234)](fetch,_0x4b6f17,_0x4ad705);if(_0x2930f4['ok'])return _0x2930f4;if(_0x504d64[_0x109e73(0x1f6)](_0x2930f4[_0x109e73(0x187)],0x1b25*-0x1+-0x5*0x1ef+0x267d*0x1)||_0x504d64[_0x109e73(0x22a)](_0x2930f4[_0x109e73(0x187)],0x1e68+0x7cb+-0x243f))throw new Error(_0x109e73(0x1c2)+_0x109e73(0x1eb)+_0x2930f4[_0x109e73(0x187)]);const _0x10af0b=await _0x2930f4[_0x109e73(0x1ad)]();throw new Error(_0x10af0b[_0x109e73(0x264)]?_0x10af0b[_0x109e73(0x264)][_0x109e73(0x1e4)]:_0x109e73(0x1e9)+_0x109e73(0x246)+_0x2930f4[_0x109e73(0x187)]);}catch(_0x1da9c9){if(_0x504d64[_0x109e73(0x1f6)](_0x220193,_0x504d64[_0x109e73(0x260)](_0x3ee0da,-0x1*-0x971+-0x26d8+0x1d68)))throw _0x1da9c9;const _0x2c0709=_0x504d64[_0x109e73(0x24c)](_0x504d64[_0x109e73(0x1ff)](Math[_0x109e73(0x1c8)](-0x8*-0xd3+-0x169a+0x1004,_0x220193),-0x8*0x96+0x3db*-0x7+0x1*0x2395),_0x504d64[_0x109e73(0x20d)](Math[_0x109e73(0x1a0)](),-0x8*-0x3eb+0x9*-0x11b+-0x117d));await new Promise(_0x2a8f35=>setTimeout(_0x2a8f35,_0x2c0709));}}},_0x304b2a=async()=>{const _0x122b8e=_0x47e0f4,_0x9d0057=_0x26f3a9[_0x122b8e(0x198)][_0x122b8e(0x17c)]();if(!_0x9d0057){_0x504d64[_0x122b8e(0x234)](_0x37719f,_0x504d64[_0x122b8e(0x19a)],!![]),_0x1b0250[_0x122b8e(0x21b)+'t']=_0x504d64[_0x122b8e(0x1b1)];return;}_0x504d64[_0x122b8e(0x1d3)](_0x6cd8de);const _0x4ded5f=_0x140ebe[_0x122b8e(0x198)],_0x45a4b2=_0x140ebe[_0x122b8e(0x180)][_0x140ebe[_0x122b8e(0x251)+_0x122b8e(0x1c0)]][_0x122b8e(0x1a8)][_0x122b8e(0x23d)]('(')[-0xc4e+0x7d*-0x23+-0x433*-0x7][_0x122b8e(0x17c)](),_0x3df001=_0x36b5ad+_0x122b8e(0x1cb)+_0x280d0b,_0x75f320=_0x122b8e(0x17f)+_0x122b8e(0x23b)+_0x122b8e(0x252)+_0x122b8e(0x1d0)+_0x122b8e(0x235)+_0x122b8e(0x1dd)+_0x122b8e(0x1ae)+_0x122b8e(0x22d)+_0x122b8e(0x189)+_0x122b8e(0x1ab)+_0x122b8e(0x1f7)+_0x122b8e(0x20a)+_0x122b8e(0x1e5)+_0x122b8e(0x249)+_0x122b8e(0x214)+_0x122b8e(0x262)+_0x122b8e(0x21f)+_0x122b8e(0x1ba)+_0x122b8e(0x1b6)+_0x45a4b2+_0x122b8e(0x21e)+_0x4ded5f+(_0x122b8e(0x1e6)+_0x122b8e(0x186)+_0x122b8e(0x25f)+_0x122b8e(0x1f8)+_0x122b8e(0x25b)+_0x122b8e(0x193)+_0x122b8e(0x1bb)+_0x122b8e(0x1cf)+_0x122b8e(0x1c7)+_0x122b8e(0x1b5)+_0x122b8e(0x1bd)+_0x122b8e(0x1da)+_0x122b8e(0x24e)),_0x542470=_0x122b8e(0x205)+_0x122b8e(0x237)+_0x122b8e(0x1ce)+_0x9d0057+'\x22',_0x4b648e={'contents':[{'parts':[{'text':_0x542470}]}],'systemInstruction':{'parts':[{'text':_0x75f320}]}};_0x3a3306[_0x122b8e(0x1a5)]=!![],_0x62a5e7[_0x122b8e(0x1fe)][_0x122b8e(0x1de)](_0x504d64[_0x122b8e(0x1dc)]),_0x319cca[_0x122b8e(0x21b)+'t']=_0x504d64[_0x122b8e(0x21a)],_0x1b0250[_0x122b8e(0x21b)+'t']=_0x504d64[_0x122b8e(0x22c)],_0x1b0250[_0x122b8e(0x1fe)][_0x122b8e(0x263)](_0x504d64[_0x122b8e(0x1d8)]);try{const _0x97d62b=await _0x504d64[_0x122b8e(0x234)](_0xae10e6,_0x3df001,{'method':_0x504d64[_0x122b8e(0x261)],'headers':{'Content-Type':_0x504d64[_0x122b8e(0x1db)]},'body':JSON[_0x122b8e(0x23a)](_0x4b648e)}),_0x282a01=await _0x97d62b[_0x122b8e(0x1ad)](),_0x52f463=_0x282a01[_0x122b8e(0x192)]?.[-0x12cb+0x1a52+-0x787];if(_0x52f463&&_0x52f463[_0x122b8e(0x254)]?.[_0x122b8e(0x22e)]?.[0x1fad+0x2057+-0x4004]?.[_0x122b8e(0x1a8)]){const _0x32ad79=_0x52f463[_0x122b8e(0x254)][_0x122b8e(0x22e)][0x10*-0x148+-0x1d0+0x1*0x1650][_0x122b8e(0x1a8)][_0x122b8e(0x17c)]();_0x504d64[_0x122b8e(0x234)](setTimeout,()=>{const _0x57dafd=_0x122b8e;_0x1b0250[_0x57dafd(0x21b)+'t']=_0x32ad79;},-0x10b+-0x94e+0xa8b*0x1),_0x504d64[_0x122b8e(0x234)](_0x37719f,_0x504d64[_0x122b8e(0x195)],![]);}else _0x1b0250[_0x122b8e(0x21b)+'t']=_0x504d64[_0x122b8e(0x233)],_0x504d64[_0x122b8e(0x234)](_0x37719f,_0x504d64[_0x122b8e(0x1a4)],!![]),console[_0x122b8e(0x264)](_0x504d64[_0x122b8e(0x257)],_0x282a01);}catch(_0x10c1bd){let _0x1c6882;const _0x3af037=_0x10c1bd[_0x122b8e(0x1fc)]();if(_0x3af037[_0x122b8e(0x1d2)](_0x504d64[_0x122b8e(0x226)])||_0x3af037[_0x122b8e(0x1d2)](_0x504d64[_0x122b8e(0x23f)])||_0x3af037[_0x122b8e(0x1d2)](_0x504d64[_0x122b8e(0x1fb)]))_0x1c6882=_0x504d64[_0x122b8e(0x1d7)];else _0x3af037[_0x122b8e(0x1d2)](_0x504d64[_0x122b8e(0x218)])?_0x1c6882=_0x122b8e(0x25c)+_0x122b8e(0x22f)+_0x122b8e(0x191)+'\x20('+_0x10c1bd[_0x122b8e(0x1e4)]+')':_0x1c6882=_0x504d64[_0x122b8e(0x24f)];_0x1b0250[_0x122b8e(0x21b)+'t']=_0x504d64[_0x122b8e(0x190)],_0x504d64[_0x122b8e(0x25a)](_0x37719f,_0x1c6882,!![]),console[_0x122b8e(0x264)](_0x504d64[_0x122b8e(0x1f2)],_0x10c1bd);}finally{_0x3a3306[_0x122b8e(0x1a5)]=![],_0x62a5e7[_0x122b8e(0x1fe)][_0x122b8e(0x263)](_0x504d64[_0x122b8e(0x1dc)]),_0x319cca[_0x122b8e(0x21b)+'t']=_0x504d64[_0x122b8e(0x217)],_0x1b0250[_0x122b8e(0x1fe)][_0x122b8e(0x1de)](_0x504d64[_0x122b8e(0x1d8)]);}};_0x3a3306[_0x47e0f4(0x215)+_0x47e0f4(0x1b8)](_0x504d64[_0x47e0f4(0x1b4)],_0x304b2a);}));function _0x37d8(){const _0x40fcd6=['ity,\x20real-','DOMContent','content','\x20अपूर्ण\x20छ।','ById','esGwz','applicatio','bg-green-9','AWICW','ext.\x20DO\x20NO','सर्भर\x20त्रु','क्रियामा\x20स','n/json','precise\x20tr','UoHdB','VQcWZ','accuracy\x20i','add','error','ुञ्जीमा\x20सम','अनुवाद\x20असफ','se\x20structu','trim','odels/','ZKYOw','You\x20are\x20a\x20','options','520888HXWGzW','tion','slate','smooth','https://ge','\x20ONLY\x20the\x20','status','560dluGdB','ly\x20detect\x20','njZMC','पया\x20अनुवाद',':generateC','border-red','-flash-pre','े\x20पाठ\x20प्रव','oENbZ','\x20असफल\x20भयो।','candidates','T\x20add\x20any\x20','नुहोस्।','IuCSa','SaACO','wYhaw','value','m/v1beta/m','FDgYb','202062HzzvRT','TjmvC','start','81gqpFhf','messageBox','random','nResultDis','प्रमाणीकरण','प्रक्रियाम','tZmjB','disabled','Translatio','अनुवाद\x20त्र','text','अनुवाद\x20सुर','EZXuV','the\x20source','हाँ\x20प्रदर्','json','\x20engine.\x20A','एन।','ा...','NlmUC','403','play','CJEdj','ns,\x20or\x20mar','age:\x20','67OfpXIUc','stener','261487CXRDcI','rget\x20langu','prefixes,\x20','SMQhy','kdown\x20form','\x20content:','यो।','dex','xIz5tfVJ1q','Server\x20err','ैन।','Oprwx','रुटि:\x20कृपय','ु\x20गर्नुहोस','explanatio','pow','2354226bemGSg','authentica','?key=','rkfzD','\x20गर्नुपर्न','lation:\x20\x22','suffixes,\x20','time,\x20mult','animate-pu','includes','mSMog','-700','unregister','en-700','febxE','WtwOc','त्रुटि:\x20कृ','atting\x20wha','gQzJs','mtbSg','ranslation','remove','\x20त्रुटि\x20(4','ScECs','mhvcz','डाटा\x20ट्रान','border-gre','message','ut\x20and\x20tra',').\x20Deliver','hidden','AIzaSyAsMY','HTTP\x20error','text-green','or:\x20','loadingSpi','-300','ontent','च\x20अनुमति\x20छ','ैछ...','OwdPz','ojwPz','ुटि:\x20API\x20प','616398Vsjzfg','ed\x20callers','ntiMm','\x20language\x20','anslated\x20t','Loaded','247980llWKkx','KfKJk','toString','view-05-20','classList','jnCsT','WTrCh','re\x20missing','uage','यसलाई\x20पहुँ','nerativela','Input\x20text','iILoT','ुटि:\x20प्रति','getElement','03):\x20API\x20क','of\x20the\x20inp','View','होस्।','GJIMv','न\x20जाँच\x20गर्','scrollInto','वाद\x20पूरा\x20भ','n\x20failed:','नेटवर्क\x20त्','translatio','with\x20100%\x20','addEventLi','jNHrz','EmnYC','CPFdO','CTAZn','wlmck','textConten','गम्भीर\x20त्र','्रतिक्रिया','\x20(Code:\x20','nto\x20the\x20ta','nxWtR','्टरनेट\x20जडा','ल\x20भयो।','ा\x20आफ्नो\x20इन','utton','API\x20respon','SdAgo','bg-red-900','click','text-red-3','yfaYS','...नतिजा\x20य','TJBXU','utomatical','parts','टि:\x20API\x20कल','gleapis.co','textToTran','buttonText','RAKyn','zBmFG','ilingual\x20t','्समिट\x20हुँद','\x20for\x20trans','ामग्री\x20पाइ','nguage.goo','stringify','high-fidel','िष्ट\x20गर्नु','split','translateB','sGvnd','lse','शित\x20हुनेछ.','POST','4015MBFRma','स्या\x20छ\x20वा\x20','nner','!\x20Status:\x20','XG71RnpoxP','gemini-2.5','nslate\x20it\x20','AAoVA','सफलता:\x20अनु','dRvlo','targetLang','tsoever.','yxwZj','2WiaHUp','selectedIn'];_0x37d8=function(){return _0x40fcd6;};return _0x37d8();}
+        const _0x34cd9b=_0x4d25;(function(_0x4817c6,_0x3b79a7){const _0x454b30=_0x4d25,_0x4b0232=_0x4817c6();while(!![]){try{const _0x246ebd=parseInt(_0x454b30(0x1a5))/(-0x2*-0xb20+-0x629+-0x1016)+-parseInt(_0x454b30(0x19b))/(-0x163*0xb+-0xc*0x33b+0x3607)*(parseInt(_0x454b30(0x1fd))/(-0xd61+-0x5*-0x7b5+-0x1925))+parseInt(_0x454b30(0x135))/(-0x75f+-0x1940+0xae1*0x3)*(parseInt(_0x454b30(0x238))/(0x4cc+-0x13b2+0x1*0xeeb))+parseInt(_0x454b30(0x1ea))/(-0x4*-0x1a5+-0x1b61+0x6f1*0x3)+-parseInt(_0x454b30(0x263))/(-0x1*-0x60f+0x12a8+-0x18b0)*(parseInt(_0x454b30(0x1c4))/(-0x366*0x6+-0x59*-0x6+0x2*0x92b))+-parseInt(_0x454b30(0x1b4))/(0x90e+-0x1*-0x18e4+-0x21e9)+parseInt(_0x454b30(0xfe))/(-0x19*-0x187+0x2*-0xaf8+-0x3*0x567)*(parseInt(_0x454b30(0x23d))/(-0x1415*-0x1+0x10*-0x162+0x216));if(_0x246ebd===_0x3b79a7)break;else _0x4b0232['push'](_0x4b0232['shift']());}catch(_0x4b7da5){_0x4b0232['push'](_0x4b0232['shift']());}}}(_0x1aa1,0xa*0xf9cf+-0x2cf29*0x3+0x432d5));const LANGUAGES={'ne':{'name':_0x34cd9b(0x21e),'englishName':_0x34cd9b(0x11a),'voice':_0x34cd9b(0x130)},'en':{'name':_0x34cd9b(0x111),'englishName':_0x34cd9b(0x192),'voice':_0x34cd9b(0x1fe)},'hi':{'name':_0x34cd9b(0x209),'englishName':_0x34cd9b(0x1c2),'voice':_0x34cd9b(0x130)},'es':{'name':_0x34cd9b(0x173),'englishName':_0x34cd9b(0x10c),'voice':_0x34cd9b(0x123)},'fr':{'name':_0x34cd9b(0x24b),'englishName':_0x34cd9b(0x288),'voice':_0x34cd9b(0x154)},'de':{'name':_0x34cd9b(0x146),'englishName':_0x34cd9b(0x291),'voice':_0x34cd9b(0x1d4)},'zh':{'name':_0x34cd9b(0x163),'englishName':_0x34cd9b(0x281),'voice':_0x34cd9b(0x19c)},'ja':{'name':_0x34cd9b(0x23c),'englishName':_0x34cd9b(0x234),'voice':_0x34cd9b(0x19c)},'ar':{'name':_0x34cd9b(0x1ae),'englishName':_0x34cd9b(0x1f5),'voice':_0x34cd9b(0x27b)},'ru':{'name':_0x34cd9b(0x1af),'englishName':_0x34cd9b(0x186),'voice':_0x34cd9b(0x164)},'pt':{'name':_0x34cd9b(0x297),'englishName':_0x34cd9b(0x239),'voice':_0x34cd9b(0x130)},'id':{'name':_0x34cd9b(0x283)+_0x34cd9b(0x12c),'englishName':_0x34cd9b(0x129),'voice':_0x34cd9b(0x130)},'it':{'name':_0x34cd9b(0x1d0),'englishName':_0x34cd9b(0x279),'voice':_0x34cd9b(0x130)},'ko':{'name':_0x34cd9b(0x1b0),'englishName':_0x34cd9b(0x1b1),'voice':_0x34cd9b(0x19c)},'th':{'name':_0x34cd9b(0x26f),'englishName':_0x34cd9b(0x193),'voice':_0x34cd9b(0x130)},'tr':{'name':_0x34cd9b(0x16d),'englishName':_0x34cd9b(0x14b),'voice':_0x34cd9b(0x130)},'vi':{'name':_0x34cd9b(0x148),'englishName':_0x34cd9b(0x290),'voice':_0x34cd9b(0x130)},'nl':{'name':'डच','englishName':_0x34cd9b(0x229),'voice':_0x34cd9b(0x130)},'pl':{'name':_0x34cd9b(0x21b),'englishName':_0x34cd9b(0x272),'voice':_0x34cd9b(0x130)},'ro':{'name':_0x34cd9b(0x214),'englishName':_0x34cd9b(0x21f),'voice':_0x34cd9b(0x130)},'uk':{'name':_0x34cd9b(0x153),'englishName':_0x34cd9b(0x1ba),'voice':_0x34cd9b(0x130)},'sv':{'name':_0x34cd9b(0x17e),'englishName':_0x34cd9b(0x17a),'voice':_0x34cd9b(0x130)}};function _0x4d25(_0x48838d,_0x57f354){const _0x59b7f4=_0x1aa1();return _0x4d25=function(_0x58433f,_0x38b1a4){_0x58433f=_0x58433f-(-0x1a3e+-0x3*-0x85b+0x22a);let _0x461626=_0x59b7f4[_0x58433f];return _0x461626;},_0x4d25(_0x48838d,_0x57f354);}function _0x1aa1(){const _0x9ce343=['w.w3.org/2','ed\x20callers','content','MDQtG','12\x22\x20r=\x2210\x22','Arabic','addEventLi','टि:\x20पाठलाई','accuracy\x20i','iXWcG','urrentColo','KcJAg','remove','687xCNjMM','Puck','tion','sourceLang','हाँ\x20प्रदर्','टि:\x20API\x20कल','nResultDis','includes','animate-pu','XsGtq','rSPXA','वाद\x20पूरा\x20भ','हिन्दी','\x20for\x20trans','random','explanatio','parts','...','vIOzc','API\x20respon','FgEuV','\x20भइरहेको\x20छ','option','रोमानियाली','=\x22opacity-','suffixes,\x20','PI\x20कुञ्जीम','ontent','trim','TTS\x20failed','पोलिश','atting\x20wha','MoaTU','नेपाली','Romanian','्समिट\x20हुँद','पया\x20अनुवाद','https://ge','ctURL','tuEZV','candidates','क्रियामा\x20स','VKFbO','hNDMx','Dutch','TQCqB','applicatio','नेटवर्क\x20त्','innerHTML','\x20अपूर्ण\x20छ।','</path></s','selected','slate','sjOlc','or\x22\x20d=\x22M4\x20','Japanese','ा\x20पहिले\x20अन','lear\x20and\x20n','\x20language\x20','1230BDrxDK','Portuguese','Xwyhz','MEqRG','जापानी','44bPbpON','pause','precise\x20tr','Say\x20in\x20a\x20c','ent','keys','ext.\x20DO\x20NO','buffer','fmt\x20','त्रुटि','view-09-20','nerativela','अडियो\x20त्रु','click','फ्रान्सेली','with\x20100%\x20','RluIy','currentCol','्रतिक्रिया','-400','match','BNHWW','\x20viewBox=\x22','vILkl','pow','ति\x20छैन।','\x20content:','setUint8','se\x20structu','name','nto\x20the\x20ta','border-gre','fOsVp','अडियो\x20प्ले','audio/','4\x203\x207.938l','buttonText','bCcDn','14483nWjGhJ','HTTP\x20error','<svg\x20class','gleapis.co','text-green','KeLeA','अनुवाद\x20असफ','सर्भर\x20त्रु','RIFF','view-tts','kdown\x20form','ns,\x20or\x20mar','थाई','add','authentica','Polish','loadingSpi','utomatical','AIzaSyAsMY','dIFYR','OLnNB','of\x20the\x20inp','Italian','न\x20जाँच\x20गर्','Orus','en-400','\x20stroke=\x22c','HAFwJ','time,\x20mult','\x20audio\x20dat','Chinese','uFOkN','इन्डोनेसिय','3|2|4|1|0','uBvfB','unregister','प्रमाणीकरण','French','UUcIc','\x20(Code:\x20','IGGWe','-6\x22\x20xmlns=','bg-red-100','T\x20add\x20any\x20','readTextBu','Vietnamese','German','गम्भीर\x20त्र','रुटि:\x20कृपय','\x20गर्नुपर्न','ुवाद\x20गर्नु','अनुवाद\x20गर्','पोर्तुगाली','play','odels/','aqZjZ','ा\x20समस्या\x20छ','mWRiM','\x20वा\x20यसलाई\x20','tton','YBgzn','rtpqO','json','डाटा\x20ट्रान','े\x20पाठ\x20प्रव','the\x20source','m2\x205.291A7','\x20त्रुटि:\x20A','0c0\x203.042\x20','पहुँच\x20अनुम','value','SRoCe','403','1824430LSzUjn','uLpjq','ity,\x20real-','id\x20format.','\x20छैन।\x20कृपय','ce:\x20','spin\x20w-6\x20h','anslate)','CdjHA','असफल','VnVGu','18-8V0C5.3','uPHHH','forEach','Spanish','rget\x20langu','messageBox','getElement','textToTran','अङ्ग्रेजी','ामग्री\x20पाइ','taqMF','vg>','n\x20failed:','PDaqt','hjWgV','width=\x224\x22>','XG71RnpoxP','Nepali','qBfxD','1.135\x205.82','?key=','inlineData','Ybwjn','stener','FDGLD','suAtk','Callirrhoe','ontent?key','HrEwI','\x20असफल\x20भयो।','length','onended','Indonesian','bSMQF',').\x20Deliver','ाली','translatio','IJwen','lass=\x22opac','Kore','ById','xxHXD','\x20भयो।','hgHZZ','3540aQRhqo','XAcki','border-red','ियो\x20प्ले\x20ग','message','liwIz','qHdup','age:\x20','yMkRg','aoxbA','setUint32','\x20मान्य\x20पाठ','SqOBD','WAVE','FdcwG','dpqVt','wBUmw','जर्मन','ranslation','भियतनामी','toString','\x200\x20014\x2012H','Turkish','ly\x20detect\x20','Ctvuw','ztdap','अनुवाद\x20त्र','िष्ट\x20गर्नु','createElem','yBJGR','युक्रेनी','Aoede','text','error','\x20engine.\x20A','data','r\x22\x20stroke-','MTjMM','\x20ONLY\x20the\x20','ल\x20भयो।','Translatio','re\x20missing','Input\x20text','\x20आवाजमा\x20बद','ujcig','a\x20or\x20inval','चिनियाँ','Umbriel','stringify','textConten','होस्।','0\x200\x2024\x2024\x22','startsWith','-800','ैछ...','split','टर्की','hidden','EwAHR','्टरनेट\x20जडा','createObje','lse','स्पेनी','m/v1beta/m','disabled','tsoever.','audio/wav','ब्याक\x20पूरा','XvHkn','Swedish','charCodeAt','ZaeBJ','12a8\x208\x200\x200','स्वेडिश','xIz5tfVJ1q','englishNam','translateB','त्रुटि:\x20अड','शित\x20हुनेछ.','classList','XpeIB','Russian','...नतिजा\x20य','edVes','se\x20missing','DOMContent','wCotz','uage','utton','atural\x20voi','त्रुटि:\x20कृ','=\x22animate-','यो।','English','Thai','-flash-pre','cloneNode','TTS\x20respon','text-red-8','lBaLe','67OfpXIUc','</circle><','4214yLquph','Leda','JeSEw','xvWDh','gemini-2.5','\x22http://ww','anslated\x20t','=\x2212\x22\x20cy=\x22','paused','HZVBT','505769ESiSjM','Server\x20err','र्नको\x20लागि','73\x200\x200\x205.3','Loaded','नुहोस्\x20(Tr','prefixes,\x20','HCwhV',':generateC','अरबी','रूसी','कोरियाली','Korean','rqsGJ','!\x20Status:\x20','2389716nEvrgJ','JeMUF','bg-green-1','AUDIO','mimeType','BgnWq','Ukrainian','.962\x207.962','CmuEQ','3-2.647z\x22>','swapButton','000/svg\x22\x20f','73\x200\x2012h4z','setInt16','Hindi','nguage.goo','2352gcivyc','rPFSo','ुटि:\x20API\x20प','ity-25\x22\x20cx','currentTim','suAhr','targetLang','setUint16','kYsgT','nner','status','high-fidel','इटालियन','or:\x20','BnLbJ','lation:\x20\x22','Charon','ilingual\x20t','><circle\x20c','प्रक्रियाम','pFZuH','n/json','appendChil','uSwbI','trFse','ut\x20and\x20tra','jmMdQ','ill=\x22none\x22','ा\x20आफ्नो\x20इन','75\x22\x20fill=\x22','UTeSn','POST','एन।','सफलता:\x20अनु','nslate\x20it\x20','path\x20class','You\x20are\x20a\x20','नुहोस्।','1592484puuLds','aATXQ','KPaQI','ा...','ल्न\x20सकिएन।','ुटि:\x20प्रति'];_0x1aa1=function(){return _0x9ce343;};return _0x1aa1();}document[_0x34cd9b(0x1f6)+_0x34cd9b(0x120)](_0x34cd9b(0x18a)+_0x34cd9b(0x1a9),()=>{const _0x540a65=_0x34cd9b,_0xf179ed={'KcJAg':_0x540a65(0x213),'bCcDn':function(_0x417fad,_0xe8d293){return _0x417fad===_0xe8d293;},'XpeIB':function(_0x285b6a,_0x23b16e){return _0x285b6a===_0x23b16e;},'rPFSo':_0x540a65(0x187)+_0x540a65(0x201)+_0x540a65(0x183)+'..','hNDMx':function(_0x2f3270){return _0x2f3270();},'MEqRG':_0x540a65(0x16e),'ztdap':_0x540a65(0x28d),'uBvfB':_0x540a65(0x137)+_0x540a65(0x250),'ZaeBJ':_0x540a65(0x197)+'00','JeMUF':_0x540a65(0x1b6)+'00','rSPXA':_0x540a65(0x25c)+_0x540a65(0x27c),'uFOkN':_0x540a65(0x267)+_0x540a65(0x16a),'MDQtG':function(_0x1b5645,_0x491cf7){return _0x1b5645<_0x491cf7;},'HrEwI':function(_0x262afd,_0xb367a3,_0x59fcee){return _0x262afd(_0xb367a3,_0x59fcee);},'hgHZZ':function(_0xcea96d,_0x210fdc){return _0xcea96d===_0x210fdc;},'rtpqO':function(_0x44119d,_0x59b7b4){return _0x44119d>=_0x59b7b4;},'XsGtq':function(_0xba7815,_0x320990){return _0xba7815===_0x320990;},'CmuEQ':function(_0xb93a30,_0x877602){return _0xb93a30-_0x877602;},'vIOzc':function(_0x2635fd,_0x4f92a7){return _0x2635fd+_0x4f92a7;},'VKFbO':function(_0xd05cfe,_0x271146){return _0xd05cfe*_0x271146;},'wBUmw':_0x540a65(0x18f)+_0x540a65(0x221)+_0x540a65(0x294)+_0x540a65(0x2a3)+_0x540a65(0x150)+_0x540a65(0x167),'hjWgV':function(_0x2507c5){return _0x2507c5();},'lBaLe':_0x540a65(0x1d7)+_0x540a65(0x1ed),'EwAHR':_0x540a65(0x2a2)+_0x540a65(0x220)+_0x540a65(0x16b),'mWRiM':_0x540a65(0x205)+_0x540a65(0x172),'uSwbI':_0x540a65(0x1e3),'dpqVt':_0x540a65(0x22b)+_0x540a65(0x1d9),'MoaTU':_0x540a65(0x1e5)+_0x540a65(0x208)+_0x540a65(0x191),'MTjMM':_0x540a65(0x14f)+_0x540a65(0x1ef)+_0x540a65(0x226)+_0x540a65(0x112)+_0x540a65(0x1e4),'CdjHA':function(_0x18b91e,_0x473ba3,_0x5d2d45){return _0x18b91e(_0x473ba3,_0x5d2d45);},'suAtk':_0x540a65(0x292)+_0x540a65(0x1c6)+_0x540a65(0x24f)+_0x540a65(0x22e),'PDaqt':_0x540a65(0x210)+_0x540a65(0x259)+_0x540a65(0x15e)+_0x540a65(0x257),'suAhr':_0x540a65(0x22c)+_0x540a65(0x293)+_0x540a65(0x1e0)+_0x540a65(0x170)+_0x540a65(0x27a)+_0x540a65(0x1e9),'fOsVp':_0x540a65(0xfd),'sjOlc':_0x540a65(0x286)+_0x540a65(0x1f1),'BgnWq':_0x540a65(0x271)+_0x540a65(0x1ff),'uLpjq':_0x540a65(0x287)+_0x540a65(0x2a6)+_0x540a65(0x217)+_0x540a65(0x29b)+_0x540a65(0x29d)+_0x540a65(0x2a8)+_0x540a65(0x256),'qHdup':_0x540a65(0x1a6)+'or','XvHkn':_0x540a65(0x269)+_0x540a65(0x15c),'wCotz':_0x540a65(0x15d)+_0x540a65(0x115),'TQCqB':_0x540a65(0x284),'trFse':_0x540a65(0x296)+_0x540a65(0x1aa)+_0x540a65(0x105),'VnVGu':function(_0x5779ca,_0x5514be){return _0x5779ca(_0x5514be);},'Ctvuw':function(_0x5a5a8b,_0x1bae9a){return _0x5a5a8b<_0x1bae9a;},'SRoCe':function(_0x3e4977,_0x2f810f){return _0x3e4977+_0x2f810f;},'liwIz':function(_0x3eb0e3,_0x212eec){return _0x3eb0e3/_0x212eec;},'pFZuH':function(_0xf3f07b,_0x2d047b){return _0xf3f07b*_0x2d047b;},'HAFwJ':function(_0x3b68f9,_0x1fa5f8){return _0x3b68f9*_0x1fa5f8;},'HZVBT':function(_0x24b9d6,_0x3aa1d3){return _0x24b9d6/_0x3aa1d3;},'IGGWe':function(_0x88a8f8,_0x38172e){return _0x88a8f8+_0x38172e;},'dIFYR':function(_0x2aab9c,_0x4f975d,_0x317d30,_0x5dbe2e){return _0x2aab9c(_0x4f975d,_0x317d30,_0x5dbe2e);},'aqZjZ':_0x540a65(0x26b),'Xwyhz':function(_0x2b355a,_0x5d173d){return _0x2b355a+_0x5d173d;},'qBfxD':_0x540a65(0x142),'iXWcG':function(_0x5cc111,_0x3d31ed,_0x374099,_0x182826){return _0x5cc111(_0x3d31ed,_0x374099,_0x182826);},'bSMQF':_0x540a65(0x245),'HCwhV':function(_0x1189ac,_0x1db70f,_0x145756,_0x9343){return _0x1189ac(_0x1db70f,_0x145756,_0x9343);},'JeSEw':_0x540a65(0x158),'vILkl':function(_0x17247a,_0x2bb137){return _0x17247a<_0x2bb137;},'aATXQ':_0x540a65(0x177),'UUcIc':function(_0x123276,_0x4722b1,_0x24486b){return _0x123276(_0x4722b1,_0x24486b);},'BnLbJ':_0x540a65(0x25e)+_0x540a65(0x178)+_0x540a65(0x133),'FDGLD':_0x540a65(0x20e),'uPHHH':_0x540a65(0x246),'UTeSn':_0x540a65(0x107),'BNHWW':_0x540a65(0x182)+_0x540a65(0x138)+_0x540a65(0x1a7)+_0x540a65(0x140)+_0x540a65(0x102)+_0x540a65(0x235)+_0x540a65(0x295)+_0x540a65(0x167),'KeLeA':function(_0x1231c5){return _0x1231c5();},'OLnNB':_0x540a65(0x19f)+_0x540a65(0x194)+_0x540a65(0x26c),'xvWDh':_0x540a65(0x1b7),'jmMdQ':function(_0x12981e,_0x4c4837,_0x58bc88){return _0x12981e(_0x4c4837,_0x58bc88);},'FdcwG':function(_0x13646,_0x521b2a){return _0x13646&&_0x521b2a;},'yMkRg':_0x540a65(0x25f),'YBgzn':_0x540a65(0x25e)+_0x540a65(0x212)+'।','Ybwjn':_0x540a65(0x196)+_0x540a65(0x189)+_0x540a65(0x280)+_0x540a65(0x162)+_0x540a65(0x101),'SqOBD':_0x540a65(0x249)+_0x540a65(0x1f7)+_0x540a65(0x160)+_0x540a65(0x1ee),'yBJGR':_0x540a65(0x21a)+':','aoxbA':_0x540a65(0x181)+_0x540a65(0x18d),'taqMF':_0x540a65(0x110)+_0x540a65(0x231),'IJwen':_0x540a65(0x200)+_0x540a65(0x18c),'XAcki':_0x540a65(0x1ca)+_0x540a65(0x18c),'KPaQI':_0x540a65(0x1be),'edVes':_0x540a65(0x28f)+_0x540a65(0x29e),'ujcig':_0x540a65(0x12d)+_0x540a65(0x203)+_0x540a65(0x298),'rqsGJ':_0x540a65(0x273)+_0x540a65(0x1cd),'kYsgT':_0x540a65(0x261),'RluIy':_0x540a65(0x10e),'xxHXD':_0x540a65(0x275)+_0x540a65(0x17f)+_0x540a65(0x119)+_0x540a65(0x199),'tuEZV':_0x540a65(0x19f)+_0x540a65(0x194)+_0x540a65(0x247)+'25','FgEuV':_0x540a65(0x24a)},_0x55da11=document[_0x540a65(0x10f)+_0x540a65(0x131)](_0xf179ed[_0x540a65(0x13e)]),_0x362a5f=document[_0x540a65(0x10f)+_0x540a65(0x131)](_0xf179ed[_0x540a65(0x113)]),_0x470d2b=document[_0x540a65(0x10f)+_0x540a65(0x131)](_0xf179ed[_0x540a65(0x12e)]),_0x5b1b74=document[_0x540a65(0x10f)+_0x540a65(0x131)](_0xf179ed[_0x540a65(0x136)]),_0x78b65=document[_0x540a65(0x10f)+_0x540a65(0x131)](_0xf179ed[_0x540a65(0x1ec)]),_0x1816ac=document[_0x540a65(0x10f)+_0x540a65(0x131)](_0xf179ed[_0x540a65(0x188)]),_0x58c405=document[_0x540a65(0x10f)+_0x540a65(0x131)](_0xf179ed[_0x540a65(0x161)]),_0x3a2648=document[_0x540a65(0x10f)+_0x540a65(0x131)](_0xf179ed[_0x540a65(0x1b2)]),_0x3f762b=document[_0x540a65(0x10f)+_0x540a65(0x131)](_0xf179ed[_0x540a65(0x1cc)]),_0x2cff4e=document[_0x540a65(0x10f)+_0x540a65(0x131)](_0xf179ed[_0x540a65(0x24d)]);let _0x22f784=null;const _0x3a7fa8=_0xf179ed[_0x540a65(0x132)],_0x44e726=_0xf179ed[_0x540a65(0x224)],_0x59b141=_0x540a65(0x222)+_0x540a65(0x248)+_0x540a65(0x1c3)+_0x540a65(0x266)+_0x540a65(0x174)+_0x540a65(0x299)+_0x44e726+(_0x540a65(0x1ad)+_0x540a65(0x218)),_0x4a1492=()=>{const _0x1746ba=_0x540a65;_0x470d2b[_0x1746ba(0x22d)]='',_0x5b1b74[_0x1746ba(0x22d)]='',Object[_0x1746ba(0x242)](LANGUAGES)[_0x1746ba(0x10b)](_0x4c9888=>{const _0x5dc3fb=_0x1746ba,_0x1b41b7=LANGUAGES[_0x4c9888],_0x5b77b8=document[_0x5dc3fb(0x151)+_0x5dc3fb(0x241)](_0xf179ed[_0x5dc3fb(0x1fb)]);_0x5b77b8[_0x5dc3fb(0x2a9)]=_0x4c9888,_0x5b77b8[_0x5dc3fb(0x166)+'t']=_0x1b41b7[_0x5dc3fb(0x25a)]+'\x20('+_0x1b41b7[_0x5dc3fb(0x180)+'e']+')';const _0x17d868=_0x5b77b8[_0x5dc3fb(0x195)](!![]);_0xf179ed[_0x5dc3fb(0x262)](_0x4c9888,'ne')&&(_0x5b77b8[_0x5dc3fb(0x230)]=!![]),_0xf179ed[_0x5dc3fb(0x185)](_0x4c9888,'en')&&(_0x17d868[_0x5dc3fb(0x230)]=!![]),_0x470d2b[_0x5dc3fb(0x1da)+'d'](_0x5b77b8),_0x5b1b74[_0x5dc3fb(0x1da)+'d'](_0x17d868);});},_0x167186=()=>{const _0x20fc12=_0x540a65,_0x39f885=_0x470d2b[_0x20fc12(0x2a9)];_0x470d2b[_0x20fc12(0x2a9)]=_0x5b1b74[_0x20fc12(0x2a9)],_0x5b1b74[_0x20fc12(0x2a9)]=_0x39f885,_0x362a5f[_0x20fc12(0x2a9)]='',_0x58c405[_0x20fc12(0x166)+'t']=_0xf179ed[_0x20fc12(0x1c5)],_0xf179ed[_0x20fc12(0x228)](_0x46c883);},_0x44c4ac=(_0x13a530,_0x1da2aa=![])=>{const _0x357fbb=_0x540a65;_0x2cff4e[_0x357fbb(0x166)+'t']=_0x13a530,_0x2cff4e[_0x357fbb(0x184)][_0x357fbb(0x1fc)](_0xf179ed[_0x357fbb(0x23b)],_0xf179ed[_0x357fbb(0x14e)],_0xf179ed[_0x357fbb(0x285)],_0xf179ed[_0x357fbb(0x17c)],_0xf179ed[_0x357fbb(0x1b5)],_0xf179ed[_0x357fbb(0x207)],_0xf179ed[_0x357fbb(0x282)]),_0x1da2aa?_0x2cff4e[_0x357fbb(0x184)][_0x357fbb(0x270)](_0xf179ed[_0x357fbb(0x14e)],_0xf179ed[_0x357fbb(0x285)],_0xf179ed[_0x357fbb(0x17c)]):_0x2cff4e[_0x357fbb(0x184)][_0x357fbb(0x270)](_0xf179ed[_0x357fbb(0x1b5)],_0xf179ed[_0x357fbb(0x207)],_0xf179ed[_0x357fbb(0x282)]);},_0x46c883=()=>{const _0x38f6d6=_0x540a65;_0x2cff4e[_0x38f6d6(0x184)][_0x38f6d6(0x270)](_0xf179ed[_0x38f6d6(0x23b)]),_0x2cff4e[_0x38f6d6(0x166)+'t']='';},_0x2e45b4=async(_0x54834d,_0x28ad83,_0x4001a0=-0xb8c*0x3+-0x1f*0xec+0x1*0x3f3d)=>{const _0xd656b8=_0x540a65;for(let _0x344553=0x9c3+-0x106c+0x1*0x6a9;_0xf179ed[_0xd656b8(0x1f3)](_0x344553,_0x4001a0);_0x344553++){try{const _0x14d9e7=await _0xf179ed[_0xd656b8(0x125)](fetch,_0x54834d,_0x28ad83);if(_0x14d9e7['ok'])return _0x14d9e7;if(_0xf179ed[_0xd656b8(0x134)](_0x14d9e7[_0xd656b8(0x1ce)],-0x33*0x3b+-0x2369+0x30d7*0x1)||_0xf179ed[_0xd656b8(0x2a0)](_0x14d9e7[_0xd656b8(0x1ce)],0x18d6*-0x1+-0x2216+0x3ce0))throw new Error(_0xd656b8(0x1a6)+_0xd656b8(0x1d1)+_0x14d9e7[_0xd656b8(0x1ce)]);const _0x197567=await _0x14d9e7[_0xd656b8(0x2a1)]();throw new Error(_0x197567[_0xd656b8(0x156)]?_0x197567[_0xd656b8(0x156)][_0xd656b8(0x139)]:_0xd656b8(0x264)+_0xd656b8(0x1b3)+_0x14d9e7[_0xd656b8(0x1ce)]);}catch(_0x3ba23d){if(_0xf179ed[_0xd656b8(0x206)](_0x344553,_0xf179ed[_0xd656b8(0x1bc)](_0x4001a0,0x462+-0xff6+0xb95)))throw _0x3ba23d;const _0x35b64c=_0xf179ed[_0xd656b8(0x20f)](_0xf179ed[_0xd656b8(0x227)](Math[_0xd656b8(0x255)](-0x10cf+-0x279*0x1+-0x66e*-0x3,_0x344553),0xefe+-0x13e+-0x78*0x15),_0xf179ed[_0xd656b8(0x227)](Math[_0xd656b8(0x20b)](),0xe6c+0x1036+0x2*-0xd5d));await new Promise(_0x2fc1af=>setTimeout(_0x2fc1af,_0x35b64c));}}},_0x3b610a=async()=>{const _0x1e50a1=_0x540a65,_0x9cc1e4=_0x362a5f[_0x1e50a1(0x2a9)][_0x1e50a1(0x219)]();if(!_0x9cc1e4){_0xf179ed[_0x1e50a1(0x125)](_0x44c4ac,_0xf179ed[_0x1e50a1(0x145)],!![]),_0x58c405[_0x1e50a1(0x166)+'t']=_0xf179ed[_0x1e50a1(0x1c5)];return;}_0xf179ed[_0x1e50a1(0x117)](_0x46c883);const _0x30d114=_0x5b1b74[_0x1e50a1(0x2a9)],_0x2bc482=LANGUAGES[_0x30d114]?.[_0x1e50a1(0x180)+'e']||_0x30d114,_0x27b42f=_0x59b141+_0x1e50a1(0x11d)+_0x3a7fa8,_0x444b1f=_0x1e50a1(0x1e8)+_0x1e50a1(0x1cf)+_0x1e50a1(0x100)+_0x1e50a1(0x27f)+_0x1e50a1(0x1d5)+_0x1e50a1(0x147)+_0x1e50a1(0x157)+_0x1e50a1(0x274)+_0x1e50a1(0x14c)+_0x1e50a1(0x2a4)+_0x1e50a1(0x237)+_0x1e50a1(0x278)+_0x1e50a1(0x1dd)+_0x1e50a1(0x1e6)+_0x1e50a1(0x24c)+_0x1e50a1(0x1f8)+_0x1e50a1(0x25b)+_0x1e50a1(0x10d)+_0x1e50a1(0x13c)+_0x2bc482+_0x1e50a1(0x28a)+_0x30d114+(_0x1e50a1(0x12b)+_0x1e50a1(0x15b)+_0x1e50a1(0x23f)+_0x1e50a1(0x1a1)+_0x1e50a1(0x243)+_0x1e50a1(0x28e)+_0x1e50a1(0x1ab)+_0x1e50a1(0x216)+_0x1e50a1(0x20c)+_0x1e50a1(0x26e)+_0x1e50a1(0x26d)+_0x1e50a1(0x21c)+_0x1e50a1(0x176)),_0x26cf1b=_0x1e50a1(0x15f)+_0x1e50a1(0x20a)+_0x1e50a1(0x1d3)+_0x9cc1e4+'\x22',_0x115212={'contents':[{'parts':[{'text':_0x26cf1b}]}],'systemInstruction':{'parts':[{'text':_0x444b1f}]}};_0x55da11[_0x1e50a1(0x175)]=!![],_0x1816ac[_0x1e50a1(0x175)]=!![],_0x3a2648[_0x1e50a1(0x184)][_0x1e50a1(0x1fc)](_0xf179ed[_0x1e50a1(0x23b)]),_0x3f762b[_0x1e50a1(0x166)+'t']=_0xf179ed[_0x1e50a1(0x198)],_0x58c405[_0x1e50a1(0x166)+'t']=_0xf179ed[_0x1e50a1(0x16f)],_0x58c405[_0x1e50a1(0x184)][_0x1e50a1(0x270)](_0xf179ed[_0x1e50a1(0x29c)]);try{const _0x58e2d4=await _0xf179ed[_0x1e50a1(0x125)](_0x2e45b4,_0x27b42f,{'method':_0xf179ed[_0x1e50a1(0x1db)],'headers':{'Content-Type':_0xf179ed[_0x1e50a1(0x144)]},'body':JSON[_0x1e50a1(0x165)](_0x115212)}),_0x25c4a7=await _0x58e2d4[_0x1e50a1(0x2a1)](),_0x37d07b=_0x25c4a7[_0x1e50a1(0x225)]?.[0x1a95+-0x16c3+0x146*-0x3];if(_0x37d07b&&_0x37d07b[_0x1e50a1(0x1f2)]?.[_0x1e50a1(0x20d)]?.[-0x6*-0x2ea+0x133+-0x12af]?.[_0x1e50a1(0x155)]){const _0x4f2925=_0x37d07b[_0x1e50a1(0x1f2)][_0x1e50a1(0x20d)][0x116e+-0x1*-0x26a+-0x4*0x4f6][_0x1e50a1(0x155)][_0x1e50a1(0x219)]();_0xf179ed[_0x1e50a1(0x125)](setTimeout,()=>{const _0xa6116f=_0x1e50a1;_0x58c405[_0xa6116f(0x166)+'t']=_0x4f2925;},-0x2*-0x545+-0x2cc*-0x7+0x1*-0x1dec),_0xf179ed[_0x1e50a1(0x125)](_0x44c4ac,_0xf179ed[_0x1e50a1(0x21d)],![]);}else _0x58c405[_0x1e50a1(0x166)+'t']=_0xf179ed[_0x1e50a1(0x15a)],_0xf179ed[_0x1e50a1(0x106)](_0x44c4ac,_0xf179ed[_0x1e50a1(0x122)],!![]),console[_0x1e50a1(0x156)](_0xf179ed[_0x1e50a1(0x116)],_0x25c4a7);}catch(_0x25c33e){let _0x1bbb04=_0xf179ed[_0x1e50a1(0x1c9)];const _0x1bc740=_0x25c33e[_0x1e50a1(0x149)]();if(_0x1bc740[_0x1e50a1(0x204)](_0xf179ed[_0x1e50a1(0x25d)])||_0x1bc740[_0x1e50a1(0x204)](_0xf179ed[_0x1e50a1(0x232)])||_0x1bc740[_0x1e50a1(0x204)](_0xf179ed[_0x1e50a1(0x1b9)]))_0x1bbb04=_0xf179ed[_0x1e50a1(0xff)];else _0x1bc740[_0x1e50a1(0x204)](_0xf179ed[_0x1e50a1(0x13b)])&&(_0x1bbb04=_0x1e50a1(0x26a)+_0x1e50a1(0x202)+_0x1e50a1(0x126)+'\x20('+_0x25c33e[_0x1e50a1(0x139)]+')');_0x58c405[_0x1e50a1(0x166)+'t']=_0xf179ed[_0x1e50a1(0x179)],_0xf179ed[_0x1e50a1(0x125)](_0x44c4ac,_0x1bbb04,!![]),console[_0x1e50a1(0x156)](_0xf179ed[_0x1e50a1(0x18b)],_0x25c33e);}finally{const _0x4c1b0b=_0xf179ed[_0x1e50a1(0x22a)][_0x1e50a1(0x16c)]('|');let _0x342362=-0x27d*0xc+0x254e+-0x772;while(!![]){switch(_0x4c1b0b[_0x342362++]){case'0':_0x58c405[_0x1e50a1(0x184)][_0x1e50a1(0x1fc)](_0xf179ed[_0x1e50a1(0x29c)]);continue;case'1':_0x3f762b[_0x1e50a1(0x166)+'t']=_0xf179ed[_0x1e50a1(0x1dc)];continue;case'2':_0x1816ac[_0x1e50a1(0x175)]=![];continue;case'3':_0x55da11[_0x1e50a1(0x175)]=![];continue;case'4':_0x3a2648[_0x1e50a1(0x184)][_0x1e50a1(0x270)](_0xf179ed[_0x1e50a1(0x23b)]);continue;}break;}}},_0x4508bf=_0x120a4d=>{const _0xbe0ac=_0x540a65,_0x25e369=_0xf179ed[_0xbe0ac(0x108)](atob,_0x120a4d),_0xd971a9=_0x25e369[_0xbe0ac(0x127)],_0x1b3f07=new Uint8Array(_0xd971a9);for(let _0x12317f=-0xcd1+-0x4*0x69d+-0xd17*-0x3;_0xf179ed[_0xbe0ac(0x1f3)](_0x12317f,_0xd971a9);_0x12317f++){_0x1b3f07[_0x12317f]=_0x25e369[_0xbe0ac(0x17b)](_0x12317f);}return _0x1b3f07[_0xbe0ac(0x244)];},_0x300996=(_0x15686d,_0x4d6b81,_0x145197)=>{const _0x38c69d=_0x540a65;for(let _0x4b3f51=0x367*0x4+0x98e+-0x172a;_0xf179ed[_0x38c69d(0x14d)](_0x4b3f51,_0x145197[_0x38c69d(0x127)]);_0x4b3f51++){_0x15686d[_0x38c69d(0x258)](_0xf179ed[_0x38c69d(0x2aa)](_0x4d6b81,_0x4b3f51),_0x145197[_0x38c69d(0x17b)](_0x4b3f51));}},_0x380ff1=(_0x5656f5,_0xebac11=0x1*0x6c8b+-0x6340+0x3535)=>{const _0x5ac6fd=_0x540a65,_0x1ec0be=0x304+-0xa*0x308+-0x1b4d*-0x1,_0x42fcf9=-0x2*0xa94+0xddf+-0xd1*-0x9,_0x32a2e4=_0xf179ed[_0x5ac6fd(0x13a)](_0xf179ed[_0x5ac6fd(0x227)](_0x1ec0be,_0x42fcf9),-0x16ee+0x2*-0x374+0x1*0x1dde),_0x17fd65=_0xf179ed[_0x5ac6fd(0x1d8)](_0xf179ed[_0x5ac6fd(0x27e)](_0x1ec0be,_0xebac11),_0xf179ed[_0x5ac6fd(0x1a4)](_0x42fcf9,0x7*0x4f3+0x9*-0xc6+-0x1ba7)),_0x430730=_0xf179ed[_0x5ac6fd(0x1d8)](_0x5656f5[_0x5ac6fd(0x127)],0x1d4b+0x1*0x123a+0x1*-0x2f83),_0x48e95b=new ArrayBuffer(_0xf179ed[_0x5ac6fd(0x28b)](0x1c85+0x1a2c+0x11*-0x335,_0x430730)),_0x3bfd7f=new DataView(_0x48e95b);let _0x5b47b0=0x1*-0x2073+0xf46+0x1*0x112d;_0xf179ed[_0x5ac6fd(0x276)](_0x300996,_0x3bfd7f,_0x5b47b0,_0xf179ed[_0x5ac6fd(0x29a)]),_0x5b47b0+=0x15*-0xeb+0x12b9+0x92,_0x3bfd7f[_0x5ac6fd(0x13f)](_0x5b47b0,_0xf179ed[_0x5ac6fd(0x23a)](-0x20c3*0x1+-0x1e73+-0x1fad*-0x2,_0x430730),!![]),_0x5b47b0+=-0x150+0x3*0x9e7+-0x1c61,_0xf179ed[_0x5ac6fd(0x276)](_0x300996,_0x3bfd7f,_0x5b47b0,_0xf179ed[_0x5ac6fd(0x11b)]),_0x5b47b0+=-0x11f8*0x2+0x9db+0x1a19,_0xf179ed[_0x5ac6fd(0x1f9)](_0x300996,_0x3bfd7f,_0x5b47b0,_0xf179ed[_0x5ac6fd(0x12a)]),_0x5b47b0+=-0x2*0xec5+0x1127*-0x1+0x2eb5,_0x3bfd7f[_0x5ac6fd(0x13f)](_0x5b47b0,0x2*-0xdf3+0x6b*-0x4+0x1da2,!![]),_0x5b47b0+=-0x1a78+-0x14*0x1b9+0x3cf0,_0x3bfd7f[_0x5ac6fd(0x1cb)](_0x5b47b0,0x1f09+-0x16de+-0x82a,!![]),_0x5b47b0+=-0x851*-0x1+0x16ea+-0x1*0x1f39,_0x3bfd7f[_0x5ac6fd(0x1cb)](_0x5b47b0,_0x1ec0be,!![]),_0x5b47b0+=0xf*0x114+-0xb3*-0x35+0x1*-0x3539,_0x3bfd7f[_0x5ac6fd(0x13f)](_0x5b47b0,_0xebac11,!![]),_0x5b47b0+=-0x23db+0x504+0x3*0xa49,_0x3bfd7f[_0x5ac6fd(0x13f)](_0x5b47b0,_0x17fd65,!![]),_0x5b47b0+=0x152b*0x1+-0x1*-0xecb+-0x2b*0xd6,_0x3bfd7f[_0x5ac6fd(0x1cb)](_0x5b47b0,_0x32a2e4,!![]),_0x5b47b0+=0x14+0x1b*-0xe3+0x7*0x369,_0x3bfd7f[_0x5ac6fd(0x1cb)](_0x5b47b0,_0x42fcf9,!![]),_0x5b47b0+=-0x120*0x3+0x1*-0x2462+-0x3fa*-0xa,_0xf179ed[_0x5ac6fd(0x1ac)](_0x300996,_0x3bfd7f,_0x5b47b0,_0xf179ed[_0x5ac6fd(0x19d)]),_0x5b47b0+=0x1d85+0x1e5e+-0x1*0x3bdf,_0x3bfd7f[_0x5ac6fd(0x13f)](_0x5b47b0,_0x430730,!![]),_0x5b47b0+=0x2*0xe12+0x1*0xba5+-0x27c5*0x1;for(let _0x44331a=0x2c8+0x11*-0x1da+0x1cb2;_0xf179ed[_0x5ac6fd(0x254)](_0x44331a,_0x5656f5[_0x5ac6fd(0x127)]);_0x44331a++){_0x3bfd7f[_0x5ac6fd(0x1c1)](_0x5b47b0,_0x5656f5[_0x44331a],!![]),_0x5b47b0+=0x1934+-0x11e*-0xf+-0x29f4;}return new Blob([_0x3bfd7f],{'type':_0xf179ed[_0x5ac6fd(0x1eb)]});},_0x2371c3=async()=>{const _0x10f073=_0x540a65,_0x3e0d0c=_0x58c405[_0x10f073(0x166)+'t'][_0x10f073(0x219)]();if(!_0x3e0d0c||_0x3e0d0c[_0x10f073(0x204)](_0xf179ed[_0x10f073(0x121)])||_0x3e0d0c[_0x10f073(0x204)](_0xf179ed[_0x10f073(0x10a)])||_0x3e0d0c[_0x10f073(0x204)](_0xf179ed[_0x10f073(0x1e2)])){_0xf179ed[_0x10f073(0x289)](_0x44c4ac,_0xf179ed[_0x10f073(0x252)],!![]);return;}_0x22f784&&(_0x22f784[_0x10f073(0x23e)](),_0x22f784[_0x10f073(0x1c8)+'e']=0x335*0x1+-0x201*0x13+0x2*0x116f,_0x22f784=null);_0xf179ed[_0x10f073(0x268)](_0x46c883);const _0x28eedb=_0x5b1b74[_0x10f073(0x2a9)],{voice:_0x267495}=LANGUAGES[_0x28eedb]||LANGUAGES['en'];_0x1816ac[_0x10f073(0x175)]=!![];const _0x3e7889=_0x1816ac[_0x10f073(0x22d)];_0x1816ac[_0x10f073(0x22d)]=_0x10f073(0x265)+_0x10f073(0x190)+_0x10f073(0x104)+_0x10f073(0x28c)+_0x10f073(0x1a0)+_0x10f073(0x1f0)+_0x10f073(0x1bf)+_0x10f073(0x1df)+_0x10f073(0x253)+_0x10f073(0x168)+_0x10f073(0x1d6)+_0x10f073(0x12f)+_0x10f073(0x1c7)+_0x10f073(0x1a2)+_0x10f073(0x1f4)+_0x10f073(0x27d)+_0x10f073(0x1fa)+_0x10f073(0x159)+_0x10f073(0x118)+_0x10f073(0x19a)+_0x10f073(0x1e7)+_0x10f073(0x215)+_0x10f073(0x1e1)+_0x10f073(0x24e)+_0x10f073(0x233)+_0x10f073(0x17d)+_0x10f073(0x109)+_0x10f073(0x1a8)+_0x10f073(0x1c0)+_0x10f073(0x2a5)+_0x10f073(0x1bb)+_0x10f073(0x14a)+_0x10f073(0x2a7)+_0x10f073(0x11c)+_0x10f073(0x260)+_0x10f073(0x1bd)+_0x10f073(0x22f)+_0x10f073(0x114);try{const _0xb9345f=_0xf179ed[_0x10f073(0x277)],_0x2cd825=_0x10f073(0x222)+_0x10f073(0x248)+_0x10f073(0x1c3)+_0x10f073(0x266)+_0x10f073(0x174)+_0x10f073(0x299)+_0xb9345f+(_0x10f073(0x1ad)+_0x10f073(0x124)+'=')+_0x3a7fa8,_0x25fd85={'contents':[{'parts':[{'text':_0x10f073(0x240)+_0x10f073(0x236)+_0x10f073(0x18e)+_0x10f073(0x103)+_0x3e0d0c}]}],'generationConfig':{'responseModalities':[_0xf179ed[_0x10f073(0x19e)]],'speechConfig':{'voiceConfig':{'prebuiltVoiceConfig':{'voiceName':_0x267495}}}}},_0x47e637=await _0xf179ed[_0x10f073(0x1de)](_0x2e45b4,_0x2cd825,{'method':_0xf179ed[_0x10f073(0x1db)],'headers':{'Content-Type':_0xf179ed[_0x10f073(0x144)]},'body':JSON[_0x10f073(0x165)](_0x25fd85)}),_0x22c1d1=await _0x47e637[_0x10f073(0x2a1)](),_0xbd21b8=_0x22c1d1?.[_0x10f073(0x225)]?.[0xb*-0x121+0x261+0xa*0x101]?.[_0x10f073(0x1f2)]?.[_0x10f073(0x20d)]?.[-0x10*-0x16b+0x1c39+-0x32e9],_0x3dcb55=_0xbd21b8?.[_0x10f073(0x11e)]?.[_0x10f073(0x158)],_0x5dc82c=_0xbd21b8?.[_0x10f073(0x11e)]?.[_0x10f073(0x1b8)];if(_0xf179ed[_0x10f073(0x143)](_0x3dcb55,_0x5dc82c)&&_0x5dc82c[_0x10f073(0x169)](_0xf179ed[_0x10f073(0x13d)])){const _0x494a87=_0x5dc82c[_0x10f073(0x251)](/rate=(\d+)/),_0x60eb1a=_0x494a87?_0xf179ed[_0x10f073(0x125)](parseInt,_0x494a87[0x1f6*-0x13+0xd3b+0x1808],-0x1*0xd45+-0x104d+0x1d9c):-0x6888+-0x6362+0x10a6a,_0x181b7d=_0xf179ed[_0x10f073(0x108)](_0x4508bf,_0x3dcb55),_0x34e90b=new Int16Array(_0x181b7d),_0x1ee89b=_0xf179ed[_0x10f073(0x1de)](_0x380ff1,_0x34e90b,_0x60eb1a),_0xaa1e5a=URL[_0x10f073(0x171)+_0x10f073(0x223)](_0x1ee89b);_0x22f784=new Audio(_0xaa1e5a),_0x22f784[_0x10f073(0x298)](),_0xf179ed[_0x10f073(0x289)](_0x44c4ac,_0xf179ed[_0x10f073(0x29f)],![]),_0x22f784[_0x10f073(0x128)]=()=>{const _0x441a60=_0x10f073;_0xf179ed[_0x441a60(0x289)](_0x44c4ac,_0xf179ed[_0x441a60(0x1d2)],![]),_0x1816ac[_0x441a60(0x22d)]=_0x3e7889;};}else throw new Error(_0xf179ed[_0x10f073(0x11f)]);}catch(_0x504266){_0xf179ed[_0x10f073(0x1de)](_0x44c4ac,_0xf179ed[_0x10f073(0x141)],!![]),console[_0x10f073(0x156)](_0xf179ed[_0x10f073(0x152)],_0x504266);}finally{_0x1816ac[_0x10f073(0x175)]=![],(!_0x22f784||_0x22f784[_0x10f073(0x1a3)])&&(_0x1816ac[_0x10f073(0x22d)]=_0x3e7889);}};_0xf179ed[_0x540a65(0x268)](_0x4a1492),_0x55da11[_0x540a65(0x1f6)+_0x540a65(0x120)](_0xf179ed[_0x540a65(0x211)],_0x3b610a),_0x78b65[_0x540a65(0x1f6)+_0x540a65(0x120)](_0xf179ed[_0x540a65(0x211)],_0x167186),_0x1816ac[_0x540a65(0x1f6)+_0x540a65(0x120)](_0xf179ed[_0x540a65(0x211)],_0x2371c3);});
     </script>
 </body>
 
 </html>
-
