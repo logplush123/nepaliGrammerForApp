@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली व्याकरण प्रो - २०२५</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="status-bar">
+                <span>नेपाली व्याकरण</span>
+                <span id="clock"></span>
+            </div>
+            <div class="search-section">
+                <h1>वाक्यमा प्रयोग</h1>
+                <input type="text" id="searchInput" placeholder="शब्द वा टुक्का खोज्नुहोस्...">
+            </div>
+        </header>
+
+        <nav class="categories" id="categoryNav">
+            <button class="cat-btn active" data-cat="all">सबै</button>
+            <button class="cat-btn" data-cat="common">साधारण</button>
+            <button class="cat-btn" data-cat="idiom">उखान/टुक्का</button>
+            <button class="cat-btn" data-cat="nipat">निपात</button>
+            <button class="cat-btn" data-cat="onomatopoeia">अनुकरणात्मक</button>
+        </nav>
+
+        <main id="contentArea">
+            <div class="intro-card">
+                <h3>वाक्यको परिभाषा</h3>
+                <p>स्वतन्त्र भाषिक एकाइलाई वाक्य भनिन्छ, जसमा उद्देश्य र विधेय हुन्छ।</p>
+                
+            </div>
+            <div id="wordGrid" class="word-grid">
+                </div>
+        </main>
+
+        <!-- <footer class="bottom-nav">
+            <div class="nav-item active">🏠<span>गृह</span></div>
+            <div class="nav-item">📚<span>कोश</span></div>
+            <div class="nav-item">📝<span>अभ्यास</span></div>
+            <div class="nav-item">⚙️<span>सेटिङ</span></div>
+        </footer> -->
+    </div>
+
+    <script src="units.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

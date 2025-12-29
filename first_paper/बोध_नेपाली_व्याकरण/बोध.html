@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली बोध अभ्यास - २०२५ Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #6366f1;
+            --success: #059669;
+            --bg-body: #f1f5f9;
+            --card-white: #ffffff;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Mukta', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* Sidebar/Navigation */
+        nav {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Section Cards */
+        section {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .intro-grid { grid-template-columns: 1fr; }
+        }
+
+        .highlight-card {
+            background: #eff6ff;
+            padding: 1.5rem;
+            border-left: 5px solid var(--primary);
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* List Styling */
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-list li {
+            background: #f8fafc;
+            margin-bottom: 10px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.3s;
+        }
+
+        .rules-list li:hover {
+            background: #f1f5f9;
+            transform: translateX(10px);
+        }
+
+        .rules-list li i {
+            color: var(--success);
+        }
+
+        /* Practice Sections */
+        .practice-box {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .practice-header {
+            background: #f8fafc;
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .passage-content {
+            padding: 1.5rem;
+            background: #fff;
+            font-style: italic;
+            border-bottom: 1px dashed #cbd5e1;
+            line-height: 2;
+        }
+
+        .interaction-area {
+            padding: 1.5rem;
+            background: #fafafa;
+        }
+
+        .question-item {
+            margin-bottom: 1rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .answer-box {
+            display: none;
+            background: #ecfdf5;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 1px solid var(--success);
+        }
+
+        .active-answer {
+            display: block;
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h1>२.३ बोध (Comprehension)</h1>
+    <p>पठन बोध र विश्लेषण अभ्यास - २०२५</p>
+</nav>
+
+<div class="container">
+    
+    <section>
+        <h2><i class="fas fa-book-open"></i> बोधको परिचय र अभ्यास</h2>
+        <p>'बोध' तत्सम नाम शब्द हो। यो 'बोध' धातुमा 'अ' प्रत्यय लागेर बनेको छ। यसको अर्थ हुन्छ <strong>बुझ्नु वा बुझाइ</strong>। कुनै पनि विषयवस्तुको राम्ररी जानकारी गर्नु नै बोध हो।</p>
+        
+        <div class="intro-grid">
+            <div class="highlight-card">
+                <strong>अभिव्यक्ति:</strong> मौखिक वा लिखित रूपमा व्यक्त भाव वा विचार।
+            </div>
+            <div class="highlight-card">
+                <strong>बोध:</strong> लिखित अभिव्यक्ति पढेर वा मौखिक अभिव्यक्ति सुनेर अर्थ बुझ्नु।
+            </div>
+        </div>
+        <p style="margin-top:1.5rem">बोध र अभिव्यक्तिको आपसमा अभिन्न सम्बन्ध हुन्छ। बोध गर्ने कार्य अभिव्यक्तिको पठनप्रक्रिया वा श्रवणप्रक्रियाद्वारा पूरा गरिन्छ। बोधशक्तिको विकास गर्नका निम्ति मनमा इच्छा जगाउनुपर्छ, मन लगाएर विभिन्न विषयवस्तुको अध्ययन गर्नुपर्छ र मिल्दाजुल्दा कुराहरूसँग तुलना गर्नुपर्छ।</p>
+    </section>
+
+    <section>
+        <h2><i class="fas fa-pen-fancy"></i> उत्तर लेख्दा ध्यान दिनुपर्ने कुराहरू</h2>
+        <ul class="rules-list">
+            <li><i class="fas fa-check-circle"></i> अर्थ बुझिने गरी दुई-तीन पटकसम्म अनुच्छेद पढ्नुपर्छ।</li>
+            <li><i class="fas fa-check-circle"></i> प्रश्नहरू पढेर तिनको उत्तर अनुच्छेदभित्रै खोज्नुपर्छ।</li>
+            <li><i class="fas fa-check-circle"></i> उत्तर लेख्दा क्रम नबिगारीकन लेख्नुपर्छ।</li>
+            <li><i class="fas fa-check-circle"></i> उत्तर न धेरै लामो, न धेरै छोटो—ठिक्कको हुनुपर्छ।</li>
+            <li><i class="fas fa-check-circle"></i> आफ्नै सरल र सुस्पष्ट भाषाशैलीको प्रयोग गर्नुपर्छ।</li>
+            <li><i class="fas fa-check-circle"></i> शीर्षक राख्दा अनुच्छेदको केन्द्रीय भाव समेट्ने गरी छोटो राख्नुपर्छ।</li>
+        </ul>
+    </section>
+
+    <section>
+        <div class="practice-box">
+            <div class="practice-header">
+                <span class="badge">नमुना अभ्यास १</span>
+                <strong>लेखनाथ पौडेल र बालाजुको परिवेश</strong>
+            </div>
+            <div class="passage-content">
+                
+                "प्रकृतिको हरियो कुञ्जमा सहरको पुछारनेर औपन्यासिक बालाजु जाने बाटामा हामी एउटा घरको चित्रण गर्न सक्तछौं। त्यहाँ शान्तिको र प्रतिभाको निकेतन छ। मलाई एक-दुईबाजि त्यहाँ जाने सौभाग्य मिलेको थियो... प्राचीनका स्पष्टतया पुजारी, धोती र भोटाका साथ पूर्वपट्टिको झ्यालतिर बिछाएको लम्पटमा बस्नुभएको देखें।"
+            </div>
+            <div class="interaction-area">
+                <p><strong>प्रश्नोत्तर (क्लिक गरेर उत्तर हेर्नुहोस्):</strong></p>
+                <div class="question-item" onclick="toggleAns('q1')">
+                    (क) यस अनुच्छेदका लेखकले उनी कहाँ जाँदाको अनुभव व्यक्त गरेका छन्?
+                    <div id="q1" class="answer-box">उत्तर: लेखकले सहरको पुछारनेर औपन्यासिक बालाजु जाने बाटामा रहेको शान्त वातावरणमा रहेको घर (विशिष्ट प्रतिभा लेखनाथ पौडेलको निवास) मा जाँदाको अनुभव व्यक्त गरेका छन्।</div>
+                </div>
+                <div class="question-item" onclick="toggleAns('q2')">
+                    (ङ) यस अनुच्छेदमा रेखाङ्कित पदहरूको अर्थ के हो?
+                    <div id="q2" class="answer-box">
+                        <strong>प्रतिभा:</strong> नयाँ कुरा सिर्जना गर्ने बौद्धिक शक्ति।<br>
+                        <strong>बाँकेघर:</strong> टेढो वा छड्के पारी बनाइएको घर।
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="practice-box">
+            <div class="practice-header">
+                <span class="badge">नमुना अभ्यास २</span>
+                <strong>कला र सत्य</strong>
+            </div>
+            <div class="passage-content">
+                
+                "कला भनेको सिर्जनात्मक कल्पनाद्वारा सत्यको सुन्दर प्रकाशन हो। निराकारमा स्फुरण छ, तर साकारमा कला छ। सिर्जनाको मूल तत्व प्रेम हो र प्रेमको मूल क्रिया आनन्द दिनु हो... कीट्सले भनेका छन् कि 'सत्य नै सौन्दर्य हो र सौन्दर्य नै सत्य हो'।"
+            </div>
+            <div class="interaction-area">
+                <div class="question-item" onclick="toggleAns('q3')">
+                    (ख) लेखकका दृष्टिमा सत्य कति किसिमका छन्?
+                    <div id="q3" class="answer-box">उत्तर: लेखकका दृष्टिमा सत्य तीन किसिमका छन्: व्यावहारिक सत्य, दार्शनिक सत्य र काल्पनिक सत्य।</div>
+                </div>
+                <div class="question-item" onclick="toggleAns('q4')">
+                    (घ) यस अनुच्छेदका निम्ति उपयुक्त शीर्षक के हुन सक्छ?
+                    <div id="q4" class="answer-box">उत्तर: "कला र सत्यको सम्बन्ध" वा "कलाको परिचय"।</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="practice-box">
+            <div class="practice-header">
+                <span class="badge">नमुना अभ्यास ३</span>
+                <strong>अनन्त विश्व र ब्रह्माण्ड</strong>
+            </div>
+            <div class="passage-content">
+                
+                "अनन्तमा कतिओटा ब्रह्माण्ड छन्, हामीलाई थाहा छैन... कुनै करोड वर्ष पहिलेका ताराको किरण आज भर्खर हामीकहाँ आएको छ। यो सम्पूर्ण विश्वको एकचोटि आँखा चिम्लेर चिन्तन गर्दा हाम्रो मुखबाट यी शब्द निस्कन्छन्—अनादि, अनन्त, अनिर्वचनीय..."
+            </div>
+            <div class="interaction-area">
+                <div class="question-item" onclick="toggleAns('q5')">
+                    (क) ब्रह्माण्डका बारेमा लेखक हामीलाई अज्ञात भएको कुरा किन बताउँछन्?
+                    <div id="q5" class="answer-box">उत्तर: हाम्रो ज्ञानको सीमितता र ब्रह्माण्डको विशालताका कारण हामीलाई यसबारे पूर्ण जानकारी नभएको कुरा लेखक बताउँछन्।</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>&copy; २०२५ Log Plus </p>
+</footer>
+
+<script>
+    function toggleAns(id) {
+        const ans = document.getElementById(id);
+        ans.classList.toggle('active-answer');
+    }
+</script>
+
+</body>
+</html>

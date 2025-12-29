@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली व्याकरण - समास र विग्रह</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --bg-color: #f4f1ea;
+            --paper-color: #ffffff;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        /* Mobile App Container */
+        .app-container {
+            width: 100%;
+            max-width: 500px;
+            height: 90vh;
+            background: var(--paper-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-radius: 15px;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Page Content Area */
+        .book-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { color: var(--accent-color); border-bottom: 2px solid #ddd; padding-bottom: 5px; }
+        h3 { color: var(--primary-color); margin-top: 20px; }
+
+        /* Tables for Examples */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: #fafafa;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th { background: #eee; }
+
+        /* Navigation */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background: #fff;
+            border-top: 1px solid #ddd;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background: #ccc;
+        }
+
+        .footer-note {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 5px;
+            color: #888;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <header id="header-title">१.८ समास परिचय</header>
+
+    <div class="book-content" id="book-content">
+        
+        <div class="page active" id="page1">
+            <h2>समासको परिचय</h2>
+            <p>दुई वा दुईभन्दा बढी स्वतन्त्र शब्दहरू मिलेर एउटा शब्द बनाउने प्रक्रियालाई <strong>समास</strong> भनिन्छ। यस प्रक्रियाबाट बन्ने शब्दलाई <strong>समस्त शब्द</strong> भनिन्छ।</p>
+            
+            <blockquote>
+                <strong>विग्रह:</strong> समासमा रहेका शब्दहरूलाई छुट्याएर तिनीहरूको अर्थ स्पष्ट पार्ने कामलाई विग्रह भनिन्छ।
+            </blockquote>
+
+            <h3>उदाहरणहरू:</h3>
+            <table>
+                <tr><th>समस्त शब्द</th><th>विग्रह</th></tr>
+                <tr><td>दालभात</td><td>दाल र भात</td></tr>
+                <tr><td>त्रिभुज</td><td>तीन भुजाको समूह</td></tr>
+                <tr><td>आजीवन</td><td>जीवन रहेसम्म</td></tr>
+                <tr><td>कालीमाटी</td><td>कालो छ जुन माटो</td></tr>
+            </table>
+        </div>
+
+        <div class="page" id="page2">
+            <h2>१. तत्पुरुष समास</h2>
+            <p>जसमा दोस्रो शब्दको अर्थ प्रधान हुन्छ र विग्रह गर्दा विभक्ति चिन्ह (लाई, ले, बाट, को, मा) को लोप हुन्छ।</p>
+            <table>
+                <tr><td>भाइमारा</td><td>भाइलाई मार्ने</td></tr>
+                <tr><td>कामचोर</td><td>कामबाट चोर्ने</td></tr>
+                <tr><td>राजकाज</td><td>राजाको काज</td></tr>
+                <tr><td>रतन्धो</td><td>रातमा अन्धो</td></tr>
+            </table>
+
+            <h2>२. कर्मधारय समास</h2>
+            <p>विशेषण-विशेष्य वा उपमान-उपमेय बीच हुने समास।</p>
+            <table>
+                <tr><td>महाकवि</td><td>महान् कवि</td></tr>
+                <tr><td>विद्याधन</td><td>विद्या नै धन</td></tr>
+                <tr><td>घरज्वाइँ</td><td>घरमा बस्ने ज्वाइँ</td></tr>
+                <tr><td>प्राणप्रिय</td><td>प्राण जस्तै प्रिय</td></tr>
+            </table>
+        </div>
+
+        <div class="page" id="page3">
+            <h2>३. द्विगु समास</h2>
+            <p>पहिलो शब्द संख्यावाचक विशेषण भई समूहको अर्थ बुझाउने समास।</p>
+            <table>
+                <tr><td>दोबाटो</td><td>दुई बाटोको समूह</td></tr>
+                <tr><td>त्रिकोण</td><td>तीन कोणको समूह</td></tr>
+                <tr><td>नवरत्न</td><td>नौ रत्नको समूह</td></tr>
+                <tr><td>दशावतार</td><td>दस अवतारको समूह</td></tr>
+            </table>
+
+            <h2>४. अव्ययीभाव समास</h2>
+            <p>जसमा पहिलो पद अव्यय हुन्छ र समस्त शब्दले पनि अव्ययको कार्य गर्दछ।</p>
+            <table>
+                <tr><td>आजभोलि</td><td>आज र भोलि</td></tr>
+                <tr><td>घरबाहिर</td><td>घरको बाहिर</td></tr>
+                <tr><td>यसप्रकार</td><td>यो प्रकार</td></tr>
+                <tr><td>साँझबिहान</td><td>साँझ र बिहान</td></tr>
+            </table>
+        </div>
+
+        <div class="page" id="page4">
+            <h2>५. बहुब्रीहि समास</h2>
+            <p>दुई शब्द मिलेर अर्कै तेस्रो अर्थ (विशेषण) बुझाउने प्रक्रिया।</p>
+            <table>
+                <tr><td>लम्बोदर</td><td>लम्ब (लामो) छ उदर (पेट) जसको (गणेश)</td></tr>
+                <tr><td>चन्द्रमुखी</td><td>चन्द्रमा जस्तो मुख भएकी</td></tr>
+                <tr><td>दोजिया</td><td>दुई जिउ भएकी (गर्भवती)</td></tr>
+                <tr><td>नकटो</td><td>नाक काटिएको</td></tr>
+            </table>
+
+            <h2>६. द्वन्द्व समास</h2>
+            <p>दुवै शब्दको अर्थ प्रधान हुने र विग्रह गर्दा 'र', 'वा', 'अथवा' जस्ता संयोजक आउने।</p>
+            <table>
+                <tr><td>आमाबाबु</td><td>आमा र बाबु</td></tr>
+                <tr><td>सुखदुःख</td><td>सुख वा दुःख</td></tr>
+                <tr><td>घामपानी</td><td>घाम र पानी</td></tr>
+            </table>
+        </div>
+
+        <div class="page" id="page5">
+            <h2>द्वित्व प्रक्रिया</h2>
+            <p>एउटै शब्द वा शब्दांश दोहोरिएर नयाँ शब्द बन्ने प्रक्रिया।</p>
+            <ul>
+                <li>घर + घर = <strong>घरघर</strong> (पूर्ण द्वित्व)</li>
+                <li>भात + सात = <strong>भातसात</strong> (आंशिक द्वित्व)</li>
+                <li>पानी + सानी = <strong>पानीसानी</strong></li>
+            </ul>
+
+            <h2>सन्धि (Sandhi)</h2>
+            <p>दुई ध्वनि वा वर्णको मेलबाट हुने परिवर्तन।</p>
+            <table>
+                <tr><td>सूर्योदय</td><td>सूर्य + उदय</td></tr>
+                <tr><td>ग्रामीण</td><td>ग्राम + इन</td></tr>
+                <tr><td>निश्छल</td><td>नि: + छल</td></tr>
+            </table>
+        </div>
+
+    </div>
+
+    
+    <div class="nav-bar">
+        <button id="prevBtn" onclick="changePage(-1)" disabled>Back</button>
+        <span id="pageNumber">Page 1 / 5</span>
+        <button id="nextBtn" onclick="changePage(1)">Next</button>
+    </div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = 5;
+    const titles = [
+        "१.८ समास परिचय",
+        "तत्पुरुष र कर्मधारय",
+        "द्विगु र अव्ययीभाव",
+        "बहुब्रीहि र द्वन्द्व",
+        "द्वित्व र सन्धि"
+    ];
+
+    function changePage(step) {
+        // Hide current page
+        document.getElementById(`page${currentPage}`).classList.remove('active');
+        
+        // Update page number
+        currentPage += step;
+        
+        // Show new page
+        document.getElementById(`page${currentPage}`).classList.add('active');
+        
+        // Update UI elements
+        document.getElementById('header-title').innerText = titles[currentPage - 1];
+        document.getElementById('pageNumber').innerText = `Page ${currentPage} / ${totalPages}`;
+        
+        // Control buttons
+        document.getElementById('prevBtn').disabled = (currentPage === 1);
+        document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+
+        // Scroll to top
+        document.getElementById('book-content').scrollTop = 0;
+    }
+</script>
+
+</body>
+</html>
